@@ -1,7 +1,8 @@
 import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Request
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database.db import init_db
@@ -100,25 +101,35 @@ app.include_router(
 # WebSocket endpoint
 app.add_api_websocket_route("/ws/chat", websocket_endpoint)
 
-# Serve React static build (must be last)
-# Only mount if the directory exists (won't exist during development)
+# Serve React SPA with proper client-side routing fallback
 frontend_dir = os.path.join(os.path.dirname(__file__), "../../frontend/dist")
+frontend_dir = os.path.abspath(frontend_dir)
+
 if os.path.isdir(frontend_dir):
     print(f"Serving frontend from: {frontend_dir}")
-    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="static")
+    # Mount /assets for hashed static files (JS, CSS, images)
+    assets_dir = os.path.join(frontend_dir, "assets")
+    if os.path.isdir(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(request: Request, full_path: str):
+        """
+        SPA catch-all: serve static file if it exists, otherwise index.html.
+        """
+        file_path = os.path.join(frontend_dir, full_path)
+        if full_path and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(frontend_dir, "index.html"))
 else:
     print(f"Frontend directory not found: {frontend_dir}")
     print("Frontend will not be served. Build the frontend first.")
 
-
-@app.get("/")
-async def root():
-    """
-    Root endpoint. Returns API info if frontend is not built.
-    """
-    return {
-        "name": "Hermes Agent API",
-        "version": "1.0.0",
-        "docs": "/docs",
-        "health": "/api/health",
-    }
+    @app.get("/")
+    async def root():
+        return {
+            "name": "Hermes Agent API",
+            "version": "1.0.0",
+            "docs": "/docs",
+            "health": "/api/health",
+        }
