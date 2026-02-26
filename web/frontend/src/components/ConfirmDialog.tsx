@@ -39,32 +39,43 @@ export const ConfirmDialog = () => {
 
   return (
     <div className="fixed inset-0 z-[90] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={close} />
-      <div className="relative bg-surface-1 rounded-2xl border border-border shadow-2xl shadow-black/30 w-full max-w-sm overflow-hidden">
-        <div className="flex items-center justify-between p-4 border-b border-border">
+      <div
+        className="absolute inset-0 bg-black/70 backdrop-blur-md"
+        onClick={close}
+        style={{ background: 'radial-gradient(circle at center, rgba(201, 149, 106, 0.08), transparent 60%), rgba(10, 10, 15, 0.9)' }}
+      />
+      <div className="relative gradient-border ambient-glow-strong glass-strong rounded-2xl shadow-2xl shadow-black/50 w-full max-w-sm overflow-hidden animate-fade-in-scale">
+        <div className="flex items-center justify-between p-4 border-b border-[#c9956a]/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-amber-500/15 flex items-center justify-center">
-              <AlertTriangle size={16} className="text-amber-400" />
+            <div className="w-10 h-10 rounded-full gradient-border bg-[#16161f] flex items-center justify-center animate-glow-pulse">
+              <AlertTriangle size={18} className="text-[#c9956a]" />
             </div>
-            <h3 className="text-[15px] font-semibold text-zinc-100">{title}</h3>
+            <h3 className="text-[15px] font-semibold font-outfit text-zinc-100">
+              {title}
+            </h3>
           </div>
-          <button onClick={close} className="p-1.5 rounded-lg text-zinc-500 hover:bg-surface-2">
+          <button
+            onClick={close}
+            className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-[#16161f] transition-colors"
+          >
             <X size={18} />
           </button>
         </div>
         <div className="px-4 py-4">
-          <p className="text-[13px] text-zinc-400 leading-relaxed">{message}</p>
+          <p className="text-[13px] text-zinc-400 leading-relaxed font-outfit">
+            {message}
+          </p>
         </div>
         <div className="flex gap-2 px-4 pb-4">
           <button
             onClick={close}
-            className="flex-1 px-4 py-2.5 bg-surface-3 text-zinc-300 rounded-xl text-[13px] font-medium hover:bg-surface-4 border border-border transition-colors"
+            className="flex-1 px-4 py-2.5 glass text-zinc-300 rounded-xl text-[13px] font-medium font-outfit hover:bg-[#16161f]/50 active:bg-[#16161f] border border-[#c9956a]/20 transition-all"
           >
             Cancel
           </button>
           <button
             onClick={handleConfirm}
-            className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-xl text-[13px] font-semibold hover:bg-red-600 active:bg-red-700 transition-colors"
+            className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-xl text-[13px] font-semibold font-outfit hover:bg-red-600 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] active:bg-red-700 active:scale-95 transition-all"
           >
             {confirmLabel}
           </button>

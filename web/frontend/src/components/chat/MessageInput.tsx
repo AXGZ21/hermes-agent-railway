@@ -37,25 +37,26 @@ export const MessageInput = ({ onSend, disabled }: MessageInputProps) => {
   };
 
   return (
-    <div className="border-t border-border bg-surface-1/50 backdrop-blur-xl px-4 py-3 md:px-6 md:py-4 flex-shrink-0">
+    <div className="glass-strong border-t border-[#c9956a]/10 px-4 py-4 md:px-6 md:py-5 flex-shrink-0 relative">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c9956a]/20 to-transparent" />
       <div className="flex items-end gap-3 max-w-3xl mx-auto relative">
-        <div className="flex-1 relative bg-surface-2 rounded-xl border border-border">
+        <div className="flex-1 relative bg-[#16161f] rounded-xl gradient-border focus-within:ambient-glow transition-all duration-300">
           <textarea
             ref={textareaRef}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Message Hermes..."
+            placeholder="Message Hermes Agent..."
             disabled={disabled}
             rows={1}
-            className="w-full bg-transparent text-zinc-100 px-4 py-3 pr-12 text-[15px] resize-none focus:outline-none placeholder:text-zinc-600 disabled:opacity-40 leading-relaxed"
+            className="w-full bg-transparent text-zinc-100 px-4 py-3.5 pr-14 text-[15px] resize-none focus:outline-none placeholder:text-zinc-500 disabled:opacity-40 leading-relaxed scrollbar-hide"
           />
           <button
             onClick={handleSend}
             disabled={!message.trim() || disabled}
-            className="absolute right-2 bottom-2 flex items-center justify-center w-8 h-8 bg-brand text-surface-0 rounded-full hover:bg-brand-light transition-colors disabled:opacity-30 disabled:pointer-events-none"
+            className="absolute right-2 bottom-2 flex items-center justify-center w-9 h-9 bg-gradient-brand text-[#0a0a0f] rounded-full hover:scale-110 hover:shadow-xl hover:shadow-[#c9956a]/30 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none disabled:scale-100"
           >
-            <ArrowUp size={16} strokeWidth={2.5} />
+            <ArrowUp size={18} strokeWidth={2.5} />
           </button>
         </div>
       </div>

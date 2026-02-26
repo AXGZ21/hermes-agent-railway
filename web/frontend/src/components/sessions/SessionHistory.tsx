@@ -69,11 +69,11 @@ export const SessionHistory = () => {
   );
 
   return (
-    <div className="h-full flex flex-col bg-surface-0">
+    <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Header */}
-      <div className="bg-surface-1 border-b border-border p-3 md:p-4 flex-shrink-0">
+      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
         <div className="flex items-center gap-3">
-          <h1 className="text-[15px] md:text-[17px] font-semibold text-zinc-100 flex-shrink-0">Sessions</h1>
+          <h1 className="text-[15px] md:text-[17px] font-semibold text-zinc-100 flex-shrink-0 font-outfit">Sessions</h1>
           <div className="relative flex-1">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
             <input
@@ -81,7 +81,7 @@ export const SessionHistory = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
-              className="w-full bg-surface-2 text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
+              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] focus:ambient-glow placeholder:text-zinc-600 font-outfit transition-all"
             />
           </div>
         </div>
@@ -91,10 +91,10 @@ export const SessionHistory = () => {
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 size={24} className="text-brand animate-spin" />
+            <Loader2 size={24} className="text-brand animate-spin animate-glow-pulse" />
           </div>
         ) : filteredSessions.length === 0 ? (
-          <div className="text-center text-zinc-500 py-8 text-[13px]">
+          <div className="text-center text-zinc-500 py-8 text-[13px] font-outfit">
             {searchQuery ? 'No matching sessions' : 'No sessions yet'}
           </div>
         ) : (
@@ -103,20 +103,20 @@ export const SessionHistory = () => {
               <div
                 key={session.id}
                 onClick={() => navigate(`/chat/${session.id}`)}
-                className="bg-surface-1 rounded-xl p-3.5 md:p-4 border border-border hover:border-brand/30 transition-all cursor-pointer group"
+                className="gradient-border ambient-glow bg-[#0f0f16] rounded-xl p-3.5 md:p-4 card-hover transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-brand/10 flex items-center justify-center flex-shrink-0">
-                    <MessageSquare size={17} className="text-brand" />
+                  <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(201,149,106,0.3)]">
+                    <MessageSquare size={17} className="text-[#0a0a0f]" strokeWidth={2} />
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-[14px] font-medium text-zinc-100 truncate">
+                    <h3 className="text-[14px] font-medium text-zinc-100 truncate font-outfit">
                       {session.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-[11px] text-zinc-500">{session.message_count} msgs</span>
-                      <span className="text-[11px] text-zinc-600">
+                      <span className="text-[11px] text-zinc-500 font-outfit">{session.message_count} msgs</span>
+                      <span className="text-[11px] text-zinc-600 font-outfit">
                         {new Date(session.updated_at).toLocaleDateString()}
                       </span>
                     </div>
@@ -126,14 +126,14 @@ export const SessionHistory = () => {
                   <div className="hidden md:flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={(e) => handleExport(session, e)}
-                      className="p-2 bg-surface-2 text-zinc-400 rounded-lg hover:bg-surface-3 hover:text-zinc-200 transition-colors"
+                      className="p-2 glass text-zinc-400 rounded-lg hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] transition-all"
                       title="Export"
                     >
                       <Download size={14} />
                     </button>
                     <button
                       onClick={(e) => handleDelete(session.id, e)}
-                      className="p-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors"
+                      className="p-2 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all"
                       title="Delete"
                     >
                       <Trash2 size={14} />

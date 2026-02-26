@@ -10,11 +10,11 @@ const LOG_LEVELS = ['ALL', 'DEBUG', 'INFO', 'WARNING', 'ERROR'];
 
 const getLevelColor = (level: string) => {
   switch (level.toLowerCase()) {
-    case 'debug': return 'bg-zinc-500/20 text-zinc-400';
-    case 'info': return 'bg-emerald-500/20 text-emerald-400';
-    case 'warning': return 'bg-amber-500/20 text-amber-400';
-    case 'error': return 'bg-red-500/20 text-red-400';
-    default: return 'bg-zinc-500/20 text-zinc-400';
+    case 'debug': return 'bg-zinc-500/30 text-zinc-300 shadow-[0_0_10px_rgba(113,113,122,0.3)]';
+    case 'info': return 'bg-emerald-500/30 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.4)]';
+    case 'warning': return 'bg-amber-500/30 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.4)]';
+    case 'error': return 'bg-red-500/30 text-red-300 shadow-[0_0_10px_rgba(239,68,68,0.4)]';
+    default: return 'bg-zinc-500/30 text-zinc-300 shadow-[0_0_10px_rgba(113,113,122,0.3)]';
   }
 };
 
@@ -80,14 +80,14 @@ export const LogsViewer = () => {
   );
 
   return (
-    <div className="h-full flex flex-col bg-surface-0">
+    <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Toolbar */}
-      <div className="bg-surface-1 border-b border-border p-3 md:p-4 flex-shrink-0">
+      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
         <div className="flex items-center gap-2">
           <select
             value={selectedLevel}
             onChange={(e) => { setSelectedLevel(e.target.value); setOffset(0); }}
-            className="bg-surface-2 text-zinc-200 rounded-xl px-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border"
+            className="bg-[#16161f] text-zinc-200 rounded-xl px-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
           >
             {LOG_LEVELS.map((level) => (
               <option key={level} value={level}>{level}</option>
@@ -101,30 +101,30 @@ export const LogsViewer = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search logs..."
-              className="w-full bg-surface-2 text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
+              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 font-outfit transition-all"
             />
           </div>
 
           <div className="flex items-center gap-1.5">
-            <label className="hidden md:flex items-center gap-1.5 text-[12px] text-zinc-400 cursor-pointer">
+            <label className="hidden md:flex items-center gap-1.5 text-[12px] text-zinc-400 cursor-pointer font-outfit">
               <input
                 type="checkbox"
                 checked={autoRefresh}
                 onChange={(e) => setAutoRefresh(e.target.checked)}
-                className="rounded accent-brand"
+                className="rounded accent-brand focus:ring-2 focus:ring-brand/60"
               />
               Auto
             </label>
             <button
               onClick={loadLogs}
               disabled={loading}
-              className="p-2 bg-surface-2 text-zinc-400 rounded-xl active:bg-surface-3 border border-border"
+              className="p-2 glass text-zinc-400 rounded-xl hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 border border-[#272733] transition-all"
             >
               <RefreshCw size={15} className={clsx(loading && 'animate-spin')} />
             </button>
             <button
               onClick={handleClearLogs}
-              className="p-2 bg-red-500/15 text-red-400 rounded-xl active:bg-red-500/25 border border-red-500/10"
+              className="p-2 glass bg-red-500/15 text-red-400 rounded-xl hover:bg-red-500/25 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] active:scale-95 border border-red-500/20 transition-all"
             >
               <Trash2 size={15} />
             </button>
@@ -135,19 +135,19 @@ export const LogsViewer = () => {
       {/* Logs list */}
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-4 md:py-4">
         {loading ? (
-          <div className="text-center text-zinc-500 py-8 text-[13px]">Loading logs...</div>
+          <div className="text-center text-zinc-500 py-8 text-[13px] font-outfit">Loading logs...</div>
         ) : filteredLogs.length === 0 ? (
-          <div className="text-center text-zinc-500 py-8 text-[13px]">No logs found</div>
+          <div className="text-center text-zinc-500 py-8 text-[13px] font-outfit">No logs found</div>
         ) : (
           <div className="space-y-1.5">
             {filteredLogs.map((log) => (
               <div
                 key={log.id}
-                className="bg-surface-1 rounded-xl p-3 border border-border hover:border-border-active transition-colors"
+                className="gradient-border ambient-glow bg-[#0f0f16] rounded-xl p-3 hover:bg-[#16161f] transition-all"
               >
                 <div className="flex items-start gap-2.5">
                   <span className={clsx(
-                    'px-1.5 py-0.5 rounded-md text-[10px] font-semibold flex-shrink-0 mt-0.5 uppercase tracking-widest',
+                    'px-1.5 py-0.5 rounded-md text-[10px] font-semibold flex-shrink-0 mt-0.5 uppercase tracking-widest font-outfit',
                     getLevelColor(log.level)
                   )}>
                     {log.level}
@@ -155,7 +155,7 @@ export const LogsViewer = () => {
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mb-1">
                       <span className="text-[11px] font-mono text-zinc-500 truncate">{log.logger}</span>
-                      <span className="text-[10px] text-zinc-600">
+                      <span className="text-[10px] text-zinc-600 font-outfit">
                         {new Date(log.created_at).toLocaleString()}
                       </span>
                     </div>
@@ -172,22 +172,22 @@ export const LogsViewer = () => {
 
       {/* Pagination */}
       {total > limit && (
-        <div className="bg-surface-1 border-t border-border px-4 py-2.5 flex items-center justify-between flex-shrink-0 safe-bottom">
-          <div className="text-[11px] text-zinc-500">
+        <div className="glass-strong border-t border-[#272733] px-4 py-2.5 flex items-center justify-between flex-shrink-0 safe-bottom backdrop-blur-xl">
+          <div className="text-[11px] text-zinc-500 font-outfit">
             {offset + 1}-{Math.min(offset + limit, total)} of {total}
           </div>
           <div className="flex gap-1.5">
             <button
               onClick={() => setOffset(Math.max(0, offset - limit))}
               disabled={offset === 0}
-              className="px-3 py-1.5 bg-surface-2 text-zinc-400 rounded-lg text-[12px] active:bg-surface-3 disabled:opacity-30 disabled:pointer-events-none border border-border"
+              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Prev
             </button>
             <button
               onClick={() => setOffset(offset + limit)}
               disabled={offset + limit >= total}
-              className="px-3 py-1.5 bg-surface-2 text-zinc-400 rounded-lg text-[12px] active:bg-surface-3 disabled:opacity-30 disabled:pointer-events-none border border-border"
+              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Next
             </button>

@@ -16,18 +16,18 @@ interface ApiKeyFieldProps {
 
 const ApiKeyField = ({ label, value, onChange, placeholder, description }: ApiKeyFieldProps) => (
   <div>
-    <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">{label}</label>
+    <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">{label}</label>
     <div className="relative">
-      <Key size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+      <Key size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand/60" />
       <input
         type="password"
         value={value || ''}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-surface-2 text-zinc-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border font-mono placeholder:text-zinc-600"
+        className="w-full bg-[#16161f] text-zinc-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-mono placeholder:text-zinc-600 transition-all"
       />
     </div>
-    <p className="text-[11px] text-zinc-500 mt-1.5 leading-relaxed">{description}</p>
+    <p className="text-[11px] text-zinc-500 mt-1.5 leading-relaxed font-outfit">{description}</p>
   </div>
 );
 
@@ -84,7 +84,7 @@ export const ConfigPanel = () => {
   if (loading || !config) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="animate-spin text-brand" size={28} />
+        <Loader2 className="animate-spin text-brand animate-glow-pulse" size={28} />
       </div>
     );
   }
@@ -97,10 +97,10 @@ export const ConfigPanel = () => {
   ];
 
   return (
-    <div className="h-full flex flex-col bg-surface-0">
+    <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Tab bar - scrollable on mobile */}
-      <div className="bg-surface-1 border-b border-border flex-shrink-0">
-        <div className="flex gap-1 p-2 md:p-3 overflow-x-auto">
+      <div className="glass border-b border-[#272733] flex-shrink-0 backdrop-blur-xl">
+        <div className="flex gap-1 p-2 md:p-3 overflow-x-auto scrollbar-hide">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             return (
@@ -108,17 +108,17 @@ export const ConfigPanel = () => {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={clsx(
-                  'flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-lg font-medium transition-all text-[13px] whitespace-nowrap flex-shrink-0 relative',
+                  'flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-lg font-medium transition-all text-[13px] whitespace-nowrap flex-shrink-0 relative font-outfit',
                   activeTab === tab.id
                     ? 'text-brand'
-                    : 'text-zinc-500 active:bg-surface-2'
+                    : 'text-zinc-500 hover:text-zinc-300 active:bg-[#16161f]'
                 )}
               >
                 <Icon size={15} strokeWidth={1.8} />
                 <span className="hidden md:inline">{tab.label}</span>
                 <span className="md:hidden">{tab.mobileLabel}</span>
                 {activeTab === tab.id && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-brand to-transparent shadow-[0_0_12px_rgba(201,149,106,0.6)]" />
                 )}
               </button>
             );
@@ -132,23 +132,23 @@ export const ConfigPanel = () => {
 
           {/* LLM Tab */}
           {activeTab === 'llm' && (
-            <div className="space-y-6">
+            <div className="space-y-6 animate-fade-in">
               <div>
-                <h2 className="text-[17px] font-semibold text-zinc-100">LLM Providers</h2>
-                <p className="text-[12px] text-zinc-500 mt-1">
+                <h2 className="text-[17px] font-semibold text-zinc-100 font-outfit">LLM Providers</h2>
+                <p className="text-[12px] text-zinc-500 mt-1 font-outfit">
                   Configure your active provider and API keys.
                 </p>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
-                <h3 className="text-[11px] font-semibold text-brand uppercase tracking-widest">Active Provider</h3>
+              <div className="gradient-border ambient-glow bg-[#0f0f16] rounded-2xl p-4 md:p-5 space-y-4">
+                <h3 className="text-[11px] font-semibold text-gradient uppercase tracking-widest font-outfit">Active Provider</h3>
 
                 <div>
-                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Provider</label>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">Provider</label>
                   <select
                     value={config.provider}
                     onChange={(e) => updateConfig({ provider: e.target.value })}
-                    className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
                   >
                     <option value="openrouter">OpenRouter</option>
                     <option value="nous">Nous Portal</option>
@@ -157,15 +157,15 @@ export const ConfigPanel = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Model</label>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">Model</label>
                   <input
                     type="text"
                     value={config.model}
                     onChange={(e) => updateConfig({ model: e.target.value })}
                     placeholder="e.g., anthropic/claude-3.5-sonnet"
-                    className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                   />
-                  <p className="text-[11px] text-zinc-500 mt-1.5">
+                  <p className="text-[11px] text-zinc-500 mt-1.5 font-outfit">
                     {config.provider === 'openrouter'
                       ? 'OpenRouter format: provider/model'
                       : config.provider === 'nous'
@@ -176,21 +176,21 @@ export const ConfigPanel = () => {
 
                 {config.provider === 'custom' && (
                   <div>
-                    <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Base URL</label>
+                    <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">Base URL</label>
                     <input
                       type="text"
                       value={config.base_url || ''}
                       onChange={(e) => updateConfig({ base_url: e.target.value })}
                       placeholder="https://api.example.com/v1"
-                      className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
+                      className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                     />
                   </div>
                 )}
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
-                <h3 className="text-[11px] font-semibold text-brand uppercase tracking-widest">API Keys</h3>
-                <p className="text-[11px] text-zinc-500 -mt-2">Keys are saved securely and shown masked after saving.</p>
+              <div className="gradient-border ambient-glow bg-[#0f0f16] rounded-2xl p-4 md:p-5 space-y-4">
+                <h3 className="text-[11px] font-semibold text-gradient uppercase tracking-widest font-outfit">API Keys</h3>
+                <p className="text-[11px] text-zinc-500 -mt-2 font-outfit">Keys are saved securely and shown masked after saving.</p>
 
                 <ApiKeyField
                   label="OpenRouter API Key"
@@ -219,15 +219,15 @@ export const ConfigPanel = () => {
 
           {/* Telegram Tab */}
           {activeTab === 'telegram' && (
-            <div className="space-y-6">
+            <div className="space-y-6 animate-fade-in">
               <div>
-                <h2 className="text-[17px] font-semibold text-zinc-100">Telegram Bot</h2>
-                <p className="text-[12px] text-zinc-500 mt-1">
+                <h2 className="text-[17px] font-semibold text-zinc-100 font-outfit">Telegram Bot</h2>
+                <p className="text-[12px] text-zinc-500 mt-1 font-outfit">
                   Connect a Telegram bot to interact with Hermes Agent.
                 </p>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
+              <div className="gradient-border ambient-glow bg-[#0f0f16] rounded-2xl p-4 md:p-5 space-y-4">
                 <ApiKeyField
                   label="Bot Token"
                   value={config.api_keys?.telegram || ''}
@@ -236,20 +236,20 @@ export const ConfigPanel = () => {
                   description="Get your bot token from @BotFather on Telegram"
                 />
 
-                <div className="bg-surface-2 rounded-xl p-3.5 flex items-center justify-between border border-border">
+                <div className="bg-[#16161f] rounded-xl p-3.5 flex items-center justify-between border border-[#272733]">
                   <div>
-                    <div className="text-[13px] font-medium text-zinc-200">Gateway Status</div>
-                    <div className="text-[11px] text-zinc-500 mt-0.5">
+                    <div className="text-[13px] font-medium text-zinc-200 font-outfit">Gateway Status</div>
+                    <div className="text-[11px] text-zinc-500 mt-0.5 font-outfit">
                       {config.telegram_enabled ? 'Bot is active' : 'Set token above to enable'}
                     </div>
                   </div>
                   <div className={clsx(
                     'w-2.5 h-2.5 rounded-full',
-                    config.telegram_enabled ? 'bg-emerald-500 shadow-lg shadow-emerald-500/30' : 'bg-zinc-600'
+                    config.telegram_enabled ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50 animate-glow-pulse' : 'bg-zinc-600'
                   )} />
                 </div>
 
-                <p className="text-[11px] text-zinc-500 leading-relaxed">
+                <p className="text-[11px] text-zinc-500 leading-relaxed font-outfit">
                   The Telegram gateway starts automatically on the next container restart after saving a valid token.
                 </p>
               </div>
@@ -258,15 +258,15 @@ export const ConfigPanel = () => {
 
           {/* Tools Tab */}
           {activeTab === 'tools' && (
-            <div className="space-y-6">
+            <div className="space-y-6 animate-fade-in">
               <div>
-                <h2 className="text-[17px] font-semibold text-zinc-100">Tool API Keys</h2>
-                <p className="text-[12px] text-zinc-500 mt-1">
+                <h2 className="text-[17px] font-semibold text-zinc-100 font-outfit">Tool API Keys</h2>
+                <p className="text-[12px] text-zinc-500 mt-1 font-outfit">
                   Optional keys for built-in agent tools.
                 </p>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
+              <div className="gradient-border ambient-glow bg-[#0f0f16] rounded-2xl p-4 md:p-5 space-y-4">
                 <ApiKeyField
                   label="Firecrawl API Key"
                   value={config.api_keys?.firecrawl || ''}
@@ -294,18 +294,18 @@ export const ConfigPanel = () => {
 
           {/* Advanced Tab */}
           {activeTab === 'advanced' && (
-            <div className="space-y-6">
+            <div className="space-y-6 animate-fade-in">
               <div>
-                <h2 className="text-[17px] font-semibold text-zinc-100">Advanced</h2>
+                <h2 className="text-[17px] font-semibold text-zinc-100 font-outfit">Advanced</h2>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
+              <div className="gradient-border ambient-glow bg-[#0f0f16] rounded-2xl p-4 md:p-5 space-y-4">
                 <div>
-                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Log Level</label>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">Log Level</label>
                   <select
                     value={config.log_level}
                     onChange={(e) => updateConfig({ log_level: e.target.value })}
-                    className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
                   >
                     <option value="DEBUG">DEBUG</option>
                     <option value="INFO">INFO</option>
@@ -320,32 +320,32 @@ export const ConfigPanel = () => {
       </div>
 
       {/* Save bar - sticky bottom */}
-      <div className="bg-surface-1 border-t border-border px-4 py-3 flex-shrink-0 safe-bottom">
+      <div className="glass-strong border-t border-[#272733] px-4 py-3 flex-shrink-0 safe-bottom backdrop-blur-xl">
         <div className="max-w-xl mx-auto flex items-center justify-between gap-3">
           <div className="min-w-0 flex-1">
             {message ? (
-              <div className="flex items-center gap-1.5 text-[12px]">
+              <div className="flex items-center gap-1.5 text-[12px] font-outfit">
                 {message.type === 'success' ? (
                   <>
-                    <CheckCircle size={14} className="text-emerald-500 flex-shrink-0" />
+                    <CheckCircle size={14} className="text-emerald-500 flex-shrink-0 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                     <span className="text-emerald-500 truncate">{message.text}</span>
                   </>
                 ) : (
                   <>
-                    <XCircle size={14} className="text-red-500 flex-shrink-0" />
+                    <XCircle size={14} className="text-red-500 flex-shrink-0 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
                     <span className="text-red-500 truncate">{message.text}</span>
                   </>
                 )}
               </div>
             ) : (
-              <div className="text-[11px] text-zinc-600 hidden md:block">Changes applied after saving</div>
+              <div className="text-[11px] text-zinc-600 hidden md:block font-outfit">Changes applied after saving</div>
             )}
           </div>
 
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 bg-brand text-surface-0 rounded-xl text-[13px] font-semibold hover:bg-brand-light active:bg-brand-dark transition-colors disabled:opacity-40 disabled:pointer-events-none flex-shrink-0"
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none flex-shrink-0 font-outfit"
           >
             {saving ? (
               <Loader2 size={15} className="animate-spin" />

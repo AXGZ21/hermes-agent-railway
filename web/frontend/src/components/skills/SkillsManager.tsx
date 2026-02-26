@@ -106,9 +106,9 @@ export const SkillsManager = () => {
   );
 
   return (
-    <div className="h-full flex flex-col bg-surface-0">
+    <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Header */}
-      <div className="bg-surface-1 border-b border-border p-3 md:p-4 flex-shrink-0">
+      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
         <div className="flex items-center gap-2">
           <div className="relative flex-1">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
@@ -117,12 +117,12 @@ export const SkillsManager = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search skills..."
-              className="w-full bg-surface-2 text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
+              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 font-outfit transition-all"
             />
           </div>
           <button
             onClick={handleCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-brand text-surface-0 rounded-xl text-[13px] font-semibold hover:bg-brand-light active:bg-brand-dark transition-colors flex-shrink-0"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all flex-shrink-0 font-outfit"
           >
             <Plus size={15} strokeWidth={2} />
             <span className="hidden sm:inline">Create</span>
@@ -134,10 +134,10 @@ export const SkillsManager = () => {
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 size={24} className="text-brand animate-spin" />
+            <Loader2 size={24} className="text-brand animate-spin animate-glow-pulse" />
           </div>
         ) : filteredSkills.length === 0 ? (
-          <div className="text-center text-zinc-500 py-8 text-[13px]">
+          <div className="text-center text-zinc-500 py-8 text-[13px] font-outfit">
             {searchQuery ? 'No matching skills' : 'No skills yet'}
           </div>
         ) : (
@@ -146,48 +146,48 @@ export const SkillsManager = () => {
               <div
                 key={skill.id}
                 className={clsx(
-                  'bg-surface-2 rounded-xl p-3.5 md:p-4 border transition-all',
-                  skill.enabled
-                    ? 'border-border hover:border-brand/30'
-                    : 'border-border opacity-50'
+                  'gradient-border ambient-glow bg-[#0f0f16] rounded-xl p-3.5 md:p-4 card-hover transition-all',
+                  skill.enabled ? '' : 'opacity-50'
                 )}
               >
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-[14px] font-semibold text-zinc-100 truncate flex-1 mr-2">{skill.name}</h3>
+                  <h3 className="text-[14px] font-semibold text-zinc-100 truncate flex-1 mr-2 font-outfit">{skill.name}</h3>
                   <button
                     onClick={() => handleToggle(skill)}
                     className={clsx(
-                      'p-1.5 rounded-lg transition-colors flex-shrink-0',
+                      'p-1.5 rounded-lg transition-all flex-shrink-0',
                       skill.enabled
-                        ? 'text-brand active:bg-brand/10'
-                        : 'text-zinc-500 active:bg-surface-3'
+                        ? 'text-brand hover:bg-brand/10 hover:shadow-[0_0_15px_rgba(201,149,106,0.3)]'
+                        : 'text-zinc-500 hover:bg-[#16161f]'
                     )}
                   >
                     {skill.enabled ? <Power size={15} /> : <PowerOff size={15} />}
                   </button>
                 </div>
 
-                <p className="text-[12px] text-zinc-400 mb-3 line-clamp-2 leading-relaxed">
+                <p className="text-[12px] text-zinc-400 mb-3 line-clamp-2 leading-relaxed font-outfit">
                   {skill.description}
                 </p>
 
                 <div className="flex items-center justify-between">
                   <span className={clsx(
-                    'text-[10px] font-medium px-2 py-0.5 rounded-full uppercase tracking-widest',
-                    skill.enabled ? 'bg-brand/15 text-brand' : 'bg-zinc-500/15 text-zinc-500'
+                    'text-[10px] font-medium px-2 py-0.5 rounded-full uppercase tracking-widest font-outfit',
+                    skill.enabled
+                      ? 'bg-gradient-brand text-[#0a0a0f] shadow-[0_0_12px_rgba(201,149,106,0.4)]'
+                      : 'bg-zinc-500/20 text-zinc-500'
                   )}>
                     {skill.enabled ? 'Active' : 'Inactive'}
                   </span>
                   <div className="flex gap-1">
                     <button
                       onClick={() => handleEdit(skill)}
-                      className="p-1.5 bg-surface-3 text-zinc-400 rounded-lg active:bg-surface-4 transition-colors"
+                      className="p-1.5 glass text-zinc-400 rounded-lg hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] transition-all"
                     >
                       <Edit2 size={13} />
                     </button>
                     <button
                       onClick={() => handleDelete(skill.id)}
-                      className="p-1.5 bg-red-500/10 text-red-400 rounded-lg active:bg-red-500/20 transition-colors"
+                      className="p-1.5 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all"
                     >
                       <Trash2 size={13} />
                     </button>
@@ -201,19 +201,19 @@ export const SkillsManager = () => {
 
       {/* Modal - full screen on mobile, centered on desktop */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end md:items-center justify-center z-50">
-          <div className="bg-surface-1 w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col border-t md:border border-border">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-end md:items-center justify-center z-50 animate-fade-in">
+          <div className="glass-strong ambient-glow-strong gradient-border bg-[#0f0f16] w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col animate-slide-up md:animate-fade-in-scale">
             {/* Handle + header */}
             <div className="md:hidden flex items-center justify-center pt-2 pb-1">
               <div className="w-8 h-1 rounded-full bg-zinc-600" />
             </div>
-            <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-border">
-              <h2 className="text-[16px] font-semibold text-zinc-100">
+            <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-[#272733]">
+              <h2 className="text-[16px] font-semibold text-zinc-100 font-serif">
                 {editingSkill ? 'Edit Skill' : 'Create Skill'}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="p-2 -mr-2 text-zinc-400 active:bg-surface-2 rounded-xl"
+                className="p-2 -mr-2 text-zinc-400 hover:text-zinc-200 active:bg-[#16161f] rounded-xl transition-all"
               >
                 <X size={20} />
               </button>
@@ -221,35 +221,35 @@ export const SkillsManager = () => {
 
             <div className="flex-1 overflow-y-auto px-4 py-4 md:px-5 space-y-4">
               <div>
-                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Name</label>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">Name</label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Web Search"
-                  className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Description</label>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">Description</label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Brief description"
                   rows={2}
-                  className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border resize-none placeholder:text-zinc-600"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] resize-none placeholder:text-zinc-600 font-outfit transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Content</label>
+                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest font-outfit">Content</label>
                 <textarea
                   value={formData.content}
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   placeholder="Skill code or configuration"
                   rows={8}
-                  className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border resize-none font-mono placeholder:text-zinc-600"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] resize-none font-mono placeholder:text-zinc-600 transition-all"
                 />
               </div>
 
@@ -259,25 +259,25 @@ export const SkillsManager = () => {
                   id="enabled"
                   checked={formData.enabled}
                   onChange={(e) => setFormData({ ...formData, enabled: e.target.checked })}
-                  className="rounded accent-brand"
+                  className="rounded accent-brand focus:ring-2 focus:ring-brand/60"
                 />
-                <label htmlFor="enabled" className="text-[13px] text-zinc-300">
+                <label htmlFor="enabled" className="text-[13px] text-zinc-300 font-outfit">
                   Enable this skill
                 </label>
               </div>
             </div>
 
-            <div className="px-4 py-3 md:px-5 md:py-4 border-t border-border flex gap-2 safe-bottom">
+            <div className="px-4 py-3 md:px-5 md:py-4 border-t border-[#272733] flex gap-2 safe-bottom">
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 md:flex-none px-4 py-2.5 bg-surface-3 text-zinc-300 rounded-xl text-[13px] font-medium active:bg-surface-4 border border-border"
+                className="flex-1 md:flex-none px-4 py-2.5 glass text-zinc-300 rounded-xl text-[13px] font-medium hover:text-zinc-100 active:scale-95 border border-[#272733] font-outfit transition-all"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
                 disabled={!formData.name || !formData.content || saving}
-                className="flex-1 md:flex-none px-5 py-2.5 bg-brand text-surface-0 rounded-xl text-[13px] font-semibold active:bg-brand-dark disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2"
+                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 font-outfit transition-all"
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}
                 <span>{editingSkill ? 'Update' : 'Create'}</span>

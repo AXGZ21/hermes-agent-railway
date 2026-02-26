@@ -100,19 +100,21 @@ export const CronManager = () => {
   };
 
   return (
-    <div className="h-full flex flex-col bg-surface-0">
+    <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Header */}
-      <div className="bg-surface-1 border-b border-border p-3 md:p-4 flex-shrink-0">
+      <div className="glass border-b border-[#c9956a]/10 p-3 md:p-4 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-[15px] font-semibold text-zinc-100">Cron Jobs</h1>
+            <h1 className="text-[15px] font-semibold font-outfit text-gradient">
+              Cron Jobs
+            </h1>
             <p className="text-[12px] text-zinc-500 mt-0.5">
               <span className="font-serif italic">Scheduled</span> task automation
             </p>
           </div>
           <button
             onClick={handleCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-brand text-surface-0 rounded-xl text-[13px] font-semibold hover:bg-brand-light active:bg-brand-dark transition-colors"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all"
           >
             <Plus size={15} strokeWidth={2} />
             <span className="hidden sm:inline">Create</span>
@@ -124,13 +126,17 @@ export const CronManager = () => {
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 size={24} className="text-brand animate-spin" />
+            <Loader2 size={24} className="text-[#c9956a] animate-spin" />
           </div>
         ) : jobs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <Clock size={40} className="text-zinc-600 mb-3" />
-            <p className="text-[13px] text-zinc-500 mb-1">No cron jobs scheduled</p>
-            <p className="text-[12px] text-zinc-600">
+            <div className="w-16 h-16 rounded-full gradient-border bg-[#16161f] flex items-center justify-center mb-4 animate-float">
+              <Clock size={32} className="text-[#c9956a]" />
+            </div>
+            <p className="text-[15px] font-semibold font-outfit text-gradient mb-1">
+              No cron jobs scheduled
+            </p>
+            <p className="text-[12px] text-zinc-600 font-outfit">
               Create a job to automate tasks on a schedule
             </p>
           </div>
@@ -140,22 +146,24 @@ export const CronManager = () => {
               <div
                 key={job.id}
                 className={clsx(
-                  'bg-surface-2 rounded-xl p-4 border transition-all',
+                  'gradient-border bg-[#0f0f16] rounded-xl p-4 transition-all card-hover animate-fade-in',
                   job.enabled
-                    ? 'border-border hover:border-brand/30'
-                    : 'border-border opacity-50'
+                    ? 'ambient-glow'
+                    : 'opacity-50'
                 )}
               >
                 <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="text-[14px] font-semibold text-zinc-100">{job.name}</h3>
+                      <h3 className="text-[14px] font-semibold font-outfit text-zinc-100">
+                        {job.name}
+                      </h3>
                       <span
                         className={clsx(
-                          'text-[10px] font-medium px-2 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0',
+                          "text-[10px] font-medium font-outfit px-2 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0",
                           job.enabled
-                            ? 'bg-brand/15 text-brand'
-                            : 'bg-zinc-500/15 text-zinc-500'
+                            ? 'bg-gradient-brand text-[#0a0a0f] shadow-[0_0_15px_rgba(201,149,106,0.5)]'
+                            : 'glass text-zinc-500 border border-[#c9956a]/20'
                         )}
                       >
                         {job.enabled ? 'Active' : 'Inactive'}
@@ -163,9 +171,9 @@ export const CronManager = () => {
                     </div>
 
                     <div className="space-y-1.5 text-[12px] mb-3">
-                      <div className="flex items-center gap-2 text-zinc-400">
-                        <Clock size={13} className="flex-shrink-0" />
-                        <span className="font-medium text-brand">
+                      <div className="flex items-center gap-2 text-zinc-400 font-outfit">
+                        <Clock size={13} className="flex-shrink-0 text-[#c9956a] animate-glow-pulse" />
+                        <span className="font-medium text-[#c9956a]">
                           {formatSchedule(job.schedule)}
                         </span>
                         <span className="text-zinc-600">•</span>
@@ -174,31 +182,36 @@ export const CronManager = () => {
                         </code>
                       </div>
 
-                      <div className="flex items-start gap-2 text-zinc-400">
-                        <span className="text-zinc-600 flex-shrink-0">$</span>
-                        <code className="text-[11px] text-zinc-400 font-mono break-all">
-                          {job.command}
-                        </code>
+                      <div className="gradient-border bg-[#1e1e28] rounded-lg p-2.5 font-mono">
+                        <div className="flex items-start gap-2 text-zinc-400">
+                          <span className="text-[#c9956a] flex-shrink-0">$</span>
+                          <code className="text-[11px] text-zinc-300 break-all">
+                            {job.command}
+                          </code>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 text-[11px] text-zinc-600">
+                    <div className="flex items-center gap-4 text-[11px] text-zinc-600 font-outfit">
                       <div className="flex items-center gap-1.5">
                         <Calendar size={11} />
                         <span>Last: {formatDateTime(job.last_run)}</span>
                       </div>
                       {job.next_run && (
-                        <div className="flex items-center gap-1.5">
-                          <Clock size={11} />
-                          <span>Next: {formatDateTime(job.next_run)}</span>
-                        </div>
+                        <>
+                          <span className="text-zinc-700">•</span>
+                          <div className="flex items-center gap-1.5">
+                            <Clock size={11} />
+                            <span>Next: {formatDateTime(job.next_run)}</span>
+                          </div>
+                        </>
                       )}
                     </div>
                   </div>
 
                   <button
                     onClick={() => handleDelete(job.id, job.name)}
-                    className="p-2 bg-red-500/10 text-red-400 rounded-lg active:bg-red-500/20 transition-colors flex-shrink-0"
+                    className="p-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 active:bg-red-500/30 transition-all flex-shrink-0 border border-red-500/30"
                   >
                     <Trash2 size={14} />
                   </button>
@@ -211,17 +224,19 @@ export const CronManager = () => {
 
       {/* Create modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end md:items-center justify-center z-50">
-          <div className="bg-surface-1 w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col border-t md:border border-border">
+        <div className="fixed inset-0 glass-strong backdrop-blur-xl flex items-end md:items-center justify-center z-50 animate-fade-in">
+          <div className="gradient-border ambient-glow-strong bg-[#0f0f16] w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col">
             {/* Handle + header */}
             <div className="md:hidden flex items-center justify-center pt-2 pb-1">
               <div className="w-8 h-1 rounded-full bg-zinc-600" />
             </div>
-            <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-border">
-              <h2 className="text-[16px] font-semibold text-zinc-100">Create Cron Job</h2>
+            <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-[#c9956a]/10">
+              <h2 className="text-[16px] font-semibold font-outfit text-gradient">
+                Create Cron Job
+              </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="p-2 -mr-2 text-zinc-400 active:bg-surface-2 rounded-xl"
+                className="p-2 -mr-2 text-zinc-400 hover:text-zinc-300 active:bg-[#16161f] rounded-xl transition-colors"
               >
                 <X size={20} />
               </button>
@@ -229,7 +244,7 @@ export const CronManager = () => {
 
             <div className="flex-1 overflow-y-auto px-4 py-4 md:px-5 space-y-4">
               <div>
-                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">
+                <label className="block text-[11px] font-medium font-outfit text-zinc-400 mb-2 uppercase tracking-widest">
                   Job Name
                 </label>
                 <input
@@ -237,12 +252,12 @@ export const CronManager = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Daily Backup"
-                  className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
+                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] font-outfit focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">
+                <label className="block text-[11px] font-medium font-outfit text-zinc-400 mb-2 uppercase tracking-widest">
                   Schedule (Cron Expression)
                 </label>
                 <input
@@ -250,15 +265,15 @@ export const CronManager = () => {
                   value={formData.schedule}
                   onChange={(e) => setFormData({ ...formData, schedule: e.target.value })}
                   placeholder="e.g., 0 9 * * * (daily at 9am)"
-                  className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border font-mono placeholder:text-zinc-600"
+                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] font-mono focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 transition-all"
                 />
-                <p className="text-[10px] text-zinc-600 mt-1.5">
+                <p className="text-[10px] text-zinc-600 mt-1.5 font-outfit">
                   Format: minute hour day month weekday
                 </p>
               </div>
 
               <div>
-                <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">
+                <label className="block text-[11px] font-medium font-outfit text-zinc-400 mb-2 uppercase tracking-widest">
                   Command
                 </label>
                 <textarea
@@ -266,7 +281,7 @@ export const CronManager = () => {
                   onChange={(e) => setFormData({ ...formData, command: e.target.value })}
                   placeholder="Command to execute"
                   rows={4}
-                  className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border resize-none font-mono placeholder:text-zinc-600"
+                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] font-mono focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] resize-none placeholder:text-zinc-600 scrollbar-hide transition-all"
                 />
               </div>
 
@@ -276,25 +291,25 @@ export const CronManager = () => {
                   id="enabled"
                   checked={formData.enabled}
                   onChange={(e) => setFormData({ ...formData, enabled: e.target.checked })}
-                  className="rounded accent-brand"
+                  className="rounded accent-[#c9956a]"
                 />
-                <label htmlFor="enabled" className="text-[13px] text-zinc-300">
+                <label htmlFor="enabled" className="text-[13px] text-zinc-300 font-outfit">
                   Enable this job immediately
                 </label>
               </div>
             </div>
 
-            <div className="px-4 py-3 md:px-5 md:py-4 border-t border-border flex gap-2 safe-bottom">
+            <div className="px-4 py-3 md:px-5 md:py-4 border-t border-[#c9956a]/10 flex gap-2 safe-bottom">
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 md:flex-none px-4 py-2.5 bg-surface-3 text-zinc-300 rounded-xl text-[13px] font-medium active:bg-surface-4 border border-border"
+                className="flex-1 md:flex-none px-4 py-2.5 glass text-zinc-300 rounded-xl text-[13px] font-medium font-outfit hover:bg-[#16161f]/50 active:bg-[#16161f] border border-[#c9956a]/20 transition-all"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
                 disabled={!formData.name || !formData.schedule || !formData.command || saving}
-                className="flex-1 md:flex-none px-5 py-2.5 bg-brand text-surface-0 rounded-xl text-[13px] font-semibold active:bg-brand-dark disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2"
+                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 transition-all"
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}
                 <span>Create</span>

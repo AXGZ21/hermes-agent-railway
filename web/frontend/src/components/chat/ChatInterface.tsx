@@ -86,10 +86,10 @@ export const ChatInterface = () => {
 
   const connectionIndicator = wsStatus !== 'connected' && (
     <div className={clsx(
-      'flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium',
+      'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium tracking-wide',
       wsStatus === 'connecting'
-        ? 'bg-amber-500/15 text-amber-400'
-        : 'bg-red-500/15 text-red-400'
+        ? 'bg-[#c9956a]/10 text-[#c9956a] ring-1 ring-[#c9956a]/20 animate-glow-pulse'
+        : 'bg-[#e0796b]/10 text-[#e0796b] ring-1 ring-[#e0796b]/20'
     )}>
       {wsStatus === 'connecting' ? (
         <Loader2 size={11} className="animate-spin" />
@@ -103,35 +103,35 @@ export const ChatInterface = () => {
   return (
     <div className="flex h-full">
       {/* ── Desktop sessions sidebar ── */}
-      <div className="hidden md:flex w-60 bg-surface-1 border-r border-border flex-col flex-shrink-0">
-        <div className="p-3 border-b border-border">
+      <div className="hidden md:flex w-56 glass gradient-border flex-col flex-shrink-0">
+        <div className="p-3 border-b border-[#c9956a]/10">
           <button
             onClick={handleCreateSession}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-brand text-brand rounded-xl text-[13px] font-semibold hover:bg-brand-muted transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 gradient-border text-[#c9956a] rounded-xl text-[13px] font-semibold tracking-wide hover:bg-[#c9956a]/5 transition-all duration-300"
           >
-            <Plus size={16} strokeWidth={2} />
+            <Plus size={16} strokeWidth={2.5} />
             <span>New Chat</span>
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto p-2">
+        <div className="flex-1 overflow-y-auto p-2 scrollbar-hide">
           {sessions.map((session) => (
             <button
               key={session.id}
               onClick={() => handleSelectSession(session.id)}
               className={clsx(
-                'w-full text-left p-3 rounded-lg mb-1 transition-all group relative border-l-2',
+                'w-full text-left p-3 rounded-lg mb-1.5 transition-all duration-300 group relative border-l-2',
                 currentSessionId === session.id
-                  ? 'bg-surface-2 text-zinc-100 border-brand'
-                  : 'text-zinc-400 hover:bg-surface-2 border-transparent'
+                  ? 'bg-[#16161f] text-zinc-100 border-[#c9956a] shadow-lg shadow-[#c9956a]/5'
+                  : 'text-zinc-400 hover:bg-[#16161f] border-transparent ambient-glow'
               )}
             >
-              <div className="pr-7">
+              <div className="pr-8">
                 <div className="font-medium text-[13px] truncate">{session.title}</div>
                 <div className="text-[11px] text-zinc-500 mt-0.5">{session.message_count} messages</div>
               </div>
               <button
                 onClick={(e) => handleDeleteSession(session.id, e)}
-                className="absolute right-2 top-3 opacity-0 group-hover:opacity-100 p-1 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-all"
+                className="absolute right-2 top-3 opacity-0 group-hover:opacity-100 p-1 hover:bg-[#e0796b]/10 hover:text-[#e0796b] rounded-lg transition-all duration-300"
               >
                 <Trash2 size={13} />
               </button>
@@ -144,7 +144,7 @@ export const ChatInterface = () => {
 
         {/* Desktop connection status */}
         {wsStatus !== 'connected' && (
-          <div className="p-3 border-t border-border">
+          <div className="p-3 border-t border-[#c9956a]/10">
             {connectionIndicator}
           </div>
         )}
@@ -153,7 +153,7 @@ export const ChatInterface = () => {
       {/* ── Mobile session bottom sheet backdrop ── */}
       <div
         className={clsx(
-          'md:hidden fixed inset-0 z-30 bg-black/60 backdrop-blur-sm transition-opacity duration-300',
+          'md:hidden fixed inset-0 z-30 glass-strong backdrop-blur-xl transition-opacity duration-300',
           showSessionDrawer ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={() => setShowSessionDrawer(false)}
@@ -162,40 +162,40 @@ export const ChatInterface = () => {
       {/* ── Mobile session bottom sheet ── */}
       <div
         className={clsx(
-          'md:hidden fixed inset-x-0 bottom-0 z-40 bg-surface-1 border-t border-border rounded-t-2xl',
+          'md:hidden fixed inset-x-0 bottom-0 z-40 glass-strong border-t border-[#c9956a]/10 rounded-t-3xl',
           'transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]',
           'max-h-[70dvh] flex flex-col',
           showSessionDrawer ? 'translate-y-0' : 'translate-y-full'
         )}
       >
-        <div className="flex items-center justify-center pt-2 pb-1">
-          <div className="w-8 h-1 rounded-full bg-zinc-600" />
+        <div className="flex items-center justify-center pt-3 pb-2">
+          <div className="w-10 h-1 rounded-full bg-[#c9956a]/20" />
         </div>
         <div className="flex items-center justify-between px-4 pb-3">
-          <h3 className="text-[15px] font-semibold text-zinc-100">Sessions</h3>
+          <h3 className="text-[15px] font-semibold text-zinc-100 tracking-wide">Sessions</h3>
           <div className="flex items-center gap-2">
             <button
               onClick={handleCreateSession}
-              className="flex items-center gap-1.5 px-3.5 py-2 border border-brand text-brand rounded-xl text-[13px] font-semibold active:bg-brand-muted"
+              className="flex items-center gap-1.5 px-3.5 py-2 gradient-border text-[#c9956a] rounded-xl text-[13px] font-semibold tracking-wide active:bg-[#c9956a]/5"
             >
-              <Plus size={15} strokeWidth={2} />
+              <Plus size={15} strokeWidth={2.5} />
               <span>New</span>
             </button>
-            <button onClick={() => setShowSessionDrawer(false)} className="p-2 rounded-xl text-zinc-400 active:bg-surface-2">
+            <button onClick={() => setShowSessionDrawer(false)} className="p-2 rounded-xl text-zinc-400 active:bg-[#16161f]">
               <X size={18} />
             </button>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto px-3 pb-4 safe-bottom">
+        <div className="flex-1 overflow-y-auto px-3 pb-4 safe-bottom scrollbar-hide">
           {sessions.map((session) => (
             <button
               key={session.id}
               onClick={() => handleSelectSession(session.id)}
               className={clsx(
-                'w-full text-left px-4 py-3.5 rounded-lg mb-1 transition-all flex items-center gap-3 border-l-2',
+                'w-full text-left px-4 py-3.5 rounded-xl mb-2 transition-all duration-300 flex items-center gap-3 border-l-2',
                 currentSessionId === session.id
-                  ? 'bg-surface-2 text-zinc-100 border-brand'
-                  : 'text-zinc-400 active:bg-surface-2 border-transparent'
+                  ? 'bg-[#16161f] text-zinc-100 border-[#c9956a] shadow-lg shadow-[#c9956a]/5'
+                  : 'text-zinc-400 active:bg-[#16161f] border-transparent'
               )}
             >
               <MessageSquare size={16} className="flex-shrink-0 opacity-50" />
@@ -216,10 +216,10 @@ export const ChatInterface = () => {
         {currentSessionId ? (
           <>
             {/* Mobile session bar */}
-            <div className="md:hidden flex items-center justify-between px-4 py-2 border-b border-border bg-surface-1/50 flex-shrink-0">
+            <div className="md:hidden flex items-center justify-between px-4 py-2.5 border-b border-[#c9956a]/10 glass flex-shrink-0">
               <button
                 onClick={() => setShowSessionDrawer(true)}
-                className="flex items-center gap-2 text-[13px] text-zinc-400 active:text-zinc-200"
+                className="flex items-center gap-2 text-[13px] text-zinc-400 active:text-zinc-200 transition-colors"
               >
                 <MessageSquare size={14} />
                 <span className="truncate max-w-[140px]">
@@ -228,7 +228,7 @@ export const ChatInterface = () => {
               </button>
               <div className="flex items-center gap-2">
                 {connectionIndicator}
-                <button onClick={handleCreateSession} className="p-1.5 rounded-lg text-zinc-500 active:bg-surface-2">
+                <button onClick={handleCreateSession} className="p-1.5 rounded-lg text-zinc-500 active:bg-[#16161f] transition-colors">
                   <Plus size={18} />
                 </button>
               </div>
@@ -236,7 +236,7 @@ export const ChatInterface = () => {
 
             {loadingSession ? (
               <div className="flex-1 flex items-center justify-center">
-                <Loader2 size={24} className="text-brand animate-spin" />
+                <Loader2 size={28} className="text-[#c9956a] animate-spin animate-glow-pulse" />
               </div>
             ) : (
               <MessageList messages={messages} isStreaming={isStreaming} streamingContent={streamingContent} />
@@ -245,17 +245,17 @@ export const ChatInterface = () => {
           </>
         ) : (
           <div className="flex-1 flex items-center justify-center px-6">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand/10 mb-4">
-                <MessageSquare size={24} className="text-brand" />
+            <div className="text-center animate-fade-in-scale">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-brand mb-5 animate-float shadow-2xl shadow-[#c9956a]/20">
+                <MessageSquare size={28} className="text-[#0a0a0f]" strokeWidth={2.5} />
               </div>
-              <h2 className="text-lg font-serif italic text-zinc-100 mb-2">Start a conversation</h2>
-              <p className="text-[13px] text-zinc-500 mb-5 max-w-[260px] mx-auto">
+              <h2 className="text-xl font-serif font-semibold text-gradient mb-2">Start a conversation</h2>
+              <p className="text-[13px] text-zinc-400 mb-6 max-w-[280px] mx-auto leading-relaxed">
                 Create a new chat session to talk with Hermes Agent
               </p>
               <button
                 onClick={handleCreateSession}
-                className="px-5 py-2.5 border border-brand text-brand rounded-xl text-[14px] font-semibold hover:bg-brand-muted transition-colors"
+                className="px-6 py-3 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[14px] font-semibold tracking-wide hover:shadow-xl hover:shadow-[#c9956a]/20 transition-all duration-300 hover:scale-105"
               >
                 New Chat
               </button>

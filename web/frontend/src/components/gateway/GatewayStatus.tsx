@@ -71,9 +71,9 @@ export const GatewayStatus = () => {
 
   const getStatusIcon = (platform: GatewayPlatform) => {
     if (platform.connected) {
-      return <CheckCircle2 size={20} className="text-green-400" />;
+      return <CheckCircle2 size={20} className="text-green-400 animate-glow-pulse" />;
     } else if (platform.configured) {
-      return <AlertCircle size={20} className="text-amber-400" />;
+      return <AlertCircle size={20} className="text-[#c9956a] animate-glow-pulse" />;
     } else {
       return <Circle size={20} className="text-zinc-600" />;
     }
@@ -83,17 +83,19 @@ export const GatewayStatus = () => {
     if (platform.connected) {
       return { text: 'Connected', color: 'text-green-400' };
     } else if (platform.configured) {
-      return { text: 'Configured', color: 'text-amber-400' };
+      return { text: 'Configured', color: 'text-[#c9956a]' };
     } else {
       return { text: 'Not configured', color: 'text-zinc-500' };
     }
   };
 
   return (
-    <div className="h-full flex flex-col bg-surface-0">
+    <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Header */}
-      <div className="bg-surface-1 border-b border-border p-3 md:p-4 flex-shrink-0">
-        <h1 className="text-[15px] font-semibold text-zinc-100">Gateway Status</h1>
+      <div className="glass border-b border-[#c9956a]/10 p-3 md:p-4 flex-shrink-0">
+        <h1 className="text-[15px] font-semibold font-outfit text-gradient">
+          Gateway Status
+        </h1>
         <p className="text-[12px] text-zinc-500 mt-0.5">
           <span className="font-serif italic">Multi-platform</span> messaging connections
         </p>
@@ -103,7 +105,7 @@ export const GatewayStatus = () => {
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 size={24} className="text-brand animate-spin" />
+            <Loader2 size={24} className="text-[#c9956a] animate-spin" />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-3 max-w-5xl">
@@ -113,19 +115,21 @@ export const GatewayStatus = () => {
                 <button
                   key={platform.id}
                   onClick={() => setSelectedPlatform(platform)}
-                  className="bg-surface-2 rounded-xl p-4 md:p-5 border border-border hover:border-brand/30 transition-all text-left group"
+                  className="gradient-border bg-[#0f0f16] rounded-xl p-4 md:p-5 text-left group card-hover ambient-glow animate-fade-in transition-all"
                 >
                   <div className="flex items-start gap-3 mb-4">
-                    <div className="text-3xl flex-shrink-0">
-                      {PLATFORM_ICONS[platform.icon] || '🔌'}
+                    <div className="w-12 h-12 rounded-full gradient-border bg-[#16161f] flex items-center justify-center flex-shrink-0">
+                      <div className="text-2xl">
+                        {PLATFORM_ICONS[platform.icon] || '🔌'}
+                      </div>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-[15px] font-semibold text-zinc-100 mb-1">
+                      <h3 className="text-[15px] font-semibold font-outfit text-zinc-100 mb-1">
                         {platform.name}
                       </h3>
                       <div className="flex items-center gap-2">
                         {getStatusIcon(platform)}
-                        <span className={clsx('text-[12px] font-medium', status.color)}>
+                        <span className={clsx("text-[12px] font-medium font-outfit", status.color)}>
                           {status.text}
                         </span>
                       </div>
@@ -133,13 +137,14 @@ export const GatewayStatus = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-[11px]">
+                    <div className="flex items-center justify-between text-[11px] font-outfit">
                       <span className="text-zinc-500">Configured</span>
                       <span className={platform.configured ? 'text-green-400' : 'text-zinc-600'}>
                         {platform.configured ? 'Yes' : 'No'}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-[11px]">
+                    <div className="h-px bg-[#c9956a]/10" />
+                    <div className="flex items-center justify-between text-[11px] font-outfit">
                       <span className="text-zinc-500">Connected</span>
                       <span className={platform.connected ? 'text-green-400' : 'text-zinc-600'}>
                         {platform.connected ? 'Yes' : 'No'}
@@ -148,8 +153,8 @@ export const GatewayStatus = () => {
                   </div>
 
                   {!platform.configured && (
-                    <div className="mt-3 pt-3 border-t border-border">
-                      <span className="text-[11px] text-brand group-hover:text-brand-light transition-colors">
+                    <div className="mt-3 pt-3 border-t border-[#c9956a]/10">
+                      <span className="text-[11px] text-gradient font-outfit group-hover:text-[#e0796b] transition-colors">
                         View setup instructions →
                       </span>
                     </div>
@@ -161,9 +166,11 @@ export const GatewayStatus = () => {
         )}
 
         {/* Info box */}
-        <div className="mt-6 bg-surface-2 rounded-xl p-4 border border-border max-w-5xl">
-          <h3 className="text-[13px] font-semibold text-zinc-100 mb-2">About Gateway</h3>
-          <p className="text-[12px] text-zinc-400 leading-relaxed">
+        <div className="mt-6 gradient-border bg-[#0f0f16] rounded-xl p-4 max-w-5xl ambient-glow">
+          <h3 className="text-[13px] font-semibold font-outfit text-gradient mb-2">
+            About Gateway
+          </h3>
+          <p className="text-[12px] text-zinc-400 leading-relaxed font-outfit">
             The Hermes Gateway allows the agent to communicate across multiple messaging platforms
             simultaneously. Configure your platform credentials to enable cross-platform messaging
             and notifications.
@@ -173,29 +180,31 @@ export const GatewayStatus = () => {
 
       {/* Setup instructions modal */}
       {selectedPlatform && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-end md:items-center justify-center z-50">
-          <div className="bg-surface-1 w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col border-t md:border border-border">
+        <div className="fixed inset-0 glass-strong backdrop-blur-xl flex items-end md:items-center justify-center z-50 animate-fade-in">
+          <div className="gradient-border ambient-glow-strong bg-[#0f0f16] w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col">
             {/* Handle + header */}
             <div className="md:hidden flex items-center justify-center pt-2 pb-1">
               <div className="w-8 h-1 rounded-full bg-zinc-600" />
             </div>
-            <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-border">
+            <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-[#c9956a]/10">
               <div className="flex items-center gap-3">
-                <span className="text-2xl">
-                  {PLATFORM_ICONS[selectedPlatform.icon] || '🔌'}
-                </span>
+                <div className="w-10 h-10 rounded-full gradient-border bg-[#16161f] flex items-center justify-center">
+                  <span className="text-xl">
+                    {PLATFORM_ICONS[selectedPlatform.icon] || '🔌'}
+                  </span>
+                </div>
                 <div>
-                  <h2 className="text-[16px] font-semibold text-zinc-100">
+                  <h2 className="text-[16px] font-semibold font-outfit text-zinc-100">
                     {selectedPlatform.name}
                   </h2>
-                  <p className="text-[11px] text-zinc-500">
+                  <p className="text-[11px] text-zinc-500 font-outfit">
                     {getStatusText(selectedPlatform).text}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setSelectedPlatform(null)}
-                className="p-2 -mr-2 text-zinc-400 active:bg-surface-2 rounded-xl"
+                className="p-2 -mr-2 text-zinc-400 hover:text-zinc-300 active:bg-[#16161f] rounded-xl transition-colors"
               >
                 ✕
               </button>
@@ -203,11 +212,11 @@ export const GatewayStatus = () => {
 
             <div className="flex-1 overflow-y-auto px-4 py-4 md:px-5 space-y-4">
               {/* Status */}
-              <div className="bg-surface-2 rounded-xl p-4 border border-border">
-                <h3 className="text-[12px] font-semibold text-zinc-300 mb-3 uppercase tracking-widest">
+              <div className="gradient-border bg-[#16161f] rounded-xl p-4 ambient-glow">
+                <h3 className="text-[12px] font-semibold font-outfit text-zinc-300 mb-3 uppercase tracking-widest">
                   Current Status
                 </h3>
-                <div className="space-y-2 text-[13px]">
+                <div className="space-y-2 text-[13px] font-outfit">
                   <div className="flex items-center justify-between">
                     <span className="text-zinc-400">Configured</span>
                     <span
@@ -218,6 +227,7 @@ export const GatewayStatus = () => {
                       {selectedPlatform.configured ? 'Yes' : 'No'}
                     </span>
                   </div>
+                  <div className="h-px bg-[#c9956a]/10" />
                   <div className="flex items-center justify-between">
                     <span className="text-zinc-400">Connected</span>
                     <span
@@ -228,9 +238,10 @@ export const GatewayStatus = () => {
                       {selectedPlatform.connected ? 'Yes' : 'No'}
                     </span>
                   </div>
+                  <div className="h-px bg-[#c9956a]/10" />
                   <div className="flex items-center justify-between">
                     <span className="text-zinc-400">Environment Variable</span>
-                    <code className="text-[11px] text-brand font-mono">
+                    <code className="text-[11px] text-[#c9956a] font-mono">
                       {PLATFORM_ENV_VARS[selectedPlatform.id] || 'N/A'}
                     </code>
                   </div>
@@ -239,11 +250,11 @@ export const GatewayStatus = () => {
 
               {/* Setup instructions */}
               {!selectedPlatform.configured && (
-                <div className="bg-surface-2 rounded-xl p-4 border border-border">
-                  <h3 className="text-[12px] font-semibold text-zinc-300 mb-3 uppercase tracking-widest">
+                <div className="gradient-border bg-[#16161f] rounded-xl p-4 ambient-glow">
+                  <h3 className="text-[12px] font-semibold font-outfit text-zinc-300 mb-3 uppercase tracking-widest">
                     Setup Instructions
                   </h3>
-                  <ol className="space-y-2 text-[13px] text-zinc-400 leading-relaxed list-decimal list-inside">
+                  <ol className="space-y-2 text-[13px] text-zinc-400 leading-relaxed list-decimal list-inside font-outfit">
                     {PLATFORM_SETUP_INSTRUCTIONS[selectedPlatform.id]?.map((step, i) => (
                       <li key={i}>{step}</li>
                     ))}
@@ -252,10 +263,10 @@ export const GatewayStatus = () => {
               )}
             </div>
 
-            <div className="px-4 py-3 md:px-5 md:py-4 border-t border-border safe-bottom">
+            <div className="px-4 py-3 md:px-5 md:py-4 border-t border-[#c9956a]/10 safe-bottom">
               <button
                 onClick={() => setSelectedPlatform(null)}
-                className="w-full px-4 py-2.5 bg-surface-3 text-zinc-300 rounded-xl text-[13px] font-medium active:bg-surface-4 border border-border"
+                className="w-full px-4 py-2.5 glass text-zinc-300 rounded-xl text-[13px] font-medium font-outfit hover:bg-[#16161f]/50 active:bg-[#16161f] border border-[#c9956a]/20 transition-all"
               >
                 Close
               </button>
