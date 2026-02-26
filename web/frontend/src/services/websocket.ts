@@ -1,13 +1,37 @@
 import { WSMessage } from '../types';
 
+export type ConnectionStatus = 'connected' | 'connecting' | 'disconnected';
+
+type StatusListener = (status: ConnectionStatus) => void;
+
 class WebSocketClient {
   private ws: WebSocket | null = null;
   private reconnectAttempts = 0;
-  private maxReconnectAttempts = 5;
+  private maxReconnectAttempts = 50;
   private reconnectDelay = 1000;
+  private maxReconnectDelay = 30000;
   private shouldReconnect = true;
   private messageHandler: ((data: WSMessage) => void) | null = null;
   private closeHandler: (() => void) | null = null;
+  private currentToken: string | null = null;
+  private _status: ConnectionStatus = 'disconnected';
+  private statusListeners = new Set<StatusListener>();
+
+  get status(): ConnectionStatus {
+    return this._status;
+  }
+
+  private setStatus(status: ConnectionStatus) {
+    this._status = status;
+    this.statusListeners.forEach((fn) => fn(status));
+  }
+
+  onStatusChange(listener: StatusListener): () => void {
+    this.statusListeners.add(listener);
+    return () => {
+      this.statusListeners.delete(listener);
+    };
+  }
 
   connect(
     token: string,
@@ -17,6 +41,8 @@ class WebSocketClient {
     this.shouldReconnect = true;
     this.messageHandler = onMessage;
     this.closeHandler = onClose;
+    this.currentToken = token;
+    this.setStatus('connecting');
 
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const wsUrl = `${protocol}//${window.location.host}/ws/chat?token=${token}`;
@@ -25,8 +51,8 @@ class WebSocketClient {
       this.ws = new WebSocket(wsUrl);
 
       this.ws.onopen = () => {
-        console.log('WebSocket connected');
         this.reconnectAttempts = 0;
+        this.setStatus('connected');
       };
 
       this.ws.onmessage = (event) => {
@@ -38,22 +64,26 @@ class WebSocketClient {
         }
       };
 
-      this.ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
+      this.ws.onerror = () => {
+        // onerror is always followed by onclose
       };
 
       this.ws.onclose = () => {
-        console.log('WebSocket disconnected');
         this.ws = null;
+        this.setStatus('disconnected');
 
         if (this.shouldReconnect && this.reconnectAttempts < this.maxReconnectAttempts) {
           this.reconnectAttempts++;
-          const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1);
-          console.log(`Reconnecting in ${delay}ms (attempt ${this.reconnectAttempts})`);
+          const delay = Math.min(
+            this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1),
+            this.maxReconnectDelay
+          );
+
+          this.setStatus('connecting');
 
           setTimeout(() => {
-            if (this.shouldReconnect && token) {
-              this.connect(token, this.messageHandler!, this.closeHandler!);
+            if (this.shouldReconnect && this.currentToken) {
+              this.connect(this.currentToken, this.messageHandler!, this.closeHandler!);
             }
           }, delay);
         } else {
@@ -62,6 +92,7 @@ class WebSocketClient {
       };
     } catch (error) {
       console.error('Failed to create WebSocket connection:', error);
+      this.setStatus('disconnected');
       this.closeHandler?.();
     }
   }
@@ -76,10 +107,12 @@ class WebSocketClient {
 
   disconnect(): void {
     this.shouldReconnect = false;
+    this.currentToken = null;
     if (this.ws) {
       this.ws.close();
       this.ws = null;
     }
+    this.setStatus('disconnected');
   }
 
   isConnected(): boolean {

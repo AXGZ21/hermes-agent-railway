@@ -2,13 +2,17 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
 import { Session } from '../../types';
-import { MessageSquare, Trash2, Download, Search, ChevronRight } from 'lucide-react';
+import { useConfirmStore } from '../ConfirmDialog';
+import { useToastStore } from '../../store/toast';
+import { MessageSquare, Trash2, Download, Search, ChevronRight, Loader2 } from 'lucide-react';
 
 export const SessionHistory = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const confirm = useConfirmStore((s) => s.open);
+  const addToast = useToastStore((s) => s.addToast);
 
   useEffect(() => { loadSessions(); }, []);
 
@@ -16,23 +20,29 @@ export const SessionHistory = () => {
     try {
       const data = await api.getSessions();
       setSessions(data);
-    } catch (error) {
-      console.error('Failed to load sessions:', error);
+    } catch {
+      addToast('error', 'Failed to load sessions');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id: string, e: React.MouseEvent) => {
+  const handleDelete = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm('Are you sure you want to delete this session?')) {
-      try {
-        await api.deleteSession(id);
-        setSessions(sessions.filter((s) => s.id !== id));
-      } catch (error) {
-        console.error('Failed to delete session:', error);
-      }
-    }
+    confirm({
+      title: 'Delete Session',
+      message: 'This session and all its messages will be permanently deleted.',
+      confirmLabel: 'Delete',
+      onConfirm: async () => {
+        try {
+          await api.deleteSession(id);
+          setSessions((prev) => prev.filter((s) => s.id !== id));
+          addToast('success', 'Session deleted');
+        } catch {
+          addToast('error', 'Failed to delete session');
+        }
+      },
+    });
   };
 
   const handleExport = async (session: Session, e: React.MouseEvent) => {
@@ -48,8 +58,9 @@ export const SessionHistory = () => {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Failed to export session:', error);
+      addToast('success', 'Session exported');
+    } catch {
+      addToast('error', 'Failed to export session');
     }
   };
 
@@ -79,7 +90,9 @@ export const SessionHistory = () => {
       {/* Sessions list */}
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
-          <div className="text-center text-slate-500 py-8 text-[13px]">Loading sessions...</div>
+          <div className="flex items-center justify-center py-12">
+            <Loader2 size={24} className="text-violet-400 animate-spin" />
+          </div>
         ) : filteredSessions.length === 0 ? (
           <div className="text-center text-slate-500 py-8 text-[13px]">
             {searchQuery ? 'No matching sessions' : 'No sessions yet'}

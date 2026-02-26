@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import { Skill } from '../../types';
-import { Plus, Search, Power, PowerOff, Edit2, Trash2, X } from 'lucide-react';
+import { useConfirmStore } from '../ConfirmDialog';
+import { useToastStore } from '../../store/toast';
+import { Plus, Search, Power, PowerOff, Edit2, Trash2, X, Loader2 } from 'lucide-react';
 import clsx from 'clsx';
 
 export const SkillsManager = () => {
@@ -9,6 +11,7 @@ export const SkillsManager = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [editingSkill, setEditingSkill] = useState<Skill | null>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -16,6 +19,8 @@ export const SkillsManager = () => {
     content: '',
     enabled: true,
   });
+  const confirm = useConfirmStore((s) => s.open);
+  const addToast = useToastStore((s) => s.addToast);
 
   useEffect(() => { loadSkills(); }, []);
 
@@ -23,8 +28,8 @@ export const SkillsManager = () => {
     try {
       const data = await api.getSkills();
       setSkills(data);
-    } catch (error) {
-      console.error('Failed to load skills:', error);
+    } catch {
+      addToast('error', 'Failed to load skills');
     } finally {
       setLoading(false);
     }
@@ -48,36 +53,48 @@ export const SkillsManager = () => {
   };
 
   const handleSave = async () => {
+    setSaving(true);
     try {
       if (editingSkill) {
         await api.updateSkill(editingSkill.id, formData);
+        addToast('success', 'Skill updated');
       } else {
         await api.createSkill(formData);
+        addToast('success', 'Skill created');
       }
       await loadSkills();
       setShowModal(false);
-    } catch (error) {
-      console.error('Failed to save skill:', error);
+    } catch {
+      addToast('error', `Failed to ${editingSkill ? 'update' : 'create'} skill`);
+    } finally {
+      setSaving(false);
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this skill?')) {
-      try {
-        await api.deleteSkill(id);
-        await loadSkills();
-      } catch (error) {
-        console.error('Failed to delete skill:', error);
-      }
-    }
+  const handleDelete = (id: string) => {
+    confirm({
+      title: 'Delete Skill',
+      message: 'This skill will be permanently removed.',
+      confirmLabel: 'Delete',
+      onConfirm: async () => {
+        try {
+          await api.deleteSkill(id);
+          await loadSkills();
+          addToast('success', 'Skill deleted');
+        } catch {
+          addToast('error', 'Failed to delete skill');
+        }
+      },
+    });
   };
 
   const handleToggle = async (skill: Skill) => {
     try {
       await api.updateSkill(skill.id, { enabled: !skill.enabled });
       await loadSkills();
-    } catch (error) {
-      console.error('Failed to toggle skill:', error);
+      addToast('info', `Skill ${skill.enabled ? 'disabled' : 'enabled'}`);
+    } catch {
+      addToast('error', 'Failed to toggle skill');
     }
   };
 
@@ -116,7 +133,9 @@ export const SkillsManager = () => {
       {/* Skills grid */}
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
-          <div className="text-center text-slate-500 py-8 text-[13px]">Loading skills...</div>
+          <div className="flex items-center justify-center py-12">
+            <Loader2 size={24} className="text-violet-400 animate-spin" />
+          </div>
         ) : filteredSkills.length === 0 ? (
           <div className="text-center text-slate-500 py-8 text-[13px]">
             {searchQuery ? 'No matching skills' : 'No skills yet'}
@@ -257,10 +276,11 @@ export const SkillsManager = () => {
               </button>
               <button
                 onClick={handleSave}
-                disabled={!formData.name || !formData.content}
-                className="flex-1 md:flex-none px-5 py-2.5 bg-violet-500 text-white rounded-xl text-[13px] font-semibold active:bg-violet-700 disabled:opacity-40 disabled:pointer-events-none"
+                disabled={!formData.name || !formData.content || saving}
+                className="flex-1 md:flex-none px-5 py-2.5 bg-violet-500 text-white rounded-xl text-[13px] font-semibold active:bg-violet-700 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2"
               >
-                {editingSkill ? 'Update' : 'Create'}
+                {saving && <Loader2 size={14} className="animate-spin" />}
+                <span>{editingSkill ? 'Update' : 'Create'}</span>
               </button>
             </div>
           </div>

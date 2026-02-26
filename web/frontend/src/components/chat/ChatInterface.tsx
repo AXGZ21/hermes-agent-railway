@@ -4,7 +4,10 @@ import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
 import { useChat } from '../../hooks/useChat';
 import { useWebSocket } from '../../hooks/useWebSocket';
-import { Plus, Trash2, MessageSquare, X } from 'lucide-react';
+import { useConfirmStore } from '../ConfirmDialog';
+import { useToastStore } from '../../store/toast';
+import { wsClient, ConnectionStatus } from '../../services/websocket';
+import { Plus, Trash2, MessageSquare, X, WifiOff, Loader2 } from 'lucide-react';
 import clsx from 'clsx';
 
 export const ChatInterface = () => {
@@ -21,21 +24,39 @@ export const ChatInterface = () => {
     deleteSession,
   } = useChat();
   const { sendMessage } = useWebSocket();
+  const confirm = useConfirmStore((s) => s.open);
+  const addToast = useToastStore((s) => s.addToast);
   const [showSessionDrawer, setShowSessionDrawer] = useState(false);
+  const [loadingSession, setLoadingSession] = useState(false);
+  const [wsStatus, setWsStatus] = useState<ConnectionStatus>(wsClient.status);
+
+  useEffect(() => {
+    return wsClient.onStatusChange(setWsStatus);
+  }, []);
 
   useEffect(() => {
     if (sessionId && sessionId !== currentSessionId) {
-      selectSession(sessionId);
+      let cancelled = false;
+      setLoadingSession(true);
+      selectSession(sessionId).finally(() => {
+        if (!cancelled) setLoadingSession(false);
+      });
+      return () => { cancelled = true; };
     }
-  }, [sessionId, currentSessionId, selectSession]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId]);
 
   useEffect(() => {
     setShowSessionDrawer(false);
   }, [currentSessionId]);
 
   const handleCreateSession = async () => {
-    const id = await createSession();
-    navigate(`/chat/${id}`);
+    try {
+      const id = await createSession();
+      navigate(`/chat/${id}`);
+    } catch {
+      addToast('error', 'Failed to create session');
+    }
   };
 
   const handleSelectSession = (id: string) => {
@@ -43,15 +64,41 @@ export const ChatInterface = () => {
     setShowSessionDrawer(false);
   };
 
-  const handleDeleteSession = async (id: string, e: React.MouseEvent) => {
+  const handleDeleteSession = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm('Are you sure you want to delete this session?')) {
-      await deleteSession(id);
-      if (currentSessionId === id) {
-        navigate('/chat');
-      }
-    }
+    confirm({
+      title: 'Delete Session',
+      message: 'This session and all its messages will be permanently deleted.',
+      confirmLabel: 'Delete',
+      onConfirm: async () => {
+        try {
+          await deleteSession(id);
+          if (currentSessionId === id) {
+            navigate('/chat');
+          }
+          addToast('success', 'Session deleted');
+        } catch {
+          addToast('error', 'Failed to delete session');
+        }
+      },
+    });
   };
+
+  const connectionIndicator = wsStatus !== 'connected' && (
+    <div className={clsx(
+      'flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium',
+      wsStatus === 'connecting'
+        ? 'bg-amber-500/15 text-amber-400'
+        : 'bg-red-500/15 text-red-400'
+    )}>
+      {wsStatus === 'connecting' ? (
+        <Loader2 size={11} className="animate-spin" />
+      ) : (
+        <WifiOff size={11} />
+      )}
+      <span>{wsStatus === 'connecting' ? 'Reconnecting...' : 'Disconnected'}</span>
+    </div>
+  );
 
   return (
     <div className="flex h-full">
@@ -94,6 +141,13 @@ export const ChatInterface = () => {
             <div className="text-center text-slate-500 text-[12px] mt-8 px-4">No sessions yet</div>
           )}
         </div>
+
+        {/* Desktop connection status */}
+        {wsStatus !== 'connected' && (
+          <div className="p-3 border-t border-white/[0.06]">
+            {connectionIndicator}
+          </div>
+        )}
       </div>
 
       {/* ── Mobile session bottom sheet backdrop ── */}
@@ -168,16 +222,26 @@ export const ChatInterface = () => {
                 className="flex items-center gap-2 text-[13px] text-slate-400 active:text-slate-200"
               >
                 <MessageSquare size={14} />
-                <span className="truncate max-w-[200px]">
+                <span className="truncate max-w-[140px]">
                   {sessions.find(s => s.id === currentSessionId)?.title || 'Session'}
                 </span>
               </button>
-              <button onClick={handleCreateSession} className="p-1.5 rounded-lg text-slate-500 active:bg-white/[0.08]">
-                <Plus size={18} />
-              </button>
+              <div className="flex items-center gap-2">
+                {connectionIndicator}
+                <button onClick={handleCreateSession} className="p-1.5 rounded-lg text-slate-500 active:bg-white/[0.08]">
+                  <Plus size={18} />
+                </button>
+              </div>
             </div>
-            <MessageList messages={messages} isStreaming={isStreaming} streamingContent={streamingContent} />
-            <MessageInput onSend={sendMessage} disabled={isStreaming} />
+
+            {loadingSession ? (
+              <div className="flex-1 flex items-center justify-center">
+                <Loader2 size={24} className="text-violet-400 animate-spin" />
+              </div>
+            ) : (
+              <MessageList messages={messages} isStreaming={isStreaming} streamingContent={streamingContent} />
+            )}
+            <MessageInput onSend={sendMessage} disabled={isStreaming || wsStatus !== 'connected'} />
           </>
         ) : (
           <div className="flex-1 flex items-center justify-center px-6">

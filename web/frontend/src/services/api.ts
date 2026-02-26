@@ -21,6 +21,12 @@ class APIClient {
       },
     });
 
+    if (response.status === 401) {
+      localStorage.removeItem('hermes_token');
+      window.location.href = '/login';
+      throw new Error('Session expired. Please log in again.');
+    }
+
     if (!response.ok) {
       const error = await response.json().catch(() => ({ detail: 'Request failed' }));
       throw new Error(error.detail || `HTTP ${response.status}`);

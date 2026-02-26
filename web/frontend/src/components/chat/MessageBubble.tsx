@@ -6,6 +6,9 @@ interface MessageBubbleProps {
   message: Message;
 }
 
+const escapeHtml = (str: string) =>
+  str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
 const formatContent = (content: string) => {
   const parts: React.JSX.Element[] = [];
   const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
@@ -18,7 +21,7 @@ const formatContent = (content: string) => {
       parts.push(<span key={`text-${lastIndex}`}>{formatInlineText(text)}</span>);
     }
 
-    const language = match[1] || 'text';
+    const language = escapeHtml(match[1] || 'text');
     const code = match[2];
     parts.push(
       <div key={`code-${match.index}`} className="my-2 -mx-1">
@@ -61,31 +64,36 @@ const formatInlineText = (text: string) => {
 
 const formatInlineStyles = (text: string) => {
   const parts: (string | React.JSX.Element)[] = [];
-  const boldRegex = /\*\*(.+?)\*\*/g;
-  const italicRegex = /\*(.+?)\*/g;
+  // Match inline code, bold, then italic - in order of priority
+  const regex = /`([^`]+)`|\*\*(.+?)\*\*|\*(.+?)\*/g;
+  let lastIdx = 0;
+  let m;
 
-  let processed = text;
-  processed = processed.replace(boldRegex, '|||BOLD_START|||$1|||BOLD_END|||');
-  processed = processed.replace(italicRegex, (match, p1) => {
-    if (match.includes('|||')) return match;
-    return `|||ITALIC_START|||${p1}|||ITALIC_END|||`;
-  });
-
-  const tokens = processed.split('|||');
-
-  for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i];
-    if (token === 'BOLD_START') {
-      i++;
-      parts.push(<strong key={i} className="font-semibold">{tokens[i]}</strong>);
-      i++;
-    } else if (token === 'ITALIC_START') {
-      i++;
-      parts.push(<em key={i} className="italic">{tokens[i]}</em>);
-      i++;
-    } else if (token && !token.includes('_END')) {
-      parts.push(token);
+  while ((m = regex.exec(text)) !== null) {
+    if (m.index > lastIdx) {
+      parts.push(text.slice(lastIdx, m.index));
     }
+
+    if (m[1] !== undefined) {
+      // Inline code
+      parts.push(
+        <code key={m.index} className="bg-black/20 text-violet-300 px-1.5 py-0.5 rounded text-[12px] font-mono">
+          {m[1]}
+        </code>
+      );
+    } else if (m[2] !== undefined) {
+      // Bold
+      parts.push(<strong key={m.index} className="font-semibold">{m[2]}</strong>);
+    } else if (m[3] !== undefined) {
+      // Italic
+      parts.push(<em key={m.index} className="italic">{m[3]}</em>);
+    }
+
+    lastIdx = m.index + m[0].length;
+  }
+
+  if (lastIdx < text.length) {
+    parts.push(text.slice(lastIdx));
   }
 
   return parts;

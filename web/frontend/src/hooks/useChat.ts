@@ -16,7 +16,8 @@ export const useChat = () => {
 
   useEffect(() => {
     loadSessions();
-  }, [loadSessions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     sessions,

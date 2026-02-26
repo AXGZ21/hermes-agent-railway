@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../services/api';
 import { LogEntry } from '../../types';
+import { useConfirmStore } from '../ConfirmDialog';
+import { useToastStore } from '../../store/toast';
 import { RefreshCw, Trash2, Search } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -25,39 +27,49 @@ export const LogsViewer = () => {
   const [total, setTotal] = useState(0);
   const [offset, setOffset] = useState(0);
   const limit = 100;
+  const confirm = useConfirmStore((s) => s.open);
+  const addToast = useToastStore((s) => s.addToast);
 
-  const loadLogs = async () => {
+  const loadLogs = useCallback(async () => {
     try {
-      const params: any = { limit, offset };
+      const params: { limit: number; offset: number; level?: string } = { limit, offset };
       if (selectedLevel !== 'ALL') params.level = selectedLevel;
       const data = await api.getLogs(params);
       setLogs(data.logs);
       setTotal(data.total);
-    } catch (error) {
-      console.error('Failed to load logs:', error);
+    } catch {
+      addToast('error', 'Failed to load logs');
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedLevel, offset, addToast]);
 
-  useEffect(() => { loadLogs(); }, [selectedLevel, offset]);
+  useEffect(() => {
+    loadLogs();
+  }, [loadLogs]);
 
   useEffect(() => {
     if (!autoRefresh) return;
-    const interval = setInterval(() => { loadLogs(); }, 5000);
+    const interval = setInterval(loadLogs, 5000);
     return () => clearInterval(interval);
-  }, [autoRefresh, selectedLevel, offset]);
+  }, [autoRefresh, loadLogs]);
 
-  const handleClearLogs = async () => {
-    if (confirm('Are you sure you want to clear all logs?')) {
-      try {
-        await api.clearLogs();
-        setLogs([]);
-        setTotal(0);
-      } catch (error) {
-        console.error('Failed to clear logs:', error);
-      }
-    }
+  const handleClearLogs = () => {
+    confirm({
+      title: 'Clear Logs',
+      message: 'All logs will be permanently deleted. This cannot be undone.',
+      confirmLabel: 'Clear All',
+      onConfirm: async () => {
+        try {
+          await api.clearLogs();
+          setLogs([]);
+          setTotal(0);
+          addToast('success', 'Logs cleared');
+        } catch {
+          addToast('error', 'Failed to clear logs');
+        }
+      },
+    });
   };
 
   const filteredLogs = logs.filter((log) =>
