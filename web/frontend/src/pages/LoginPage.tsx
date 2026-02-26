@@ -30,7 +30,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-[#0a0a0f] noise flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom relative overflow-hidden">
+    <div className="min-h-[100dvh] bg-[#0a0a0f] noise flex flex-col items-center justify-center px-5 py-8 md:px-6 md:py-12 safe-top safe-bottom relative overflow-hidden">
       {/* Background atmospheric orbs */}
       <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#c9956a]/[0.08] blur-[120px] pointer-events-none animate-float"
         style={{ animationDuration: '8s' }}
@@ -47,11 +47,11 @@ export const LoginPage = () => {
 
       <div className="w-full max-w-[420px] relative z-10">
         {/* Branding */}
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-brand gradient-border mb-8 animate-glow-pulse">
-            <span className="text-3xl font-bold text-[#0a0a0f] font-outfit tracking-tighter">H</span>
+        <div className="text-center mb-8 md:mb-12 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-brand gradient-border mb-6 md:mb-8 animate-glow-pulse">
+            <span className="text-2xl md:text-3xl font-bold text-[#0a0a0f] font-outfit tracking-tighter">H</span>
           </div>
-          <h1 className="text-4xl font-light text-zinc-100 tracking-tight font-outfit mb-2">
+          <h1 className="text-3xl md:text-4xl font-light text-zinc-100 tracking-tight font-outfit mb-2">
             <span className="text-gradient">Hermes</span>{' '}
             <span className="font-serif italic text-[#e0796b]">Agent</span>
           </h1>
@@ -62,7 +62,7 @@ export const LoginPage = () => {
 
         {/* Form */}
         <div className="animate-fade-in stagger-2">
-          <div className="glass-strong gradient-border rounded-2xl p-8 ambient-glow-strong">
+          <div className="glass-strong gradient-border rounded-2xl p-6 md:p-8 ambient-glow-strong">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
@@ -93,7 +93,7 @@ export const LoginPage = () => {
               <button
                 type="submit"
                 disabled={loading || !password}
-                className="w-full flex items-center justify-center gap-3 bg-gradient-brand text-[#0a0a0f] rounded-xl py-4 text-[15px] font-bold font-outfit tracking-wide uppercase hover:shadow-[0_0_30px_rgba(201,149,106,0.3)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none ambient-glow"
+                className="w-full flex items-center justify-center gap-3 bg-gradient-brand text-[#0a0a0f] rounded-xl py-4 text-[15px] font-bold font-outfit tracking-wide uppercase hover:shadow-[0_0_30px_rgba(201,149,106,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none ambient-glow min-h-[52px]"
               >
                 {loading ? (
                   <Loader2 size={20} className="animate-spin" />

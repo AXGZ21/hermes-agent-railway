@@ -30,7 +30,7 @@ const formatContent = (content: string) => {
             <span className="text-[10px] text-[#c9956a] font-mono uppercase tracking-widest font-semibold">{language}</span>
             <button
               onClick={() => navigator.clipboard.writeText(code)}
-              className="text-[10px] text-zinc-500 hover:text-[#c9956a] active:text-[#c9956a] px-2 py-1 rounded transition-colors"
+              className="text-[10px] text-zinc-500 hover:text-[#c9956a] active:text-[#c9956a] px-3 py-2 rounded-lg transition-colors min-h-[36px] flex items-center"
             >
               Copy
             </button>
@@ -114,7 +114,7 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
   }
 
   return (
-    <div className={clsx('flex gap-3 mb-5', isUser ? 'justify-end' : 'justify-start')}>
+    <div className={clsx('flex gap-2 md:gap-3 mb-4 md:mb-5', isUser ? 'justify-end' : 'justify-start')}>
       {!isUser && (
         <div className="w-7 h-7 rounded-full gradient-border bg-gradient-brand flex items-center justify-center flex-shrink-0 mt-0.5 ambient-glow-strong">
           <Bot size={14} className="text-[#0a0a0f]" strokeWidth={2.5} />
@@ -123,7 +123,7 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
 
       <div
         className={clsx(
-          'max-w-[85%] md:max-w-2xl px-4 py-3.5 rounded-2xl shadow-xl',
+          'max-w-[88%] md:max-w-2xl px-4 py-3 md:py-3.5 rounded-2xl shadow-xl',
           isUser
             ? 'bg-gradient-brand text-[#0a0a0f] rounded-tr-md'
             : 'glass gradient-border text-zinc-200 rounded-tl-md'

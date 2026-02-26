@@ -108,7 +108,7 @@ export const ConfigPanel = () => {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={clsx(
-                  'flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-lg font-medium transition-all text-[13px] whitespace-nowrap flex-shrink-0 relative font-outfit',
+                  'flex items-center gap-1.5 px-3.5 md:px-4 py-2.5 rounded-lg font-medium transition-all text-[13px] whitespace-nowrap flex-shrink-0 relative font-outfit min-h-[44px]',
                   activeTab === tab.id
                     ? 'text-brand'
                     : 'text-zinc-500 hover:text-zinc-300 active:bg-[#16161f]'
@@ -148,7 +148,7 @@ export const ConfigPanel = () => {
                   <select
                     value={config.provider}
                     onChange={(e) => updateConfig({ provider: e.target.value })}
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-3 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all min-h-[48px]"
                   >
                     <option value="openrouter">OpenRouter</option>
                     <option value="nous">Nous Portal</option>
@@ -305,7 +305,7 @@ export const ConfigPanel = () => {
                   <select
                     value={config.log_level}
                     onChange={(e) => updateConfig({ log_level: e.target.value })}
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-3 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all min-h-[48px]"
                   >
                     <option value="DEBUG">DEBUG</option>
                     <option value="INFO">INFO</option>
@@ -345,7 +345,7 @@ export const ConfigPanel = () => {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none flex-shrink-0 font-outfit"
+            className="flex items-center gap-2 px-5 py-3 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none flex-shrink-0 font-outfit min-h-[44px]"
           >
             {saving ? (
               <Loader2 size={15} className="animate-spin" />

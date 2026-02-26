@@ -85,7 +85,7 @@ export const MemoryManager = () => {
               <button
                 key={file.filename}
                 onClick={() => handleSelectFile(file)}
-                className="gradient-border bg-[#0f0f16] rounded-xl p-4 md:p-5 text-left group card-hover ambient-glow animate-fade-in"
+                className="gradient-border bg-[#0f0f16] rounded-xl p-4 md:p-5 text-left group card-hover ambient-glow animate-fade-in active:scale-[0.98] min-h-[120px]"
               >
                 <div className="flex items-start gap-3 mb-3">
                   <div className="w-12 h-12 rounded-full gradient-border bg-[#16161f] flex items-center justify-center flex-shrink-0">

@@ -155,7 +155,7 @@ export const SkillsManager = () => {
                   <button
                     onClick={() => handleToggle(skill)}
                     className={clsx(
-                      'p-1.5 rounded-lg transition-all flex-shrink-0',
+                      'p-2.5 rounded-lg transition-all flex-shrink-0 min-w-[40px] min-h-[40px] flex items-center justify-center',
                       skill.enabled
                         ? 'text-brand hover:bg-brand/10 hover:shadow-[0_0_15px_rgba(201,149,106,0.3)]'
                         : 'text-zinc-500 hover:bg-[#16161f]'
@@ -181,15 +181,15 @@ export const SkillsManager = () => {
                   <div className="flex gap-1">
                     <button
                       onClick={() => handleEdit(skill)}
-                      className="p-1.5 glass text-zinc-400 rounded-lg hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] transition-all"
+                      className="p-2 glass text-zinc-400 rounded-lg hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] transition-all min-w-[36px] min-h-[36px] flex items-center justify-center"
                     >
-                      <Edit2 size={13} />
+                      <Edit2 size={14} />
                     </button>
                     <button
                       onClick={() => handleDelete(skill.id)}
-                      className="p-1.5 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all"
+                      className="p-2 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all min-w-[36px] min-h-[36px] flex items-center justify-center"
                     >
-                      <Trash2 size={13} />
+                      <Trash2 size={14} />
                     </button>
                   </div>
                 </div>

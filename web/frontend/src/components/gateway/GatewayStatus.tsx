@@ -115,7 +115,7 @@ export const GatewayStatus = () => {
                 <button
                   key={platform.id}
                   onClick={() => setSelectedPlatform(platform)}
-                  className="gradient-border bg-[#0f0f16] rounded-xl p-4 md:p-5 text-left group card-hover ambient-glow animate-fade-in transition-all"
+                  className="gradient-border bg-[#0f0f16] rounded-xl p-4 md:p-5 text-left group card-hover ambient-glow animate-fade-in transition-all active:scale-[0.98] min-h-[140px]"
                 >
                   <div className="flex items-start gap-3 mb-4">
                     <div className="w-12 h-12 rounded-full gradient-border bg-[#16161f] flex items-center justify-center flex-shrink-0">

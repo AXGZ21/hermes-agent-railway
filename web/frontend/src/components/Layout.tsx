@@ -168,7 +168,7 @@ export const Layout = () => {
                 key={item.to}
                 to={item.to}
                 className={clsx(
-                  'relative flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-medium text-[15px] font-outfit',
+                  'relative flex items-center gap-3 px-4 py-4 rounded-xl transition-all font-medium text-[15px] font-outfit min-h-[52px]',
                   isActive
                     ? 'text-[#c9956a] bg-[#c9956a]/10 border-l-2 border-[#c9956a]'
                     : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5 border-l-2 border-transparent'
@@ -213,7 +213,7 @@ export const Layout = () => {
               <NavLink
                 key={item.to}
                 to={item.to}
-                className="flex-1 flex flex-col items-center justify-center gap-1 py-3 relative group"
+                className="flex-1 flex flex-col items-center justify-center gap-1 py-3.5 relative group min-h-[52px]"
               >
                 {isActive && (
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c9956a] to-transparent rounded-full ambient-glow" />
@@ -242,7 +242,7 @@ export const Layout = () => {
           {/* More menu button */}
           <button
             onClick={() => setMoreMenuOpen(!moreMenuOpen)}
-            className="flex-1 flex flex-col items-center justify-center gap-1 py-3 relative group"
+            className="flex-1 flex flex-col items-center justify-center gap-1 py-3.5 relative group min-h-[52px]"
           >
             <MoreHorizontal
               size={22}
@@ -270,7 +270,7 @@ export const Layout = () => {
                       to={item.to}
                       onClick={() => setMoreMenuOpen(false)}
                       className={clsx(
-                        'flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-[14px] font-outfit',
+                        'flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-medium text-[14px] font-outfit min-h-[48px]',
                         isActive
                           ? 'text-[#c9956a] bg-[#c9956a]/10'
                           : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'

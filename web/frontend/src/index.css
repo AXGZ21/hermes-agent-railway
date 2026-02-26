@@ -261,6 +261,83 @@ code, pre, .font-mono {
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ═══════════════════════════════════════════
+   Mobile Optimizations
+   ═══════════════════════════════════════════ */
+
+/* Minimum touch target enforcement */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile-first spacing */
+@media (max-width: 768px) {
+  .mobile-compact { padding: 0.75rem; }
+  .mobile-tight { gap: 0.5rem; }
+
+  /* Larger tap areas on mobile */
+  button, [role="button"], a {
+    min-height: 36px;
+  }
+
+  /* Prevent text selection on interactive elements */
+  nav button, nav a {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Better mobile toast positioning */
+  .toast-container-mobile {
+    top: auto !important;
+    bottom: 5rem !important;
+    right: 1rem !important;
+    left: 1rem !important;
+  }
+}
+
+/* Haptic-style active feedback */
+.tap-highlight:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+/* Bottom sheet drag handle */
+.drag-handle {
+  width: 2.5rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgba(201, 149, 106, 0.3);
+  margin: 0.75rem auto 0.5rem;
+}
+
+/* Mobile bottom safe area with extra padding for tab bar */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom-tab {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 4rem);
+  }
+}
+
+/* Swipe hint animation */
+@keyframes swipe-hint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-swipe-hint {
+  animation: swipe-hint 2s ease-in-out infinite;
+}
+
+/* Mobile card press effect */
+@media (max-width: 768px) {
+  .card-hover:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
 /* Input reset */
 input, textarea, select {
   font-family: inherit;

@@ -181,8 +181,8 @@ export const ChatInterface = () => {
               <Plus size={15} strokeWidth={2.5} />
               <span>New</span>
             </button>
-            <button onClick={() => setShowSessionDrawer(false)} className="p-2 rounded-xl text-zinc-400 active:bg-[#16161f]">
-              <X size={18} />
+            <button onClick={() => setShowSessionDrawer(false)} className="p-2.5 rounded-xl text-zinc-400 active:bg-[#16161f] min-w-[44px] min-h-[44px] flex items-center justify-center">
+              <X size={20} />
             </button>
           </div>
         </div>
@@ -192,7 +192,7 @@ export const ChatInterface = () => {
               key={session.id}
               onClick={() => handleSelectSession(session.id)}
               className={clsx(
-                'w-full text-left px-4 py-3.5 rounded-xl mb-2 transition-all duration-300 flex items-center gap-3 border-l-2',
+                'w-full text-left px-4 py-4 rounded-xl mb-2 transition-all duration-300 flex items-center gap-3 border-l-2 min-h-[56px] active:scale-[0.98]',
                 currentSessionId === session.id
                   ? 'bg-[#16161f] text-zinc-100 border-[#c9956a] shadow-lg shadow-[#c9956a]/5'
                   : 'text-zinc-400 active:bg-[#16161f] border-transparent'
@@ -216,20 +216,20 @@ export const ChatInterface = () => {
         {currentSessionId ? (
           <>
             {/* Mobile session bar */}
-            <div className="md:hidden flex items-center justify-between px-4 py-2.5 border-b border-[#c9956a]/10 glass flex-shrink-0">
+            <div className="md:hidden flex items-center justify-between px-4 py-2 border-b border-[#c9956a]/10 glass flex-shrink-0 min-h-[48px]">
               <button
                 onClick={() => setShowSessionDrawer(true)}
-                className="flex items-center gap-2 text-[13px] text-zinc-400 active:text-zinc-200 transition-colors"
+                className="flex items-center gap-2 text-[13px] text-zinc-400 active:text-zinc-200 transition-colors min-h-[44px] -ml-2 pl-2 pr-3"
               >
-                <MessageSquare size={14} />
-                <span className="truncate max-w-[140px]">
+                <MessageSquare size={16} />
+                <span className="truncate max-w-[180px]">
                   {sessions.find(s => s.id === currentSessionId)?.title || 'Session'}
                 </span>
               </button>
               <div className="flex items-center gap-2">
                 {connectionIndicator}
-                <button onClick={handleCreateSession} className="p-1.5 rounded-lg text-zinc-500 active:bg-[#16161f] transition-colors">
-                  <Plus size={18} />
+                <button onClick={handleCreateSession} className="p-2.5 rounded-xl text-zinc-500 active:bg-[#16161f] transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+                  <Plus size={20} />
                 </button>
               </div>
             </div>

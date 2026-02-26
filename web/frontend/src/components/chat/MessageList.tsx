@@ -17,7 +17,7 @@ export const MessageList = ({ messages, isStreaming, streamingContent }: Message
   }, [messages, streamingContent]);
 
   return (
-    <div className="flex-1 overflow-y-auto px-4 py-8 md:px-8 md:py-10 scrollbar-hide">
+    <div className="flex-1 overflow-y-auto px-3 py-4 md:px-8 md:py-10 scrollbar-hide">
       {messages.length === 0 && !isStreaming && (
         <div className="flex flex-col items-center justify-center h-full text-zinc-500 animate-fade-in">
           <div className="w-12 h-12 rounded-full bg-gradient-brand flex items-center justify-center mb-4 animate-float shadow-xl shadow-[#c9956a]/10">
