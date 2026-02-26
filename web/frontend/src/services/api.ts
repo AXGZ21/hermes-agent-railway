@@ -52,8 +52,8 @@ class APIClient {
 
   // Sessions
   async getSessions(): Promise<Session[]> {
-    const data = await this.request<{ sessions: Session[] }>('/sessions');
-    return data.sessions;
+    const data = await this.request<Session[] | { sessions: Session[] }>('/sessions');
+    return Array.isArray(data) ? data : data.sessions;
   }
 
   async getSession(id: string): Promise<{ session: Session; messages: Message[] }> {
@@ -108,8 +108,8 @@ class APIClient {
 
   // Skills
   async getSkills(): Promise<Skill[]> {
-    const data = await this.request<{ skills: Skill[] }>('/skills');
-    return data.skills;
+    const data = await this.request<Skill[] | { skills: Skill[] }>('/skills');
+    return Array.isArray(data) ? data : data.skills;
   }
 
   async createSkill(skill: Partial<Skill>): Promise<Skill> {
