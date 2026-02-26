@@ -9,9 +9,9 @@ const iconMap = {
 };
 
 const colorMap = {
-  success: 'bg-emerald-500/15 border-emerald-500/20 text-emerald-400',
-  error: 'bg-red-500/15 border-red-500/20 text-red-400',
-  info: 'bg-blue-500/15 border-blue-500/20 text-blue-400',
+  success: 'bg-surface-2 border-emerald-500/30 text-emerald-400',
+  error: 'bg-surface-2 border-red-500/30 text-red-400',
+  info: 'bg-surface-2 border-brand/30 text-brand',
 };
 
 export const ToastContainer = () => {
@@ -27,15 +27,15 @@ export const ToastContainer = () => {
           <div
             key={toast.id}
             className={clsx(
-              'pointer-events-auto flex items-start gap-2.5 px-4 py-3 rounded-xl border backdrop-blur-xl shadow-2xl shadow-black/30 animate-in',
+              'pointer-events-auto flex items-start gap-2.5 px-4 py-3 rounded-xl border backdrop-blur-xl shadow-2xl shadow-black/30 animate-in slide-in-from-right',
               colorMap[toast.type]
             )}
           >
             <Icon size={16} className="flex-shrink-0 mt-0.5" />
-            <span className="text-[13px] leading-relaxed flex-1">{toast.message}</span>
+            <span className="text-[13px] leading-relaxed flex-1 text-zinc-200">{toast.message}</span>
             <button
               onClick={() => removeToast(toast.id)}
-              className="flex-shrink-0 p-0.5 rounded hover:bg-white/10 transition-colors"
+              className="flex-shrink-0 p-0.5 rounded hover:bg-white/10 transition-colors text-zinc-400"
             >
               <X size={14} />
             </button>

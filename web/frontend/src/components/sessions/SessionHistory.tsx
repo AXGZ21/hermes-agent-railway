@@ -71,17 +71,17 @@ export const SessionHistory = () => {
   return (
     <div className="h-full flex flex-col bg-surface-0">
       {/* Header */}
-      <div className="bg-surface-1 border-b border-white/[0.06] p-3 md:p-4 flex-shrink-0">
+      <div className="bg-surface-1 border-b border-border p-3 md:p-4 flex-shrink-0">
         <div className="flex items-center gap-3">
-          <h1 className="text-[15px] md:text-[17px] font-semibold text-slate-100 flex-shrink-0">Sessions</h1>
+          <h1 className="text-[15px] md:text-[17px] font-semibold text-zinc-100 flex-shrink-0">Sessions</h1>
           <div className="relative flex-1">
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
-              className="w-full bg-surface-2 text-slate-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06] placeholder:text-slate-600"
+              className="w-full bg-surface-2 text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
             />
           </div>
         </div>
@@ -91,10 +91,10 @@ export const SessionHistory = () => {
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 size={24} className="text-violet-400 animate-spin" />
+            <Loader2 size={24} className="text-brand animate-spin" />
           </div>
         ) : filteredSessions.length === 0 ? (
-          <div className="text-center text-slate-500 py-8 text-[13px]">
+          <div className="text-center text-zinc-500 py-8 text-[13px]">
             {searchQuery ? 'No matching sessions' : 'No sessions yet'}
           </div>
         ) : (
@@ -103,20 +103,20 @@ export const SessionHistory = () => {
               <div
                 key={session.id}
                 onClick={() => navigate(`/chat/${session.id}`)}
-                className="bg-surface-1 rounded-xl p-3.5 md:p-4 border border-white/[0.04] active:border-violet-500/30 md:hover:border-violet-500/30 transition-all cursor-pointer group"
+                className="bg-surface-1 rounded-xl p-3.5 md:p-4 border border-border hover:border-brand/30 transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-violet-500/10 flex items-center justify-center flex-shrink-0">
-                    <MessageSquare size={17} className="text-violet-400" />
+                  <div className="w-9 h-9 rounded-xl bg-brand/10 flex items-center justify-center flex-shrink-0">
+                    <MessageSquare size={17} className="text-brand" />
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-[14px] font-medium text-slate-200 truncate">
+                    <h3 className="text-[14px] font-medium text-zinc-100 truncate">
                       {session.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-[11px] text-slate-500">{session.message_count} msgs</span>
-                      <span className="text-[11px] text-slate-600">
+                      <span className="text-[11px] text-zinc-500">{session.message_count} msgs</span>
+                      <span className="text-[11px] text-zinc-600">
                         {new Date(session.updated_at).toLocaleDateString()}
                       </span>
                     </div>
@@ -126,7 +126,7 @@ export const SessionHistory = () => {
                   <div className="hidden md:flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={(e) => handleExport(session, e)}
-                      className="p-2 bg-surface-2 text-slate-400 rounded-lg hover:bg-white/[0.06] transition-colors"
+                      className="p-2 bg-surface-2 text-zinc-400 rounded-lg hover:bg-surface-3 hover:text-zinc-200 transition-colors"
                       title="Export"
                     >
                       <Download size={14} />
@@ -141,7 +141,7 @@ export const SessionHistory = () => {
                   </div>
 
                   {/* Mobile chevron */}
-                  <ChevronRight size={16} className="md:hidden text-slate-600 flex-shrink-0" />
+                  <ChevronRight size={16} className="md:hidden text-zinc-600 flex-shrink-0" />
                 </div>
               </div>
             ))}

@@ -37,25 +37,27 @@ export const MessageInput = ({ onSend, disabled }: MessageInputProps) => {
   };
 
   return (
-    <div className="border-t border-white/[0.06] bg-surface-1/50 backdrop-blur-xl px-3 py-2.5 md:px-4 md:py-3 flex-shrink-0">
-      <div className="flex items-end gap-2 max-w-3xl mx-auto">
-        <textarea
-          ref={textareaRef}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Message Hermes..."
-          disabled={disabled}
-          rows={1}
-          className="flex-1 bg-surface-2 text-slate-100 rounded-2xl px-4 py-2.5 text-[15px] resize-none focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06] placeholder:text-slate-600 disabled:opacity-40 leading-relaxed"
-        />
-        <button
-          onClick={handleSend}
-          disabled={!message.trim() || disabled}
-          className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-500 text-white rounded-full hover:bg-violet-600 active:bg-violet-700 transition-colors disabled:opacity-30 disabled:pointer-events-none"
-        >
-          <ArrowUp size={18} strokeWidth={2.5} />
-        </button>
+    <div className="border-t border-border bg-surface-1/50 backdrop-blur-xl px-4 py-3 md:px-6 md:py-4 flex-shrink-0">
+      <div className="flex items-end gap-3 max-w-3xl mx-auto relative">
+        <div className="flex-1 relative bg-surface-2 rounded-xl border border-border">
+          <textarea
+            ref={textareaRef}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Message Hermes..."
+            disabled={disabled}
+            rows={1}
+            className="w-full bg-transparent text-zinc-100 px-4 py-3 pr-12 text-[15px] resize-none focus:outline-none placeholder:text-zinc-600 disabled:opacity-40 leading-relaxed"
+          />
+          <button
+            onClick={handleSend}
+            disabled={!message.trim() || disabled}
+            className="absolute right-2 bottom-2 flex items-center justify-center w-8 h-8 bg-brand text-surface-0 rounded-full hover:bg-brand-light transition-colors disabled:opacity-30 disabled:pointer-events-none"
+          >
+            <ArrowUp size={16} strokeWidth={2.5} />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -25,18 +25,18 @@ const formatContent = (content: string) => {
     const code = match[2];
     parts.push(
       <div key={`code-${match.index}`} className="my-2 -mx-1">
-        <div className="bg-black/30 rounded-xl overflow-hidden border border-white/[0.04]">
-          <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/[0.04]">
-            <span className="text-[10px] text-slate-500 font-mono">{language}</span>
+        <div className="bg-surface-1 rounded-xl overflow-hidden border border-border">
+          <div className="flex items-center justify-between px-3 py-1.5 border-b border-border">
+            <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">{language}</span>
             <button
               onClick={() => navigator.clipboard.writeText(code)}
-              className="text-[10px] text-slate-500 hover:text-slate-300 active:text-white px-2 py-0.5 rounded"
+              className="text-[10px] text-zinc-500 hover:text-zinc-300 active:text-brand px-2 py-0.5 rounded"
             >
               Copy
             </button>
           </div>
           <pre className="p-3 overflow-x-auto">
-            <code className="text-[12px] md:text-[13px] text-slate-300 font-mono leading-relaxed">{code}</code>
+            <code className="text-[12px] md:text-[13px] text-zinc-300 font-mono leading-relaxed">{code}</code>
           </pre>
         </div>
       </div>
@@ -77,7 +77,7 @@ const formatInlineStyles = (text: string) => {
     if (m[1] !== undefined) {
       // Inline code
       parts.push(
-        <code key={m.index} className="bg-black/20 text-violet-300 px-1.5 py-0.5 rounded text-[12px] font-mono">
+        <code key={m.index} className="bg-black/30 text-brand px-1.5 py-0.5 rounded text-[12px] font-mono">
           {m[1]}
         </code>
       );
@@ -106,7 +106,7 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
   if (isSystem) {
     return (
       <div className="flex justify-center my-3">
-        <div className="bg-surface-2 text-slate-500 text-[12px] px-3 py-1.5 rounded-full">
+        <div className="bg-surface-3 text-zinc-500 text-[12px] px-3 py-1.5 rounded-full">
           {message.content}
         </div>
       </div>
@@ -114,19 +114,19 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
   }
 
   return (
-    <div className={clsx('flex gap-2.5 mb-3', isUser ? 'justify-end' : 'justify-start')}>
+    <div className={clsx('flex gap-2.5 mb-4', isUser ? 'justify-end' : 'justify-start')}>
       {!isUser && (
-        <div className="w-7 h-7 rounded-full bg-violet-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <Bot size={14} className="text-violet-400" />
+        <div className="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <Bot size={13} className="text-brand" />
         </div>
       )}
 
       <div
         className={clsx(
-          'max-w-[85%] md:max-w-2xl px-3.5 py-2.5 rounded-2xl',
+          'max-w-[85%] md:max-w-2xl px-4 py-3 rounded-xl',
           isUser
-            ? 'bg-violet-500 text-white rounded-tr-md'
-            : 'bg-surface-2 text-slate-200 rounded-tl-md'
+            ? 'bg-brand text-surface-0 rounded-tr-md'
+            : 'bg-surface-2 text-zinc-200 rounded-tl-md'
         )}
       >
         <div className="text-[14px] leading-relaxed">
@@ -134,12 +134,12 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
         </div>
 
         {message.tool_calls && message.tool_calls.length > 0 && (
-          <div className="mt-2.5 space-y-1.5">
+          <div className="mt-3 space-y-2">
             {message.tool_calls.map((tool, idx) => (
-              <div key={idx} className="bg-black/20 rounded-lg px-2.5 py-2 border border-white/[0.04]">
-                <div className="text-cyan-400 font-mono text-[11px]">{tool.name}</div>
+              <div key={idx} className="bg-surface-3 rounded-lg px-3 py-2 border border-border">
+                <div className="text-brand font-mono text-[11px] uppercase tracking-widest">{tool.name}</div>
                 {tool.result && (
-                  <div className="text-slate-400 text-[11px] mt-1 truncate">{tool.result}</div>
+                  <div className="text-zinc-400 text-[11px] mt-1 truncate">{tool.result}</div>
                 )}
               </div>
             ))}
@@ -148,8 +148,8 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
       </div>
 
       {isUser && (
-        <div className="w-7 h-7 rounded-full bg-surface-3 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <User size={14} className="text-slate-400" />
+        <div className="w-6 h-6 rounded-full bg-surface-3 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <User size={13} className="text-zinc-400" />
         </div>
       )}
     </div>

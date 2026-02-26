@@ -16,18 +16,18 @@ interface ApiKeyFieldProps {
 
 const ApiKeyField = ({ label, value, onChange, placeholder, description }: ApiKeyFieldProps) => (
   <div>
-    <label className="block text-[13px] font-medium text-slate-300 mb-2">{label}</label>
+    <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">{label}</label>
     <div className="relative">
-      <Key size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+      <Key size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
       <input
         type="password"
         value={value || ''}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-surface-2 text-slate-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06] font-mono placeholder:text-slate-600"
+        className="w-full bg-surface-2 text-zinc-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border font-mono placeholder:text-zinc-600"
       />
     </div>
-    <p className="text-[11px] text-slate-500 mt-1.5 leading-relaxed">{description}</p>
+    <p className="text-[11px] text-zinc-500 mt-1.5 leading-relaxed">{description}</p>
   </div>
 );
 
@@ -84,7 +84,7 @@ export const ConfigPanel = () => {
   if (loading || !config) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="animate-spin text-violet-500" size={28} />
+        <Loader2 className="animate-spin text-brand" size={28} />
       </div>
     );
   }
@@ -99,7 +99,7 @@ export const ConfigPanel = () => {
   return (
     <div className="h-full flex flex-col bg-surface-0">
       {/* Tab bar - scrollable on mobile */}
-      <div className="bg-surface-1 border-b border-white/[0.06] flex-shrink-0">
+      <div className="bg-surface-1 border-b border-border flex-shrink-0">
         <div className="flex gap-1 p-2 md:p-3 overflow-x-auto">
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -108,15 +108,18 @@ export const ConfigPanel = () => {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={clsx(
-                  'flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-xl font-medium transition-all text-[13px] whitespace-nowrap flex-shrink-0',
+                  'flex items-center gap-1.5 px-3 md:px-4 py-2 rounded-lg font-medium transition-all text-[13px] whitespace-nowrap flex-shrink-0 relative',
                   activeTab === tab.id
-                    ? 'bg-violet-500/15 text-violet-400'
-                    : 'text-slate-500 active:bg-white/[0.04]'
+                    ? 'text-brand'
+                    : 'text-zinc-500 active:bg-surface-2'
                 )}
               >
                 <Icon size={15} strokeWidth={1.8} />
                 <span className="hidden md:inline">{tab.label}</span>
                 <span className="md:hidden">{tab.mobileLabel}</span>
+                {activeTab === tab.id && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand" />
+                )}
               </button>
             );
           })}
@@ -131,21 +134,21 @@ export const ConfigPanel = () => {
           {activeTab === 'llm' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-[17px] font-semibold text-slate-100">LLM Providers</h2>
-                <p className="text-[12px] text-slate-500 mt-1">
+                <h2 className="text-[17px] font-semibold text-zinc-100">LLM Providers</h2>
+                <p className="text-[12px] text-zinc-500 mt-1">
                   Configure your active provider and API keys.
                 </p>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-white/[0.06] space-y-4">
-                <h3 className="text-[11px] font-semibold text-violet-400 uppercase tracking-wider">Active Provider</h3>
+              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
+                <h3 className="text-[11px] font-semibold text-brand uppercase tracking-widest">Active Provider</h3>
 
                 <div>
-                  <label className="block text-[13px] font-medium text-slate-300 mb-2">Provider</label>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Provider</label>
                   <select
                     value={config.provider}
                     onChange={(e) => updateConfig({ provider: e.target.value })}
-                    className="w-full bg-surface-2 text-slate-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06]"
+                    className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border"
                   >
                     <option value="openrouter">OpenRouter</option>
                     <option value="nous">Nous Portal</option>
@@ -154,15 +157,15 @@ export const ConfigPanel = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[13px] font-medium text-slate-300 mb-2">Model</label>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Model</label>
                   <input
                     type="text"
                     value={config.model}
                     onChange={(e) => updateConfig({ model: e.target.value })}
                     placeholder="e.g., anthropic/claude-3.5-sonnet"
-                    className="w-full bg-surface-2 text-slate-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06] placeholder:text-slate-600"
+                    className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
                   />
-                  <p className="text-[11px] text-slate-500 mt-1.5">
+                  <p className="text-[11px] text-zinc-500 mt-1.5">
                     {config.provider === 'openrouter'
                       ? 'OpenRouter format: provider/model'
                       : config.provider === 'nous'
@@ -173,21 +176,21 @@ export const ConfigPanel = () => {
 
                 {config.provider === 'custom' && (
                   <div>
-                    <label className="block text-[13px] font-medium text-slate-300 mb-2">Base URL</label>
+                    <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Base URL</label>
                     <input
                       type="text"
                       value={config.base_url || ''}
                       onChange={(e) => updateConfig({ base_url: e.target.value })}
                       placeholder="https://api.example.com/v1"
-                      className="w-full bg-surface-2 text-slate-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06] placeholder:text-slate-600"
+                      className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border placeholder:text-zinc-600"
                     />
                   </div>
                 )}
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-white/[0.06] space-y-4">
-                <h3 className="text-[11px] font-semibold text-violet-400 uppercase tracking-wider">API Keys</h3>
-                <p className="text-[11px] text-slate-500 -mt-2">Keys are saved securely and shown masked after saving.</p>
+              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
+                <h3 className="text-[11px] font-semibold text-brand uppercase tracking-widest">API Keys</h3>
+                <p className="text-[11px] text-zinc-500 -mt-2">Keys are saved securely and shown masked after saving.</p>
 
                 <ApiKeyField
                   label="OpenRouter API Key"
@@ -218,13 +221,13 @@ export const ConfigPanel = () => {
           {activeTab === 'telegram' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-[17px] font-semibold text-slate-100">Telegram Bot</h2>
-                <p className="text-[12px] text-slate-500 mt-1">
+                <h2 className="text-[17px] font-semibold text-zinc-100">Telegram Bot</h2>
+                <p className="text-[12px] text-zinc-500 mt-1">
                   Connect a Telegram bot to interact with Hermes Agent.
                 </p>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-white/[0.06] space-y-4">
+              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
                 <ApiKeyField
                   label="Bot Token"
                   value={config.api_keys?.telegram || ''}
@@ -233,20 +236,20 @@ export const ConfigPanel = () => {
                   description="Get your bot token from @BotFather on Telegram"
                 />
 
-                <div className="bg-surface-2 rounded-xl p-3.5 flex items-center justify-between">
+                <div className="bg-surface-2 rounded-xl p-3.5 flex items-center justify-between border border-border">
                   <div>
-                    <div className="text-[13px] font-medium text-slate-200">Gateway Status</div>
-                    <div className="text-[11px] text-slate-500 mt-0.5">
+                    <div className="text-[13px] font-medium text-zinc-200">Gateway Status</div>
+                    <div className="text-[11px] text-zinc-500 mt-0.5">
                       {config.telegram_enabled ? 'Bot is active' : 'Set token above to enable'}
                     </div>
                   </div>
                   <div className={clsx(
                     'w-2.5 h-2.5 rounded-full',
-                    config.telegram_enabled ? 'bg-emerald-500 shadow-lg shadow-emerald-500/30' : 'bg-slate-600'
+                    config.telegram_enabled ? 'bg-emerald-500 shadow-lg shadow-emerald-500/30' : 'bg-zinc-600'
                   )} />
                 </div>
 
-                <p className="text-[11px] text-slate-500 leading-relaxed">
+                <p className="text-[11px] text-zinc-500 leading-relaxed">
                   The Telegram gateway starts automatically on the next container restart after saving a valid token.
                 </p>
               </div>
@@ -257,13 +260,13 @@ export const ConfigPanel = () => {
           {activeTab === 'tools' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-[17px] font-semibold text-slate-100">Tool API Keys</h2>
-                <p className="text-[12px] text-slate-500 mt-1">
+                <h2 className="text-[17px] font-semibold text-zinc-100">Tool API Keys</h2>
+                <p className="text-[12px] text-zinc-500 mt-1">
                   Optional keys for built-in agent tools.
                 </p>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-white/[0.06] space-y-4">
+              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
                 <ApiKeyField
                   label="Firecrawl API Key"
                   value={config.api_keys?.firecrawl || ''}
@@ -293,16 +296,16 @@ export const ConfigPanel = () => {
           {activeTab === 'advanced' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-[17px] font-semibold text-slate-100">Advanced</h2>
+                <h2 className="text-[17px] font-semibold text-zinc-100">Advanced</h2>
               </div>
 
-              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-white/[0.06] space-y-4">
+              <div className="bg-surface-1 rounded-2xl p-4 md:p-5 border border-border space-y-4">
                 <div>
-                  <label className="block text-[13px] font-medium text-slate-300 mb-2">Log Level</label>
+                  <label className="block text-[11px] font-medium text-zinc-400 mb-2 uppercase tracking-widest">Log Level</label>
                   <select
                     value={config.log_level}
                     onChange={(e) => updateConfig({ log_level: e.target.value })}
-                    className="w-full bg-surface-2 text-slate-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06]"
+                    className="w-full bg-surface-2 text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/40 border border-border"
                   >
                     <option value="DEBUG">DEBUG</option>
                     <option value="INFO">INFO</option>
@@ -317,7 +320,7 @@ export const ConfigPanel = () => {
       </div>
 
       {/* Save bar - sticky bottom */}
-      <div className="bg-surface-1 border-t border-white/[0.06] px-4 py-3 flex-shrink-0 safe-bottom">
+      <div className="bg-surface-1 border-t border-border px-4 py-3 flex-shrink-0 safe-bottom">
         <div className="max-w-xl mx-auto flex items-center justify-between gap-3">
           <div className="min-w-0 flex-1">
             {message ? (
@@ -335,14 +338,14 @@ export const ConfigPanel = () => {
                 )}
               </div>
             ) : (
-              <div className="text-[11px] text-slate-600 hidden md:block">Changes applied after saving</div>
+              <div className="text-[11px] text-zinc-600 hidden md:block">Changes applied after saving</div>
             )}
           </div>
 
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 bg-violet-500 text-white rounded-xl text-[13px] font-semibold hover:bg-violet-600 active:bg-violet-700 transition-colors disabled:opacity-40 disabled:pointer-events-none flex-shrink-0"
+            className="flex items-center gap-2 px-5 py-2.5 bg-brand text-surface-0 rounded-xl text-[13px] font-semibold hover:bg-brand-light active:bg-brand-dark transition-colors disabled:opacity-40 disabled:pointer-events-none flex-shrink-0"
           >
             {saving ? (
               <Loader2 size={15} className="animate-spin" />

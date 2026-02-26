@@ -33,10 +33,10 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="flex flex-col items-center justify-center h-full px-6 text-center">
           <div className="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center mb-4">
-            <span className="text-2xl">!</span>
+            <span className="text-2xl text-red-400">!</span>
           </div>
-          <h2 className="text-lg font-semibold text-slate-200 mb-2">Something went wrong</h2>
-          <p className="text-[13px] text-slate-500 mb-1 max-w-xs">
+          <h2 className="text-lg font-serif italic text-zinc-100 mb-2">Something went wrong</h2>
+          <p className="text-[13px] text-zinc-500 mb-1 max-w-xs">
             An unexpected error occurred. Try refreshing the page.
           </p>
           {this.state.error && (
@@ -46,7 +46,7 @@ export class ErrorBoundary extends Component<Props, State> {
           )}
           <button
             onClick={this.handleReset}
-            className="flex items-center gap-2 px-5 py-2.5 bg-violet-500 text-white rounded-xl text-[13px] font-semibold hover:bg-violet-600 transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-brand text-surface-0 rounded-xl text-[13px] font-semibold hover:bg-brand-light transition-colors"
           >
             <RefreshCw size={14} />
             <span>Try Again</span>
