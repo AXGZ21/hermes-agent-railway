@@ -25,13 +25,9 @@ export interface Config {
   provider: string;
   model: string;
   base_url: string;
-  openrouter_api_key: string;
-  nous_api_key: string;
-  firecrawl_api_key: string;
-  fal_key: string;
-  telegram_bot_token: string;
-  browserbase_api_key: string;
+  api_keys: Record<string, string | null>;
   log_level: string;
+  telegram_enabled: boolean;
 }
 
 export interface LogEntry {

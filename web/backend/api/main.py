@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .database.db import init_db
 from .services.agent_service import AgentService
 from .services.auth_service import get_current_user
+from .services.config_service import apply_config_to_env
 from .websocket import websocket_endpoint
 
 # Import routers
@@ -27,6 +28,9 @@ async def lifespan(app: FastAPI):
     # Startup
     print("Initializing database...")
     init_db()
+
+    print("Loading saved configuration into environment...")
+    apply_config_to_env()
 
     print("Initializing agent service...")
     AgentService.initialize()
