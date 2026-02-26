@@ -1,5 +1,5 @@
-import { useState, KeyboardEvent } from 'react';
-import { Send } from 'lucide-react';
+import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { ArrowUp } from 'lucide-react';
 
 interface MessageInputProps {
   onSend: (message: string) => void;
@@ -8,11 +8,24 @@ interface MessageInputProps {
 
 export const MessageInput = ({ onSend, disabled }: MessageInputProps) => {
   const [message, setMessage] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-resize textarea
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (el) {
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+    }
+  }, [message]);
 
   const handleSend = () => {
     if (message.trim() && !disabled) {
       onSend(message.trim());
       setMessage('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
     }
   };
 
@@ -24,25 +37,24 @@ export const MessageInput = ({ onSend, disabled }: MessageInputProps) => {
   };
 
   return (
-    <div className="border-t border-slate-700 bg-slate-900 p-4">
-      <div className="flex gap-3 items-end max-w-4xl mx-auto">
+    <div className="border-t border-white/[0.06] bg-surface-1/50 backdrop-blur-xl px-3 py-2.5 md:px-4 md:py-3 flex-shrink-0">
+      <div className="flex items-end gap-2 max-w-3xl mx-auto">
         <textarea
+          ref={textareaRef}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type your message... (Shift+Enter for new line)"
+          placeholder="Message Hermes..."
           disabled={disabled}
-          className="flex-1 bg-slate-800 text-slate-100 rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-violet-500 disabled:opacity-50 disabled:cursor-not-allowed"
-          rows={3}
+          rows={1}
+          className="flex-1 bg-surface-2 text-slate-100 rounded-2xl px-4 py-2.5 text-[15px] resize-none focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06] placeholder:text-slate-600 disabled:opacity-40 leading-relaxed"
         />
-
         <button
           onClick={handleSend}
           disabled={!message.trim() || disabled}
-          className="px-6 py-3 bg-violet-500 text-white rounded-lg hover:bg-violet-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-violet-500 text-white rounded-full hover:bg-violet-600 active:bg-violet-700 transition-colors disabled:opacity-30 disabled:pointer-events-none"
         >
-          <Send size={18} />
-          <span>Send</span>
+          <ArrowUp size={18} strokeWidth={2.5} />
         </button>
       </div>
     </div>

@@ -10,42 +10,39 @@ export const ToolCallCard = ({ toolCall }: ToolCallCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="border border-cyan-500 rounded-lg overflow-hidden bg-slate-900 my-2">
+    <div className="border border-cyan-500/20 rounded-xl overflow-hidden bg-surface-1 my-2">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center gap-3 p-3 hover:bg-slate-800 transition-colors"
+        className="w-full flex items-center gap-2.5 p-3 active:bg-white/[0.04] transition-colors"
       >
-        <div className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center flex-shrink-0">
-          <Wrench size={16} className="text-white" />
+        <div className="w-7 h-7 rounded-full bg-cyan-500/15 flex items-center justify-center flex-shrink-0">
+          <Wrench size={13} className="text-cyan-400" />
         </div>
-
-        <div className="flex-1 text-left">
-          <div className="font-mono text-sm text-cyan-400">{toolCall.name}</div>
+        <div className="flex-1 text-left min-w-0">
+          <div className="font-mono text-[12px] text-cyan-400 truncate">{toolCall.name}</div>
           {toolCall.result && (
-            <div className="text-xs text-slate-400 mt-1">Tool executed successfully</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">Executed</div>
           )}
         </div>
-
         {isExpanded ? (
-          <ChevronDown size={20} className="text-slate-400" />
+          <ChevronDown size={16} className="text-slate-500" />
         ) : (
-          <ChevronRight size={20} className="text-slate-400" />
+          <ChevronRight size={16} className="text-slate-500" />
         )}
       </button>
 
       {isExpanded && (
-        <div className="border-t border-cyan-500 p-4 space-y-3">
+        <div className="border-t border-cyan-500/10 p-3 space-y-2.5">
           <div>
-            <div className="text-xs font-semibold text-slate-400 mb-1">Arguments</div>
-            <pre className="bg-slate-950 rounded p-3 text-xs text-slate-300 overflow-x-auto font-mono">
+            <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Arguments</div>
+            <pre className="bg-black/20 rounded-lg p-2.5 text-[11px] text-slate-400 overflow-x-auto font-mono">
               {JSON.stringify(JSON.parse(toolCall.arguments || '{}'), null, 2)}
             </pre>
           </div>
-
           {toolCall.result && (
             <div>
-              <div className="text-xs font-semibold text-slate-400 mb-1">Result</div>
-              <div className="bg-slate-950 rounded p-3 text-xs text-slate-300">
+              <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Result</div>
+              <div className="bg-black/20 rounded-lg p-2.5 text-[11px] text-slate-400 break-words">
                 {toolCall.result}
               </div>
             </div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
 import { Session } from '../../types';
-import { MessageSquare, Trash2, Download, Search } from 'lucide-react';
+import { MessageSquare, Trash2, Download, Search, ChevronRight } from 'lucide-react';
 
 export const SessionHistory = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
@@ -10,9 +10,7 @@ export const SessionHistory = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loadSessions();
-  }, []);
+  useEffect(() => { loadSessions(); }, []);
 
   const loadSessions = async () => {
     try {
@@ -41,9 +39,7 @@ export const SessionHistory = () => {
     e.stopPropagation();
     try {
       const data = await api.getSession(session.id);
-      const blob = new Blob([JSON.stringify(data, null, 2)], {
-        type: 'application/json',
-      });
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -57,87 +53,82 @@ export const SessionHistory = () => {
     }
   };
 
-  const handleOpen = (id: string) => {
-    navigate(`/chat/${id}`);
-  };
-
   const filteredSessions = sessions.filter((session) =>
-    searchQuery
-      ? session.title.toLowerCase().includes(searchQuery.toLowerCase())
-      : true
+    searchQuery ? session.title.toLowerCase().includes(searchQuery.toLowerCase()) : true
   );
 
   return (
-    <div className="h-full flex flex-col bg-slate-950">
-      <div className="bg-slate-900 border-b border-slate-700 p-4">
-        <div className="flex items-center justify-between gap-4">
-          <h1 className="text-xl font-bold text-slate-100">Session History</h1>
-
-          <div className="relative flex-1 max-w-md">
-            <Search
-              size={18}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"
-            />
+    <div className="h-full flex flex-col bg-surface-0">
+      {/* Header */}
+      <div className="bg-surface-1 border-b border-white/[0.06] p-3 md:p-4 flex-shrink-0">
+        <div className="flex items-center gap-3">
+          <h1 className="text-[15px] md:text-[17px] font-semibold text-slate-100 flex-shrink-0">Sessions</h1>
+          <div className="relative flex-1">
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search sessions..."
-              className="w-full bg-slate-800 text-slate-100 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              placeholder="Search..."
+              className="w-full bg-surface-2 text-slate-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-violet-500/40 border border-white/[0.06] placeholder:text-slate-600"
             />
           </div>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6">
+      {/* Sessions list */}
+      <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
-          <div className="text-center text-slate-400 py-8">Loading sessions...</div>
+          <div className="text-center text-slate-500 py-8 text-[13px]">Loading sessions...</div>
         ) : filteredSessions.length === 0 ? (
-          <div className="text-center text-slate-400 py-8">
-            {searchQuery ? 'No sessions found matching your search' : 'No sessions yet'}
+          <div className="text-center text-slate-500 py-8 text-[13px]">
+            {searchQuery ? 'No matching sessions' : 'No sessions yet'}
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {filteredSessions.map((session) => (
               <div
                 key={session.id}
-                onClick={() => handleOpen(session.id)}
-                className="bg-slate-900 rounded-lg p-5 border border-slate-800 hover:border-violet-500 transition-all cursor-pointer group"
+                onClick={() => navigate(`/chat/${session.id}`)}
+                className="bg-surface-1 rounded-xl p-3.5 md:p-4 border border-white/[0.04] active:border-violet-500/30 md:hover:border-violet-500/30 transition-all cursor-pointer group"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <MessageSquare size={20} className="text-violet-400 flex-shrink-0" />
-                      <h3 className="text-lg font-semibold text-slate-100 truncate">
-                        {session.title}
-                      </h3>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-violet-500/10 flex items-center justify-center flex-shrink-0">
+                    <MessageSquare size={17} className="text-violet-400" />
+                  </div>
 
-                    <div className="flex items-center gap-4 text-sm text-slate-400">
-                      <span>{session.message_count} messages</span>
-                      <span>•</span>
-                      <span>Created {new Date(session.created_at).toLocaleDateString()}</span>
-                      <span>•</span>
-                      <span>Updated {new Date(session.updated_at).toLocaleString()}</span>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[14px] font-medium text-slate-200 truncate">
+                      {session.title}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-[11px] text-slate-500">{session.message_count} msgs</span>
+                      <span className="text-[11px] text-slate-600">
+                        {new Date(session.updated_at).toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {/* Desktop actions */}
+                  <div className="hidden md:flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={(e) => handleExport(session, e)}
-                      className="p-2 bg-slate-800 text-slate-300 rounded hover:bg-slate-700 transition-colors"
-                      title="Export session"
+                      className="p-2 bg-surface-2 text-slate-400 rounded-lg hover:bg-white/[0.06] transition-colors"
+                      title="Export"
                     >
-                      <Download size={16} />
+                      <Download size={14} />
                     </button>
                     <button
                       onClick={(e) => handleDelete(session.id, e)}
-                      className="p-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
-                      title="Delete session"
+                      className="p-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors"
+                      title="Delete"
                     >
-                      <Trash2 size={16} />
+                      <Trash2 size={14} />
                     </button>
                   </div>
+
+                  {/* Mobile chevron */}
+                  <ChevronRight size={16} className="md:hidden text-slate-600 flex-shrink-0" />
                 </div>
               </div>
             ))}

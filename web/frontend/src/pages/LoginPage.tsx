@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/auth';
-import { Terminal, Lock } from 'lucide-react';
+import { Lock, ArrowRight, Loader2 } from 'lucide-react';
 
 export const LoginPage = () => {
   const [password, setPassword] = useState('');
@@ -30,26 +30,32 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-violet-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-violet-500 rounded-2xl mb-4">
-            <Terminal size={40} className="text-white" />
+    <div className="min-h-[100dvh] bg-surface-0 flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom">
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[400px] bg-violet-500/[0.06] rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="w-full max-w-sm relative z-10">
+        {/* Logo */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-violet-700 shadow-lg shadow-violet-500/20 mb-5">
+            <span className="text-2xl font-black text-white font-mono">H</span>
           </div>
-          <h1 className="text-4xl font-bold text-white mb-2 font-mono">HERMES AGENT</h1>
-          <p className="text-slate-400">AI Agent Management Dashboard</p>
+          <h1 className="text-2xl font-bold text-white tracking-tight">Hermes Agent</h1>
+          <p className="text-sm text-slate-500 mt-1.5">AI Agent Management Dashboard</p>
         </div>
 
-        <div className="bg-slate-900 rounded-2xl shadow-2xl border border-slate-800 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Login card */}
+        <div className="bg-surface-1 rounded-2xl border border-white/[0.06] p-6 shadow-2xl shadow-black/20">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="password" className="block text-[13px] font-medium text-slate-400 mb-2">
                 Password
               </label>
               <div className="relative">
                 <Lock
-                  size={18}
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"
+                  size={16}
+                  strokeWidth={1.8}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
                 />
                 <input
                   id="password"
@@ -57,14 +63,15 @@ export const LoginPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full bg-slate-800 text-slate-100 rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  className="w-full bg-surface-2 text-slate-100 rounded-xl pl-10 pr-4 py-3 text-[15px] focus:outline-none focus:ring-2 focus:ring-violet-500/50 border border-white/[0.06] placeholder:text-slate-600"
                   required
+                  autoFocus
                 />
               </div>
             </div>
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500 text-red-500 rounded-lg px-4 py-3 text-sm">
+              <div className="bg-red-500/8 border border-red-500/20 text-red-400 rounded-xl px-4 py-3 text-[13px]">
                 {error}
               </div>
             )}
@@ -72,16 +79,23 @@ export const LoginPage = () => {
             <button
               type="submit"
               disabled={loading || !password}
-              className="w-full bg-violet-500 text-white rounded-lg py-3 font-medium hover:bg-violet-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 bg-violet-500 text-white rounded-xl py-3 text-[15px] font-semibold hover:bg-violet-600 active:bg-violet-700 transition-colors disabled:opacity-40 disabled:pointer-events-none"
             >
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? (
+                <Loader2 size={18} className="animate-spin" />
+              ) : (
+                <>
+                  <span>Continue</span>
+                  <ArrowRight size={16} strokeWidth={2} />
+                </>
+              )}
             </button>
           </form>
-
-          <div className="mt-6 pt-6 border-t border-slate-800 text-center text-sm text-slate-400">
-            <p>Hermes Agent by Nous Research</p>
-          </div>
         </div>
+
+        <p className="text-center text-[11px] text-slate-600 mt-6">
+          Hermes Agent by Nous Research
+        </p>
       </div>
     </div>
   );
