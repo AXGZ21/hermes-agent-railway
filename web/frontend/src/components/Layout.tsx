@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { MessageSquare, History, Puzzle, Settings, FileText, LogOut, Menu, X } from 'lucide-react';
+import { MessageSquare, History, Puzzle, Settings, FileText, LogOut, Menu, X, Brain, Wrench, Clock, Radio } from 'lucide-react';
 import { useAuthStore } from '../store/auth';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
@@ -7,7 +7,11 @@ import clsx from 'clsx';
 const navItems = [
   { to: '/chat', icon: MessageSquare, label: 'Chat' },
   { to: '/sessions', icon: History, label: 'Sessions' },
+  { to: '/memory', icon: Brain, label: 'Memory' },
+  { to: '/tools', icon: Wrench, label: 'Tools' },
   { to: '/skills', icon: Puzzle, label: 'Skills' },
+  { to: '/cron', icon: Clock, label: 'Cron' },
+  { to: '/gateway', icon: Radio, label: 'Gateway' },
   { to: '/config', icon: Settings, label: 'Config' },
   { to: '/logs', icon: FileText, label: 'Logs' },
 ];

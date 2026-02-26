@@ -1,4 +1,4 @@
-import { Session, Message, Config, LogEntry, Skill } from '../types';
+import { Session, Message, Config, LogEntry, Skill, MemoryFile, Tool, GatewayPlatform, CronJob } from '../types';
 
 class APIClient {
   private getHeaders(): HeadersInit {
@@ -133,6 +133,51 @@ class APIClient {
   // Health
   async getHealth(): Promise<{ status: string }> {
     return this.request('/health');
+  }
+
+  // Memory
+  async getMemoryFiles(): Promise<MemoryFile[]> {
+    const data = await this.request<MemoryFile[] | { files: MemoryFile[] }>('/memory');
+    return Array.isArray(data) ? data : data.files;
+  }
+
+  async getMemoryFile(filename: string): Promise<MemoryFile> {
+    return this.request(`/memory/${filename}`);
+  }
+
+  async updateMemoryFile(filename: string, content: string): Promise<MemoryFile> {
+    return this.request(`/memory/${filename}`, {
+      method: 'PUT',
+      body: JSON.stringify({ content }),
+    });
+  }
+
+  // Tools
+  async getTools(): Promise<Tool[]> {
+    const data = await this.request<Tool[] | { tools: Tool[] }>('/tools');
+    return Array.isArray(data) ? data : data.tools;
+  }
+
+  // Gateway
+  async getGatewayStatus(): Promise<{ platforms: GatewayPlatform[] }> {
+    return this.request('/gateway/status');
+  }
+
+  // Cron
+  async getCronJobs(): Promise<CronJob[]> {
+    const data = await this.request<CronJob[] | { jobs: CronJob[] }>('/cron/jobs');
+    return Array.isArray(data) ? data : data.jobs;
+  }
+
+  async createCronJob(job: Partial<CronJob>): Promise<CronJob> {
+    return this.request('/cron/jobs', {
+      method: 'POST',
+      body: JSON.stringify(job),
+    });
+  }
+
+  async deleteCronJob(id: string): Promise<void> {
+    await this.request(`/cron/jobs/${id}`, { method: 'DELETE' });
   }
 }
 

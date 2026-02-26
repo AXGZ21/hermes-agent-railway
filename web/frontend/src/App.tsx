@@ -10,6 +10,10 @@ import { ConfigPage } from './pages/ConfigPage';
 import { LogsPage } from './pages/LogsPage';
 import { SkillsPage } from './pages/SkillsPage';
 import { SessionsPage } from './pages/SessionsPage';
+import { MemoryPage } from './pages/MemoryPage';
+import { ToolsPage } from './pages/ToolsPage';
+import { GatewayPage } from './pages/GatewayPage';
+import { CronPage } from './pages/CronPage';
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
               <Route path="/logs" element={<LogsPage />} />
               <Route path="/skills" element={<SkillsPage />} />
               <Route path="/sessions" element={<SessionsPage />} />
+              <Route path="/memory" element={<MemoryPage />} />
+              <Route path="/tools" element={<ToolsPage />} />
+              <Route path="/gateway" element={<GatewayPage />} />
+              <Route path="/cron" element={<CronPage />} />
             </Route>
           </Route>
         </Routes>

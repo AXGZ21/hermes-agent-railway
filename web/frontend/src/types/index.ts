@@ -48,11 +48,45 @@ export interface Skill {
 }
 
 export interface WSMessage {
-  type: 'token' | 'tool_call' | 'tool_result' | 'done' | 'error';
+  type: 'token' | 'tool_call' | 'tool_result' | 'done' | 'error' | 'session_created';
   content?: string;
   name?: string;
   arguments?: string;
   result?: string;
   message?: string;
   session_id?: string;
+}
+
+export interface MemoryFile {
+  name: string;
+  filename: string;
+  content: string;
+  description: string;
+  updated_at?: number;
+}
+
+export interface Tool {
+  name: string;
+  description: string;
+  category: string;
+  enabled: boolean;
+}
+
+export interface GatewayPlatform {
+  id: string;
+  name: string;
+  configured: boolean;
+  connected: boolean;
+  icon: string;
+}
+
+export interface CronJob {
+  id: string;
+  name: string;
+  schedule: string;
+  command: string;
+  enabled: boolean;
+  last_run?: string;
+  next_run?: string;
+  created_at: string;
 }

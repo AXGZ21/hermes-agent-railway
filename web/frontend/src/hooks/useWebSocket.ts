@@ -48,6 +48,13 @@ export const useWebSocket = () => {
           break;
         }
 
+        case 'session_created':
+          if (data.session_id) {
+            // Update the current session ID and reload sessions
+            useChatStore.getState().loadSessions();
+          }
+          break;
+
         case 'error':
           console.error('WebSocket error:', data.message);
           store.setStreaming(false);

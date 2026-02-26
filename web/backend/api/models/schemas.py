@@ -141,3 +141,56 @@ class ExportSessionResponse(BaseModel):
     title: str
     messages: List[ChatMessage]
     exported_at: datetime
+
+
+# Memory schemas
+class MemoryFileResponse(BaseModel):
+    name: str
+    filename: str
+    content: str
+    description: str
+    updated_at: Optional[float] = None
+
+
+class UpdateMemoryRequest(BaseModel):
+    content: str
+
+
+# Tools schemas
+class ToolResponse(BaseModel):
+    name: str
+    description: str
+    category: str
+    enabled: bool
+
+
+# Gateway schemas
+class GatewayPlatformStatus(BaseModel):
+    id: str
+    name: str
+    configured: bool
+    connected: bool
+    icon: str
+
+
+class GatewayStatusResponse(BaseModel):
+    platforms: List[GatewayPlatformStatus]
+
+
+# Cron schemas
+class CronJobResponse(BaseModel):
+    id: str
+    name: str
+    schedule: str
+    command: str
+    enabled: bool
+    last_run: Optional[str] = None
+    next_run: Optional[str] = None
+    created_at: str
+
+
+class CreateCronJobRequest(BaseModel):
+    name: str
+    schedule: str
+    command: str
+    enabled: bool = True

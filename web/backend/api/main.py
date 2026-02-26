@@ -19,6 +19,10 @@ from .routes.config import router as config_router
 from .routes.logs import router as logs_router
 from .routes.skills import router as skills_router
 from .routes.sessions import router as sessions_router
+from .routes.memory import router as memory_router
+from .routes.tools import router as tools_router
+from .routes.gateway import router as gateway_router
+from .routes.cron import router as cron_router
 
 
 @asynccontextmanager
@@ -95,6 +99,30 @@ app.include_router(
 app.include_router(
     sessions_router,
     prefix="/api/sessions",
+    dependencies=[Depends(get_current_user)],
+)
+
+app.include_router(
+    memory_router,
+    prefix="/api/memory",
+    dependencies=[Depends(get_current_user)],
+)
+
+app.include_router(
+    tools_router,
+    prefix="/api/tools",
+    dependencies=[Depends(get_current_user)],
+)
+
+app.include_router(
+    gateway_router,
+    prefix="/api/gateway",
+    dependencies=[Depends(get_current_user)],
+)
+
+app.include_router(
+    cron_router,
+    prefix="/api/cron",
     dependencies=[Depends(get_current_user)],
 )
 
