@@ -63,7 +63,7 @@ export const Layout = () => {
   );
 
   return (
-    <div className="flex h-[100dvh] bg-[#0a0a0f] noise">
+    <div className="flex h-[100dvh] bg-[#0a0a0f] noise overflow-x-hidden">
       {/* ── Desktop sidebar ── */}
       <aside className="hidden md:flex w-16 glass border-r border-white/5 flex-col flex-shrink-0 relative">
         {/* Subtle gradient at top */}
@@ -232,7 +232,7 @@ export const Layout = () => {
                 )}
 
                 <item.icon
-                  size={22}
+                  size={20}
                   strokeWidth={isActive ? 2.2 : 1.5}
                   className={clsx(
                     'transition-all duration-200',
@@ -242,7 +242,7 @@ export const Layout = () => {
                   )}
                 />
                 <span className={clsx(
-                  'text-[11px] font-medium leading-tight transition-all font-outfit',
+                  'text-[10px] font-medium leading-none whitespace-nowrap transition-all font-outfit',
                   isActive ? 'text-[#c9956a]' : 'text-zinc-500'
                 )}>
                   {item.label}
@@ -260,7 +260,7 @@ export const Layout = () => {
             )}
           >
             <MoreHorizontal
-              size={22}
+              size={20}
               strokeWidth={moreMenuOpen ? 2.2 : 1.5}
               className={clsx(
                 'transition-all duration-200',
@@ -268,7 +268,7 @@ export const Layout = () => {
               )}
             />
             <span className={clsx(
-              'text-[11px] font-medium leading-tight font-outfit',
+              'text-[10px] font-medium leading-none whitespace-nowrap font-outfit',
               moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-500'
             )}>
               More

@@ -92,7 +92,7 @@ export const GatewayStatus = () => {
   return (
     <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Header */}
-      <div className="glass border-b border-[#c9956a]/10 p-3 md:p-4 flex-shrink-0">
+      <div className="glass border-b border-[#c9956a]/10 p-3 md:p-4 flex-shrink-0 hidden md:block">
         <h1 className="text-[15px] font-semibold font-outfit text-gradient">
           Gateway Status
         </h1>

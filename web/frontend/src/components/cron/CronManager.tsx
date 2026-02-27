@@ -104,7 +104,7 @@ export const CronManager = () => {
       {/* Header */}
       <div className="glass border-b border-[#c9956a]/10 p-3 md:p-4 flex-shrink-0">
         <div className="flex items-center justify-between">
-          <div>
+          <div className="hidden md:block">
             <h1 className="text-[15px] font-semibold font-outfit text-gradient">
               Cron Jobs
             </h1>
@@ -114,10 +114,10 @@ export const CronManager = () => {
           </div>
           <button
             onClick={handleCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all md:ml-auto"
           >
             <Plus size={15} strokeWidth={2} />
-            <span className="hidden sm:inline">Create</span>
+            <span>Create</span>
           </button>
         </div>
       </div>

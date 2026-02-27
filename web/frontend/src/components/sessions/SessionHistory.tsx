@@ -73,7 +73,7 @@ export const SessionHistory = () => {
       {/* Header */}
       <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
         <div className="flex items-center gap-3">
-          <h1 className="text-[15px] md:text-[17px] font-semibold text-zinc-100 flex-shrink-0 font-outfit">Sessions</h1>
+          <h1 className="text-[15px] md:text-[17px] font-semibold text-zinc-100 flex-shrink-0 font-outfit hidden md:inline">Sessions</h1>
           <div className="relative flex-1">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
             <input

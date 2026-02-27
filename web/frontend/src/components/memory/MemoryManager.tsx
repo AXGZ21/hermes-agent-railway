@@ -63,8 +63,8 @@ export const MemoryManager = () => {
 
   return (
     <div className="h-full flex flex-col bg-[#0a0a0f]">
-      {/* Header */}
-      <div className="glass border-b border-[#c9956a]/10 p-3 md:p-4 flex-shrink-0">
+      {/* Header - title hidden on mobile since Layout provides it */}
+      <div className="hidden md:block glass border-b border-[#c9956a]/10 p-3 md:p-4 flex-shrink-0">
         <h1 className="text-[15px] font-semibold font-outfit text-gradient">
           Memory Files
         </h1>
