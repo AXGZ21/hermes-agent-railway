@@ -265,7 +265,7 @@ code, pre, .font-mono {
    Mobile Optimizations
    ═══════════════════════════════════════════ */
 
-/* Minimum touch target enforcement */
+/* Touch target utility - apply explicitly, not globally */
 .touch-target {
   min-width: 44px;
   min-height: 44px;
@@ -274,35 +274,42 @@ code, pre, .font-mono {
   justify-content: center;
 }
 
+/* Mobile viewport fix */
+@supports (height: 100dvh) {
+  .h-dvh { height: 100dvh; }
+}
+
 /* Mobile-first spacing */
-@media (max-width: 768px) {
-  .mobile-compact { padding: 0.75rem; }
-  .mobile-tight { gap: 0.5rem; }
-
-  /* Larger tap areas on mobile */
-  button, [role="button"], a {
-    min-height: 36px;
-  }
-
-  /* Prevent text selection on interactive elements */
+@media (max-width: 767px) {
+  /* Prevent text selection on nav elements */
   nav button, nav a {
     -webkit-user-select: none;
     user-select: none;
+    -webkit-touch-callout: none;
   }
 
-  /* Better mobile toast positioning */
-  .toast-container-mobile {
-    top: auto !important;
-    bottom: 5rem !important;
-    right: 1rem !important;
-    left: 1rem !important;
+  /* Larger scrollbar-free experience */
+  ::-webkit-scrollbar { width: 0; height: 0; }
+
+  /* Prevent overscroll bounce on modals */
+  .modal-scroll {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
 /* Haptic-style active feedback */
-.tap-highlight:active {
+.tap-feedback:active {
   transform: scale(0.97);
   transition: transform 0.1s ease;
+}
+
+/* Mobile card press effect */
+@media (max-width: 767px) {
+  .card-hover:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+  }
 }
 
 /* Bottom sheet drag handle */
@@ -311,13 +318,22 @@ code, pre, .font-mono {
   height: 0.25rem;
   border-radius: 999px;
   background: rgba(201, 149, 106, 0.3);
-  margin: 0.75rem auto 0.5rem;
+  margin: 0.5rem auto;
 }
 
-/* Mobile bottom safe area with extra padding for tab bar */
+/* Safe area utilities */
 @supports (padding: env(safe-area-inset-bottom)) {
-  .safe-bottom-tab {
-    padding-bottom: calc(env(safe-area-inset-bottom) + 4rem);
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+  .pb-safe-tab { padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem); }
+}
+
+/* Mobile page container - accounts for bottom tab bar */
+.mobile-page {
+  padding-bottom: 0;
+}
+@media (max-width: 767px) {
+  .mobile-page {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 
@@ -328,14 +344,6 @@ code, pre, .font-mono {
 }
 .animate-swipe-hint {
   animation: swipe-hint 2s ease-in-out infinite;
-}
-
-/* Mobile card press effect */
-@media (max-width: 768px) {
-  .card-hover:active {
-    transform: translateY(0) scale(0.98);
-    transition: transform 0.1s ease;
-  }
 }
 
 /* Input reset */

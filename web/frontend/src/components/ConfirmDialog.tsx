@@ -69,13 +69,13 @@ export const ConfirmDialog = () => {
         <div className="flex gap-2 px-4 pb-4">
           <button
             onClick={close}
-            className="flex-1 px-4 py-3 glass text-zinc-300 rounded-xl text-[14px] font-medium font-outfit hover:bg-[#16161f]/50 active:bg-[#16161f] active:scale-[0.98] border border-[#c9956a]/20 transition-all min-h-[48px]"
+            className="flex-1 px-4 py-2.5 glass text-zinc-300 rounded-xl text-[13px] font-medium font-outfit hover:bg-[#16161f]/50 active:bg-[#16161f] border border-[#c9956a]/20 transition-all"
           >
             Cancel
           </button>
           <button
             onClick={handleConfirm}
-            className="flex-1 px-4 py-3 bg-red-500 text-white rounded-xl text-[14px] font-semibold font-outfit hover:bg-red-600 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] active:bg-red-700 active:scale-95 transition-all min-h-[48px]"
+            className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-xl text-[13px] font-semibold font-outfit hover:bg-red-600 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] active:bg-red-700 active:scale-95 transition-all"
           >
             {confirmLabel}
           </button>

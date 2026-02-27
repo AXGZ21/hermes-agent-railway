@@ -37,6 +37,11 @@ export const Layout = () => {
     return () => { document.body.style.overflow = ''; };
   }, [drawerOpen]);
 
+  // Close more menu on route change
+  useEffect(() => {
+    setMoreMenuOpen(false);
+  }, [location.pathname]);
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -44,12 +49,11 @@ export const Layout = () => {
 
   const currentPage = navItems.find((item) => location.pathname.startsWith(item.to));
 
-  // Primary mobile tabs (first 4 items + config)
+  // Primary mobile tabs (first 4 items + more)
   const primaryMobileItems = [
     navItems[0], // Chat
     navItems[1], // Sessions
     navItems[2], // Memory
-    navItems[3], // Tools
     navItems[7], // Config
   ];
 
@@ -142,7 +146,7 @@ export const Layout = () => {
           drawerOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        <div className="flex items-center justify-between px-6 pt-6 pb-4 safe-top border-b border-white/5">
+        <div className="flex items-center justify-between px-5 pt-6 pb-4 safe-top border-b border-white/5">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl gradient-border bg-gradient-brand flex items-center justify-center animate-glow-pulse">
               <span className="text-[#0a0a0f] font-bold text-lg font-outfit tracking-tighter">H</span>
@@ -154,13 +158,13 @@ export const Layout = () => {
           </div>
           <button
             onClick={() => setDrawerOpen(false)}
-            className="p-2 -mr-2 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-white/5 transition-all"
+            className="p-2.5 -mr-2 rounded-xl text-zinc-400 hover:text-zinc-200 hover:bg-white/5 transition-all"
           >
             <X size={20} />
           </button>
         </div>
 
-        <nav className="flex-1 px-3 mt-4 space-y-1 overflow-y-auto scrollbar-hide">
+        <nav className="flex-1 px-3 mt-3 space-y-0.5 overflow-y-auto scrollbar-hide">
           {navItems.map((item) => {
             const isActive = location.pathname.startsWith(item.to);
             return (
@@ -168,7 +172,7 @@ export const Layout = () => {
                 key={item.to}
                 to={item.to}
                 className={clsx(
-                  'relative flex items-center gap-3 px-4 py-4 rounded-xl transition-all font-medium text-[15px] font-outfit min-h-[52px]',
+                  'relative flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-medium text-[15px] font-outfit',
                   isActive
                     ? 'text-[#c9956a] bg-[#c9956a]/10 border-l-2 border-[#c9956a]'
                     : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5 border-l-2 border-transparent'
@@ -204,7 +208,7 @@ export const Layout = () => {
         </main>
 
         {/* ── Mobile bottom tab bar ── */}
-        <nav className="md:hidden relative flex items-stretch glass backdrop-blur-xl border-t border-white/5 safe-bottom flex-shrink-0">
+        <nav className="md:hidden relative flex items-stretch glass backdrop-blur-xl border-t border-white/5 pb-safe flex-shrink-0">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9956a]/20 to-transparent" />
 
           {primaryMobileItems.map((item) => {
@@ -213,25 +217,25 @@ export const Layout = () => {
               <NavLink
                 key={item.to}
                 to={item.to}
-                className="flex-1 flex flex-col items-center justify-center gap-1 py-3.5 relative group min-h-[52px]"
+                className="flex-1 flex flex-col items-center justify-center gap-0.5 pt-2 pb-1.5 relative group"
               >
                 {isActive && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c9956a] to-transparent rounded-full ambient-glow" />
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c9956a] to-transparent rounded-full" />
                 )}
 
                 <item.icon
-                  size={22}
-                  strokeWidth={isActive ? 2 : 1.5}
+                  size={20}
+                  strokeWidth={isActive ? 2.2 : 1.5}
                   className={clsx(
                     'transition-all duration-200',
                     isActive
                       ? 'text-[#c9956a] drop-shadow-[0_0_8px_rgba(201,149,106,0.5)]'
-                      : 'text-zinc-500 group-hover:text-zinc-300'
+                      : 'text-zinc-500'
                   )}
                 />
                 <span className={clsx(
-                  'text-[9px] font-semibold leading-none transition-all uppercase tracking-wider font-outfit',
-                  isActive ? 'text-[#c9956a]' : 'text-zinc-600 group-hover:text-zinc-400'
+                  'text-[10px] font-semibold leading-tight transition-all tracking-wide font-outfit',
+                  isActive ? 'text-[#c9956a]' : 'text-zinc-600'
                 )}>
                   {item.label}
                 </span>
@@ -242,14 +246,23 @@ export const Layout = () => {
           {/* More menu button */}
           <button
             onClick={() => setMoreMenuOpen(!moreMenuOpen)}
-            className="flex-1 flex flex-col items-center justify-center gap-1 py-3.5 relative group min-h-[52px]"
+            className={clsx(
+              'flex-1 flex flex-col items-center justify-center gap-0.5 pt-2 pb-1.5 relative group',
+              moreMenuOpen && 'text-[#c9956a]'
+            )}
           >
             <MoreHorizontal
-              size={22}
-              strokeWidth={1.5}
-              className="text-zinc-500 group-hover:text-zinc-300 transition-all duration-200"
+              size={20}
+              strokeWidth={moreMenuOpen ? 2.2 : 1.5}
+              className={clsx(
+                'transition-all duration-200',
+                moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-500'
+              )}
             />
-            <span className="text-[9px] font-semibold leading-none text-zinc-600 group-hover:text-zinc-400 transition-all uppercase tracking-wider font-outfit">
+            <span className={clsx(
+              'text-[10px] font-semibold leading-tight tracking-wide font-outfit',
+              moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-600'
+            )}>
               More
             </span>
           </button>
@@ -261,7 +274,7 @@ export const Layout = () => {
                 className="fixed inset-0 z-40"
                 onClick={() => setMoreMenuOpen(false)}
               />
-              <div className="absolute bottom-full right-2 mb-2 w-56 glass-strong gradient-border rounded-2xl p-2 z-50 animate-slide-up">
+              <div className="absolute bottom-full right-2 mb-2 w-52 glass-strong gradient-border rounded-2xl p-1.5 z-50 animate-slide-up">
                 {overflowMobileItems.map((item) => {
                   const isActive = location.pathname.startsWith(item.to);
                   return (
@@ -270,10 +283,10 @@ export const Layout = () => {
                       to={item.to}
                       onClick={() => setMoreMenuOpen(false)}
                       className={clsx(
-                        'flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all font-medium text-[14px] font-outfit min-h-[48px]',
+                        'flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all font-medium text-[14px] font-outfit',
                         isActive
                           ? 'text-[#c9956a] bg-[#c9956a]/10'
-                          : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'
+                          : 'text-zinc-400 active:text-zinc-200 active:bg-white/5'
                       )}
                     >
                       <item.icon size={18} strokeWidth={isActive ? 2 : 1.5} />

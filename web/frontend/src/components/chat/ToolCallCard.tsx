@@ -13,7 +13,7 @@ export const ToolCallCard = ({ toolCall }: ToolCallCardProps) => {
     <div className="gradient-border rounded-xl overflow-hidden bg-[#0f0f16] my-3 ambient-glow transition-all duration-300">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center gap-3 p-3.5 hover:bg-[#16161f] active:bg-[#16161f] transition-all duration-300 min-h-[48px]"
+        className="w-full flex items-center gap-3 p-3 hover:bg-[#16161f] active:bg-[#16161f] transition-all duration-300"
       >
         <div className="w-8 h-8 rounded-full bg-gradient-brand flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#c9956a]/20">
           <Wrench size={14} className="text-[#0a0a0f]" strokeWidth={2.5} />

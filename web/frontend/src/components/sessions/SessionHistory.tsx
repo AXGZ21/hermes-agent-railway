@@ -103,11 +103,11 @@ export const SessionHistory = () => {
               <div
                 key={session.id}
                 onClick={() => navigate(`/chat/${session.id}`)}
-                className="gradient-border ambient-glow bg-[#0f0f16] rounded-xl p-4 md:p-4 card-hover transition-all cursor-pointer group min-h-[64px] active:scale-[0.98]"
+                className="gradient-border ambient-glow bg-[#0f0f16] rounded-xl p-3.5 md:p-4 card-hover transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(201,149,106,0.3)]">
-                    <MessageSquare size={18} className="text-[#0a0a0f]" strokeWidth={2} />
+                  <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(201,149,106,0.3)]">
+                    <MessageSquare size={16} className="text-[#0a0a0f]" strokeWidth={2} />
                   </div>
 
                   <div className="flex-1 min-w-0">

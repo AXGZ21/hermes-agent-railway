@@ -57,7 +57,7 @@ export const ToastContainer = () => {
               </span>
               <button
                 onClick={() => removeToast(toast.id)}
-                className="flex-shrink-0 p-1 rounded-lg hover:bg-white/10 transition-all text-zinc-500 hover:text-zinc-300"
+                className="flex-shrink-0 p-2 -mr-1 rounded-lg hover:bg-white/10 active:bg-white/15 transition-all text-zinc-500 hover:text-zinc-300"
               >
                 <X size={16} strokeWidth={2} />
               </button>

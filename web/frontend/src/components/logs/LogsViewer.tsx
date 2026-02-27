@@ -118,13 +118,13 @@ export const LogsViewer = () => {
             <button
               onClick={loadLogs}
               disabled={loading}
-              className="p-2.5 glass text-zinc-400 rounded-xl hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 border border-[#272733] transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2 glass text-zinc-400 rounded-xl hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 border border-[#272733] transition-all"
             >
               <RefreshCw size={15} className={clsx(loading && 'animate-spin')} />
             </button>
             <button
               onClick={handleClearLogs}
-              className="p-2.5 glass bg-red-500/15 text-red-400 rounded-xl hover:bg-red-500/25 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] active:scale-95 border border-red-500/20 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2 glass bg-red-500/15 text-red-400 rounded-xl hover:bg-red-500/25 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] active:scale-95 border border-red-500/20 transition-all"
             >
               <Trash2 size={15} />
             </button>
@@ -180,14 +180,14 @@ export const LogsViewer = () => {
             <button
               onClick={() => setOffset(Math.max(0, offset - limit))}
               disabled={offset === 0}
-              className="px-4 py-2 glass text-zinc-400 rounded-lg text-[13px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all min-h-[40px]"
+              className="px-3.5 py-1.5 glass text-zinc-400 rounded-lg text-[13px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Prev
             </button>
             <button
               onClick={() => setOffset(offset + limit)}
               disabled={offset + limit >= total}
-              className="px-4 py-2 glass text-zinc-400 rounded-lg text-[13px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all min-h-[40px]"
+              className="px-3.5 py-1.5 glass text-zinc-400 rounded-lg text-[13px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Next
             </button>

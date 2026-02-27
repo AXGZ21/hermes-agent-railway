@@ -24,19 +24,19 @@ const formatContent = (content: string) => {
     const language = escapeHtml(match[1] || 'text');
     const code = match[2];
     parts.push(
-      <div key={`code-${match.index}`} className="my-3 -mx-1">
-        <div className="bg-[#0a0a0f] rounded-xl overflow-hidden gradient-border ambient-glow">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-[#c9956a]/10">
+      <div key={`code-${match.index}`} className="my-2.5 -mx-1">
+        <div className="bg-[#0a0a0f] rounded-xl overflow-hidden gradient-border">
+          <div className="flex items-center justify-between px-3 py-1.5 border-b border-[#c9956a]/10">
             <span className="text-[10px] text-[#c9956a] font-mono uppercase tracking-widest font-semibold">{language}</span>
             <button
               onClick={() => navigator.clipboard.writeText(code)}
-              className="text-[10px] text-zinc-500 hover:text-[#c9956a] active:text-[#c9956a] px-3 py-2 rounded-lg transition-colors min-h-[36px] flex items-center"
+              className="text-[11px] text-zinc-500 hover:text-[#c9956a] active:text-[#c9956a] px-2 py-1.5 rounded-lg transition-colors"
             >
               Copy
             </button>
           </div>
-          <pre className="p-4 overflow-x-auto scrollbar-hide">
-            <code className="text-[12px] md:text-[13px] text-zinc-300 font-mono leading-relaxed">{code}</code>
+          <pre className="p-3 overflow-x-auto scrollbar-hide">
+            <code className="text-[12px] text-zinc-300 font-mono leading-relaxed">{code}</code>
           </pre>
         </div>
       </div>
@@ -77,7 +77,7 @@ const formatInlineStyles = (text: string) => {
     if (m[1] !== undefined) {
       // Inline code
       parts.push(
-        <code key={m.index} className="bg-[#c9956a]/10 text-[#c9956a] px-2 py-0.5 rounded text-[12px] font-mono">
+        <code key={m.index} className="bg-[#c9956a]/10 text-[#c9956a] px-1.5 py-0.5 rounded text-[12px] font-mono break-all">
           {m[1]}
         </code>
       );
@@ -105,7 +105,7 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
 
   if (isSystem) {
     return (
-      <div className="flex justify-center my-4">
+      <div className="flex justify-center my-3">
         <div className="glass text-zinc-400 text-[12px] px-4 py-2 rounded-full">
           {message.content}
         </div>
@@ -114,32 +114,32 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
   }
 
   return (
-    <div className={clsx('flex gap-2 md:gap-3 mb-4 md:mb-5', isUser ? 'justify-end' : 'justify-start')}>
+    <div className={clsx('flex gap-2.5 mb-4', isUser ? 'justify-end' : 'justify-start')}>
       {!isUser && (
-        <div className="w-7 h-7 rounded-full gradient-border bg-gradient-brand flex items-center justify-center flex-shrink-0 mt-0.5 ambient-glow-strong">
+        <div className="w-7 h-7 rounded-full gradient-border bg-gradient-brand flex items-center justify-center flex-shrink-0 mt-0.5">
           <Bot size={14} className="text-[#0a0a0f]" strokeWidth={2.5} />
         </div>
       )}
 
       <div
         className={clsx(
-          'max-w-[88%] md:max-w-2xl px-4 py-3 md:py-3.5 rounded-2xl shadow-xl',
+          'max-w-[85%] md:max-w-2xl px-3.5 py-2.5 md:px-4 md:py-3 rounded-2xl shadow-lg',
           isUser
             ? 'bg-gradient-brand text-[#0a0a0f] rounded-tr-md'
             : 'glass gradient-border text-zinc-200 rounded-tl-md'
         )}
       >
-        <div className="text-[14px] leading-relaxed">
+        <div className="text-[14px] leading-relaxed break-words">
           {formatContent(message.content)}
         </div>
 
         {message.tool_calls && message.tool_calls.length > 0 && (
-          <div className="mt-3 space-y-2">
+          <div className="mt-2.5 space-y-1.5">
             {message.tool_calls.map((tool, idx) => (
-              <div key={idx} className="bg-[#0a0a0f] rounded-lg px-3 py-2.5 gradient-border card-hover transition-all duration-300">
+              <div key={idx} className="bg-[#0a0a0f] rounded-lg px-3 py-2 gradient-border">
                 <div className="text-[#c9956a] font-mono text-[11px] uppercase tracking-widest font-semibold">{tool.name}</div>
                 {tool.result && (
-                  <div className="text-zinc-400 text-[11px] mt-1.5 truncate">{tool.result}</div>
+                  <div className="text-zinc-400 text-[11px] mt-1 truncate">{tool.result}</div>
                 )}
               </div>
             ))}

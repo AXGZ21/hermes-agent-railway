@@ -32,13 +32,13 @@ export const LoginPage = () => {
   return (
     <div className="min-h-[100dvh] bg-[#0a0a0f] noise flex flex-col items-center justify-center px-5 py-8 md:px-6 md:py-12 safe-top safe-bottom relative overflow-hidden">
       {/* Background atmospheric orbs */}
-      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#c9956a]/[0.08] blur-[120px] pointer-events-none animate-float"
+      <div className="absolute top-[-10%] right-[-5%] w-[80vw] max-w-[500px] aspect-square rounded-full bg-[#c9956a]/[0.08] blur-[100px] pointer-events-none animate-float"
         style={{ animationDuration: '8s' }}
       />
-      <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] rounded-full bg-[#e0796b]/[0.06] blur-[100px] pointer-events-none animate-float"
+      <div className="absolute top-[20%] right-[10%] w-[70vw] max-w-[400px] aspect-square rounded-full bg-[#e0796b]/[0.06] blur-[80px] pointer-events-none animate-float"
         style={{ animationDuration: '10s', animationDelay: '1s' }}
       />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#c9956a]/[0.05] blur-[140px] pointer-events-none animate-float"
+      <div className="absolute bottom-[-20%] left-[-10%] w-[90vw] max-w-[600px] aspect-square rounded-full bg-[#c9956a]/[0.05] blur-[100px] pointer-events-none animate-float"
         style={{ animationDuration: '12s', animationDelay: '2s' }}
       />
 
@@ -93,7 +93,7 @@ export const LoginPage = () => {
               <button
                 type="submit"
                 disabled={loading || !password}
-                className="w-full flex items-center justify-center gap-3 bg-gradient-brand text-[#0a0a0f] rounded-xl py-4 text-[15px] font-bold font-outfit tracking-wide uppercase hover:shadow-[0_0_30px_rgba(201,149,106,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none ambient-glow min-h-[52px]"
+                className="w-full flex items-center justify-center gap-3 bg-gradient-brand text-[#0a0a0f] rounded-xl py-3.5 text-[15px] font-bold font-outfit tracking-wide uppercase hover:shadow-[0_0_30px_rgba(201,149,106,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 disabled:opacity-30 disabled:pointer-events-none"
               >
                 {loading ? (
                   <Loader2 size={20} className="animate-spin" />
