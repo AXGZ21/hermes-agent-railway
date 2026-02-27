@@ -180,14 +180,14 @@ export const LogsViewer = () => {
             <button
               onClick={() => setOffset(Math.max(0, offset - limit))}
               disabled={offset === 0}
-              className="px-3.5 py-1.5 glass text-zinc-400 rounded-lg text-[13px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
+              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Prev
             </button>
             <button
               onClick={() => setOffset(offset + limit)}
               disabled={offset + limit >= total}
-              className="px-3.5 py-1.5 glass text-zinc-400 rounded-lg text-[13px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
+              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Next
             </button>

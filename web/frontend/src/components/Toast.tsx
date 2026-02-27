@@ -32,7 +32,7 @@ export const ToastContainer = () => {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed bottom-20 left-4 right-4 md:bottom-auto md:left-auto md:top-6 md:right-6 z-[100] flex flex-col-reverse md:flex-col gap-3 max-w-sm w-full md:w-auto pointer-events-none">
+    <div className="fixed bottom-20 left-4 right-4 md:bottom-auto md:left-auto md:top-6 md:right-6 z-[100] flex flex-col-reverse md:flex-col gap-3 md:max-w-sm w-full md:w-auto pointer-events-none">
       {toasts.map((toast) => {
         const Icon = iconMap[toast.type];
         return (

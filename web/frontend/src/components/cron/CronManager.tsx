@@ -211,9 +211,9 @@ export const CronManager = () => {
 
                   <button
                     onClick={() => handleDelete(job.id, job.name)}
-                    className="p-2 bg-red-500/10 text-red-400 rounded-xl hover:bg-red-500/20 active:bg-red-500/30 transition-all flex-shrink-0 border border-red-500/30"
+                    className="p-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 active:bg-red-500/30 transition-all flex-shrink-0 border border-red-500/30"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={14} />
                   </button>
                 </div>
               </div>

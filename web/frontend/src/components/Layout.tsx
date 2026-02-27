@@ -234,8 +234,8 @@ export const Layout = () => {
                   )}
                 />
                 <span className={clsx(
-                  'text-[10px] font-semibold leading-tight transition-all tracking-wide font-outfit',
-                  isActive ? 'text-[#c9956a]' : 'text-zinc-600'
+                  'text-[10px] font-medium leading-tight transition-all font-outfit',
+                  isActive ? 'text-[#c9956a]' : 'text-zinc-500'
                 )}>
                   {item.label}
                 </span>
@@ -260,8 +260,8 @@ export const Layout = () => {
               )}
             />
             <span className={clsx(
-              'text-[10px] font-semibold leading-tight tracking-wide font-outfit',
-              moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-600'
+              'text-[10px] font-medium leading-tight font-outfit',
+              moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-500'
             )}>
               More
             </span>
@@ -274,7 +274,7 @@ export const Layout = () => {
                 className="fixed inset-0 z-40"
                 onClick={() => setMoreMenuOpen(false)}
               />
-              <div className="absolute bottom-full right-2 mb-2 w-52 glass-strong gradient-border rounded-2xl p-1.5 z-50 animate-slide-up">
+              <div className="absolute bottom-full right-2 mb-2 w-56 glass-strong gradient-border rounded-2xl p-2 z-50 animate-slide-up">
                 {overflowMobileItems.map((item) => {
                   const isActive = location.pathname.startsWith(item.to);
                   return (
@@ -283,7 +283,7 @@ export const Layout = () => {
                       to={item.to}
                       onClick={() => setMoreMenuOpen(false)}
                       className={clsx(
-                        'flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all font-medium text-[14px] font-outfit',
+                        'flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all font-medium text-[14px] font-outfit',
                         isActive
                           ? 'text-[#c9956a] bg-[#c9956a]/10'
                           : 'text-zinc-400 active:text-zinc-200 active:bg-white/5'

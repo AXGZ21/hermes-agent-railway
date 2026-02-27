@@ -40,6 +40,8 @@ body {
   background: var(--color-surface-0);
   color: #d4d4dc;
   letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 code, pre, .font-mono {
@@ -304,21 +306,13 @@ code, pre, .font-mono {
   transition: transform 0.1s ease;
 }
 
-/* Mobile card press effect */
-@media (max-width: 767px) {
-  .card-hover:active {
-    transform: translateY(0) scale(0.98);
-    transition: transform 0.1s ease;
-  }
-}
-
 /* Bottom sheet drag handle */
 .drag-handle {
   width: 2.5rem;
   height: 0.25rem;
   border-radius: 999px;
   background: rgba(201, 149, 106, 0.3);
-  margin: 0.5rem auto;
+  margin: 0.75rem auto 0.25rem;
 }
 
 /* Safe area utilities */
