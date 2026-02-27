@@ -163,7 +163,7 @@ export const ChatInterface = () => {
       {/* ── Mobile session bottom sheet backdrop ── */}
       <div
         className={clsx(
-          'md:hidden fixed inset-0 z-30 bg-black/70 backdrop-blur-sm transition-opacity duration-300',
+          'md:hidden fixed inset-0 z-30 bg-black/90 transition-opacity duration-300',
           showSessionDrawer ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={() => setShowSessionDrawer(false)}

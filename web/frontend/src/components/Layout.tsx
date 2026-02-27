@@ -63,7 +63,7 @@ export const Layout = () => {
   );
 
   return (
-    <div className="flex h-full w-full bg-[#0a0a0f] noise overflow-hidden">
+    <div className="absolute inset-0 flex bg-[#0a0a0f] noise overflow-hidden">
       {/* ── Desktop sidebar ── */}
       <aside className="hidden md:flex w-16 glass border-r border-white/5 flex-col flex-shrink-0 relative">
         {/* Subtle gradient at top */}
@@ -132,7 +132,7 @@ export const Layout = () => {
       {/* ── Mobile drawer backdrop ── */}
       <div
         className={clsx(
-          'md:hidden fixed inset-0 z-40 bg-black/80 backdrop-blur-md transition-opacity duration-300',
+          'md:hidden fixed inset-0 z-40 bg-black/90 transition-opacity duration-300',
           drawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         onClick={() => setDrawerOpen(false)}
@@ -203,7 +203,7 @@ export const Layout = () => {
       {/* ── Main content ── */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         {/* Mobile top header */}
-        <div className="md:hidden flex items-center gap-2.5 px-4 py-2.5 border-b border-white/5 glass flex-shrink-0 backdrop-blur-xl">
+        <div className="md:hidden flex items-center gap-2.5 px-4 py-2.5 border-b border-white/5 glass flex-shrink-0">
           <button onClick={() => setDrawerOpen(true)} className="p-1.5 -ml-1.5 rounded-lg text-zinc-400 active:bg-white/5 transition-colors">
             <Menu size={20} />
           </button>
@@ -216,7 +216,7 @@ export const Layout = () => {
         </main>
 
         {/* ── Mobile bottom tab bar ── */}
-        <nav className="md:hidden relative flex items-stretch glass backdrop-blur-xl border-t border-white/5 pb-safe flex-shrink-0">
+        <nav className="md:hidden relative flex items-stretch glass border-t border-white/5 pb-safe flex-shrink-0">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9956a]/20 to-transparent" />
 
           {primaryMobileItems.map((item) => {

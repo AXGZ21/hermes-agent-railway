@@ -131,7 +131,7 @@ export const MemoryManager = () => {
 
       {/* Editor modal - full screen */}
       {selectedFile && (
-        <div className="fixed inset-0 glass-strong backdrop-blur-xl flex items-center justify-center z-50 p-0 md:p-4 animate-fade-in">
+        <div className="fixed inset-0 glass-strong flex items-center justify-center z-50 p-0 md:p-4 animate-fade-in">
           <div className="gradient-border ambient-glow-strong bg-[#0f0f16] w-full h-full md:h-auto md:max-w-4xl md:max-h-[90vh] md:rounded-2xl flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-[#c9956a]/10 flex-shrink-0">

@@ -71,7 +71,7 @@ export const SessionHistory = () => {
   return (
     <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Header */}
-      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
+      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0">
         <div className="flex items-center gap-3">
           <h1 className="text-[15px] md:text-[17px] font-semibold text-zinc-100 flex-shrink-0 font-outfit hidden md:inline">Sessions</h1>
           <div className="relative flex-1">

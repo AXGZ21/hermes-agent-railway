@@ -180,7 +180,7 @@ export const GatewayStatus = () => {
 
       {/* Setup instructions modal */}
       {selectedPlatform && (
-        <div className="fixed inset-0 glass-strong backdrop-blur-xl flex items-end md:items-center justify-center z-50 animate-fade-in">
+        <div className="fixed inset-0 glass-strong flex items-end md:items-center justify-center z-50 animate-fade-in">
           <div className="gradient-border ambient-glow-strong bg-[#0f0f16] w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col">
             {/* Handle + header */}
             <div className="md:hidden flex items-center justify-center pt-2 pb-1">

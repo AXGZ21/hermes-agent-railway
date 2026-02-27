@@ -108,7 +108,7 @@ export const SkillsManager = () => {
   return (
     <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Header */}
-      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
+      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0">
         <div className="flex items-center gap-2">
           <div className="relative flex-1">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
@@ -201,7 +201,7 @@ export const SkillsManager = () => {
 
       {/* Modal - full screen on mobile, centered on desktop */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-end md:items-center justify-center z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/90 md:bg-black/70 flex items-end md:items-center justify-center z-50 animate-fade-in">
           <div className="glass-strong ambient-glow-strong gradient-border bg-[#0f0f16] w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col animate-slide-up md:animate-fade-in-scale">
             {/* Handle + header */}
             <div className="md:hidden flex items-center justify-center pt-2 pb-1">

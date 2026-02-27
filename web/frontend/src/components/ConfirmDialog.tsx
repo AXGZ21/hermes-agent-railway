@@ -40,7 +40,7 @@ export const ConfirmDialog = () => {
   return (
     <div className="fixed inset-0 z-[90] flex items-center justify-center px-4">
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-md"
+        className="absolute inset-0 bg-black/90"
         onClick={close}
         style={{ background: 'radial-gradient(circle at center, rgba(201, 149, 106, 0.08), transparent 60%), rgba(10, 10, 15, 0.9)' }}
       />

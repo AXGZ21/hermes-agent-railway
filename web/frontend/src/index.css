@@ -21,41 +21,48 @@
   --color-border-brand: rgba(201, 149, 106, 0.20);
 }
 
-* {
+/* ═══════════════════════════════════════════
+   Root containment — iOS Safari bulletproof
+   Uses position:absolute instead of position:fixed
+   No backdrop-filter on mobile
+   No pseudo-element borders on mobile
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
 html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
   background: var(--color-surface-0);
   color: #d4d4dc;
   letter-spacing: -0.01em;
   overflow-wrap: break-word;
-  word-break: break-word;
+  touch-action: manipulation;
 }
 
-/* Nuclear containment - prevents ALL horizontal overflow on mobile Safari */
 #root {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -69,14 +76,17 @@ code, pre, .font-mono {
   font-family: 'Crimson Pro', Georgia, serif;
 }
 
-/* Refined scrollbar */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.06); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.12); }
+/* Refined scrollbar — desktop only */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.06); border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.12); }
+}
 
-@media (max-width: 768px) {
-  ::-webkit-scrollbar { width: 0; height: 0; }
+@media (max-width: 767px) {
+  ::-webkit-scrollbar { display: none; }
+  * { scrollbar-width: none; }
 }
 
 /* Safe areas */
@@ -186,38 +196,59 @@ code, pre, .font-mono {
 
 /* ═══════════════════════════════════════════
    Glass and Depth Effects
+   Mobile: opaque solid backgrounds (no backdrop-filter — iOS Safari safe)
+   Desktop: backdrop-filter blur
    ═══════════════════════════════════════════ */
 
 .glass {
-  background: rgba(15, 15, 22, 0.75);
-  backdrop-filter: blur(24px) saturate(1.3);
-  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  background: rgba(15, 15, 22, 0.97);
 }
 
 .glass-strong {
-  background: rgba(15, 15, 22, 0.88);
-  backdrop-filter: blur(32px) saturate(1.4);
-  -webkit-backdrop-filter: blur(32px) saturate(1.4);
+  background: rgba(15, 15, 22, 0.99);
 }
 
-/* Gradient border effect */
+@media (min-width: 768px) {
+  .glass {
+    background: rgba(15, 15, 22, 0.75);
+    backdrop-filter: blur(24px) saturate(1.3);
+    -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  }
+
+  .glass-strong {
+    background: rgba(15, 15, 22, 0.88);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
+  }
+}
+
+/* Gradient border effect
+   Mobile: simple 1px solid border (no pseudo-element, no mask-composite)
+   Desktop: fancy gradient border with pseudo-element */
 .gradient-border {
   position: relative;
-}
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(201, 149, 106, 0.25), transparent 40%, transparent 60%, rgba(224, 121, 107, 0.15));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  border: 1px solid rgba(201, 149, 106, 0.12);
 }
 
-/* Ambient glow - simplified on mobile for performance */
+@media (min-width: 768px) {
+  .gradient-border {
+    border: none;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(201, 149, 106, 0.25), transparent 40%, transparent 60%, rgba(224, 121, 107, 0.15));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* Ambient glow */
 .ambient-glow {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.03),
@@ -243,7 +274,7 @@ code, pre, .font-mono {
   }
 }
 
-/* Card hover lift - desktop only */
+/* Card hover lift — desktop only */
 .card-hover {
   transition: box-shadow 0.25s ease;
 }
@@ -273,11 +304,14 @@ code, pre, .font-mono {
   background: linear-gradient(135deg, #c9956a, #d68c5a, #e0796b);
 }
 
-/* Noise texture overlay - hidden on mobile for performance */
+/* Noise texture overlay — desktop only, uses position:absolute not fixed */
 .noise::before {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0.018;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -303,7 +337,6 @@ code, pre, .font-mono {
    Mobile Optimizations
    ═══════════════════════════════════════════ */
 
-/* Touch target utility - apply explicitly, not globally */
 .touch-target {
   min-width: 44px;
   min-height: 44px;
@@ -312,37 +345,34 @@ code, pre, .font-mono {
   justify-content: center;
 }
 
-/* Mobile viewport fix */
 @supports (height: 100dvh) {
   .h-dvh { height: 100dvh; }
 }
 
-/* Mobile-first spacing */
 @media (max-width: 767px) {
-  /* Prevent text selection on nav elements */
   nav button, nav a {
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
   }
 
-  /* Larger scrollbar-free experience */
-  ::-webkit-scrollbar { width: 0; height: 0; }
-
-  /* Prevent overscroll bounce on modals */
   .modal-scroll {
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
   }
+
+  /* Prevent any child from exceeding viewport */
+  #root > * {
+    max-width: 100%;
+    overflow: hidden;
+  }
 }
 
-/* Haptic-style active feedback */
 .tap-feedback:active {
   transform: scale(0.97);
   transition: transform 0.1s ease;
 }
 
-/* Bottom sheet drag handle */
 .drag-handle {
   width: 2.5rem;
   height: 0.25rem;
@@ -351,13 +381,11 @@ code, pre, .font-mono {
   margin: 0.75rem auto 0.25rem;
 }
 
-/* Safe area utilities */
 @supports (padding: env(safe-area-inset-bottom)) {
   .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
   .pb-safe-tab { padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem); }
 }
 
-/* Mobile page container - accounts for bottom tab bar */
 .mobile-page {
   padding-bottom: 0;
 }
@@ -367,7 +395,6 @@ code, pre, .font-mono {
   }
 }
 
-/* Swipe hint animation */
 @keyframes swipe-hint {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
@@ -376,7 +403,6 @@ code, pre, .font-mono {
   animation: swipe-hint 2s ease-in-out infinite;
 }
 
-/* Scroll fade edge indicator */
 .scroll-fade-right {
   position: relative;
 }
@@ -392,7 +418,6 @@ code, pre, .font-mono {
   z-index: 1;
 }
 
-/* Mobile page header */
 @media (max-width: 767px) {
   .mobile-header {
     position: sticky;
@@ -401,12 +426,10 @@ code, pre, .font-mono {
   }
 }
 
-/* Input reset */
 input, textarea, select {
   font-family: inherit;
 }
 
-/* Custom checkbox */
 input[type="checkbox"] {
   accent-color: var(--color-brand);
 }

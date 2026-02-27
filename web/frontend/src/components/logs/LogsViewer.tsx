@@ -82,7 +82,7 @@ export const LogsViewer = () => {
   return (
     <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Toolbar */}
-      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
+      <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0">
         <div className="flex items-center gap-2 flex-wrap">
           <select
             value={selectedLevel}
@@ -172,7 +172,7 @@ export const LogsViewer = () => {
 
       {/* Pagination */}
       {total > limit && (
-        <div className="glass-strong border-t border-[#272733] px-4 py-2.5 flex items-center justify-between flex-shrink-0 safe-bottom backdrop-blur-xl">
+        <div className="glass-strong border-t border-[#272733] px-4 py-2.5 flex items-center justify-between flex-shrink-0 safe-bottom">
           <div className="text-[11px] text-zinc-500 font-outfit">
             {offset + 1}-{Math.min(offset + limit, total)} of {total}
           </div>

@@ -99,7 +99,7 @@ export const ConfigPanel = () => {
   return (
     <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Tab bar - scrollable on mobile */}
-      <div className="glass border-b border-[#272733] flex-shrink-0 backdrop-blur-xl">
+      <div className="glass border-b border-[#272733] flex-shrink-0">
         <div className="flex gap-1.5 p-2.5 md:p-3 overflow-x-auto scrollbar-hide">
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -320,7 +320,7 @@ export const ConfigPanel = () => {
       </div>
 
       {/* Save bar - sticky bottom */}
-      <div className="glass-strong border-t border-[#272733] px-4 py-3 flex-shrink-0 safe-bottom backdrop-blur-xl">
+      <div className="glass-strong border-t border-[#272733] px-4 py-3 flex-shrink-0 safe-bottom">
         <div className="max-w-xl mx-auto flex items-center justify-between gap-3">
           <div className="min-w-0 flex-1">
             {message ? (

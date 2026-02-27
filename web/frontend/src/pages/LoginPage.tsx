@@ -30,7 +30,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="h-full w-full bg-[#0a0a0f] flex flex-col items-center justify-center px-5 py-8 md:px-6 md:py-12 safe-top safe-bottom relative overflow-hidden">
+    <div className="absolute inset-0 bg-[#0a0a0f] flex flex-col items-center justify-center px-5 py-8 md:px-6 md:py-12 safe-top safe-bottom overflow-hidden">
       {/* Background atmospheric orbs */}
       <div className="absolute top-[-10%] right-[-5%] w-[80vw] h-[80vw] max-w-[500px] max-h-[500px] rounded-full bg-[#c9956a]/[0.08] blur-[100px] pointer-events-none animate-float"
         style={{ animationDuration: '8s' }}
