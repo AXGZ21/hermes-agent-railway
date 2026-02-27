@@ -63,7 +63,7 @@ export const Layout = () => {
   );
 
   return (
-    <div className="flex h-[100dvh] bg-[#0a0a0f] noise overflow-x-hidden">
+    <div className="flex h-full w-full bg-[#0a0a0f] noise overflow-hidden">
       {/* ── Desktop sidebar ── */}
       <aside className="hidden md:flex w-16 glass border-r border-white/5 flex-col flex-shrink-0 relative">
         {/* Subtle gradient at top */}
