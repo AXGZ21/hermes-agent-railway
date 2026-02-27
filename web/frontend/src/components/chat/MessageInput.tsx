@@ -37,7 +37,7 @@ export const MessageInput = ({ onSend, disabled }: MessageInputProps) => {
   };
 
   return (
-    <div className="glass-strong border-t border-[#c9956a]/10 px-3 py-2.5 md:px-6 md:py-4 flex-shrink-0 relative">
+    <div className="glass-strong border-t border-[#c9956a]/20 px-4 py-3 md:px-6 md:py-4 flex-shrink-0 relative">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#c9956a]/20 to-transparent" />
       <div className="flex items-end gap-3 max-w-3xl mx-auto relative">
         <div className="flex-1 relative bg-[#16161f] rounded-2xl gradient-border focus-within:ambient-glow transition-all duration-300">

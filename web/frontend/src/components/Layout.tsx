@@ -202,6 +202,14 @@ export const Layout = () => {
 
       {/* ── Main content ── */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        {/* Mobile top header */}
+        <div className="md:hidden flex items-center gap-2.5 px-4 py-2.5 border-b border-white/5 glass flex-shrink-0 backdrop-blur-xl">
+          <button onClick={() => setDrawerOpen(true)} className="p-1.5 -ml-1.5 rounded-lg text-zinc-400 active:bg-white/5 transition-colors">
+            <Menu size={20} />
+          </button>
+          <span className="text-[14px] font-semibold text-zinc-100 font-outfit">{currentPage?.label || 'Hermes'}</span>
+        </div>
+
         {/* Page content */}
         <main className="flex-1 overflow-hidden">
           <Outlet />
@@ -224,7 +232,7 @@ export const Layout = () => {
                 )}
 
                 <item.icon
-                  size={20}
+                  size={22}
                   strokeWidth={isActive ? 2.2 : 1.5}
                   className={clsx(
                     'transition-all duration-200',
@@ -234,7 +242,7 @@ export const Layout = () => {
                   )}
                 />
                 <span className={clsx(
-                  'text-[10px] font-medium leading-tight transition-all font-outfit',
+                  'text-[11px] font-medium leading-tight transition-all font-outfit',
                   isActive ? 'text-[#c9956a]' : 'text-zinc-500'
                 )}>
                   {item.label}
@@ -252,7 +260,7 @@ export const Layout = () => {
             )}
           >
             <MoreHorizontal
-              size={20}
+              size={22}
               strokeWidth={moreMenuOpen ? 2.2 : 1.5}
               className={clsx(
                 'transition-all duration-200',
@@ -260,7 +268,7 @@ export const Layout = () => {
               )}
             />
             <span className={clsx(
-              'text-[10px] font-medium leading-tight font-outfit',
+              'text-[11px] font-medium leading-tight font-outfit',
               moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-500'
             )}>
               More
@@ -274,7 +282,7 @@ export const Layout = () => {
                 className="fixed inset-0 z-40"
                 onClick={() => setMoreMenuOpen(false)}
               />
-              <div className="absolute bottom-full right-2 mb-2 w-56 glass-strong gradient-border rounded-2xl p-2 z-50 animate-slide-up">
+              <div className="absolute bottom-full left-3 right-3 mb-3 glass-strong gradient-border rounded-2xl p-2.5 z-50 animate-slide-up grid grid-cols-2 gap-1">
                 {overflowMobileItems.map((item) => {
                   const isActive = location.pathname.startsWith(item.to);
                   return (
@@ -283,7 +291,7 @@ export const Layout = () => {
                       to={item.to}
                       onClick={() => setMoreMenuOpen(false)}
                       className={clsx(
-                        'flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all font-medium text-[14px] font-outfit',
+                        'flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all font-medium text-[13px] font-outfit',
                         isActive
                           ? 'text-[#c9956a] bg-[#c9956a]/10'
                           : 'text-zinc-400 active:text-zinc-200 active:bg-white/5'

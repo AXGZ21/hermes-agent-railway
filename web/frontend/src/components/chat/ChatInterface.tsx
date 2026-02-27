@@ -179,6 +179,7 @@ export const ChatInterface = () => {
         )}
       >
         <div className="drag-handle" />
+        <p className="text-center text-[10px] text-zinc-600 mb-1 font-outfit">swipe down to close</p>
         <div className="flex items-center justify-between px-4 pb-3">
           <h3 className="text-[15px] font-semibold text-zinc-100 tracking-wide font-outfit">Sessions</h3>
           <div className="flex items-center gap-1.5">
@@ -230,7 +231,7 @@ export const ChatInterface = () => {
                 className="flex items-center gap-2 text-[13px] text-zinc-300 active:text-zinc-100 transition-colors py-1.5 pr-2"
               >
                 <MessageSquare size={15} className="text-zinc-500" />
-                <span className="truncate max-w-[180px] font-medium">
+                <span className="truncate max-w-[200px] font-medium">
                   {sessions.find(s => s.id === currentSessionId)?.title || 'Session'}
                 </span>
               </button>
@@ -252,7 +253,7 @@ export const ChatInterface = () => {
             <MessageInput onSend={sendMessage} disabled={isStreaming || wsStatus !== 'connected'} />
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center px-6">
+          <div className="flex-1 flex items-center justify-center px-6 pb-20 md:pb-6">
             <div className="text-center animate-fade-in-scale">
               <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-brand mb-5 animate-float shadow-2xl shadow-[#c9956a]/20">
                 <MessageSquare size={24} className="text-[#0a0a0f]" strokeWidth={2.5} />

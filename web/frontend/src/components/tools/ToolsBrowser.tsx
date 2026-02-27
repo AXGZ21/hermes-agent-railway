@@ -110,7 +110,7 @@ export const ToolsBrowser = () => {
           <button
             onClick={() => setSelectedCategory(null)}
             className={clsx(
-              'px-3 py-2 rounded-lg text-[11px] font-medium uppercase tracking-widest transition-all flex-shrink-0 border',
+              'px-3.5 py-2 rounded-lg text-[13px] font-medium uppercase tracking-widest transition-all flex-shrink-0 border',
               selectedCategory === null
                 ? 'glass bg-[#c9956a]/10 text-[#c9956a] border-[#c9956a]/40 ambient-glow'
                 : 'glass text-zinc-500 border-[#c9956a]/10 hover:border-[#c9956a]/30'
@@ -126,7 +126,7 @@ export const ToolsBrowser = () => {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={clsx(
-                  'px-3 py-2 rounded-lg text-[11px] font-medium uppercase tracking-widest transition-all flex-shrink-0 border',
+                  'px-3.5 py-2 rounded-lg text-[13px] font-medium uppercase tracking-widest transition-all flex-shrink-0 border',
                   selectedCategory === category
                     ? `${colors.bg} ${colors.text} ${colors.border} ambient-glow`
                     : 'glass text-zinc-500 border-[#c9956a]/10 hover:border-[#c9956a]/30'

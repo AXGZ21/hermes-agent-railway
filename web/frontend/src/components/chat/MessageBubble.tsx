@@ -116,8 +116,8 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
   return (
     <div className={clsx('flex gap-2.5 mb-4', isUser ? 'justify-end' : 'justify-start')}>
       {!isUser && (
-        <div className="w-7 h-7 rounded-full gradient-border bg-gradient-brand flex items-center justify-center flex-shrink-0 mt-0.5">
-          <Bot size={14} className="text-[#0a0a0f]" strokeWidth={2.5} />
+        <div className="w-8 h-8 rounded-full gradient-border bg-gradient-brand flex items-center justify-center flex-shrink-0 mt-0.5">
+          <Bot size={16} className="text-[#0a0a0f]" strokeWidth={2.5} />
         </div>
       )}
 
@@ -148,8 +148,8 @@ export const MessageBubble = ({ message }: MessageBubbleProps) => {
       </div>
 
       {isUser && (
-        <div className="w-7 h-7 rounded-full bg-[#1e1e28] border border-[#272733] flex items-center justify-center flex-shrink-0 mt-0.5">
-          <User size={14} className="text-zinc-400" strokeWidth={2.5} />
+        <div className="w-8 h-8 rounded-full bg-[#1e1e28] border border-[#272733] flex items-center justify-center flex-shrink-0 mt-0.5">
+          <User size={16} className="text-zinc-400" strokeWidth={2.5} />
         </div>
       )}
     </div>

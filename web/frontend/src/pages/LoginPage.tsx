@@ -32,13 +32,13 @@ export const LoginPage = () => {
   return (
     <div className="min-h-[100dvh] bg-[#0a0a0f] noise flex flex-col items-center justify-center px-5 py-8 md:px-6 md:py-12 safe-top safe-bottom relative overflow-hidden">
       {/* Background atmospheric orbs */}
-      <div className="absolute top-[-10%] right-[-5%] w-[80vw] max-w-[500px] aspect-square rounded-full bg-[#c9956a]/[0.08] blur-[100px] pointer-events-none animate-float"
+      <div className="absolute top-[-10%] right-[-5%] w-[80vw] h-[80vw] max-w-[500px] max-h-[500px] rounded-full bg-[#c9956a]/[0.08] blur-[100px] pointer-events-none animate-float"
         style={{ animationDuration: '8s' }}
       />
-      <div className="absolute top-[20%] right-[10%] w-[70vw] max-w-[400px] aspect-square rounded-full bg-[#e0796b]/[0.06] blur-[80px] pointer-events-none animate-float"
+      <div className="absolute top-[20%] right-[10%] w-[70vw] h-[70vw] max-w-[400px] max-h-[400px] rounded-full bg-[#e0796b]/[0.06] blur-[80px] pointer-events-none animate-float"
         style={{ animationDuration: '10s', animationDelay: '1s' }}
       />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[90vw] max-w-[600px] aspect-square rounded-full bg-[#c9956a]/[0.05] blur-[100px] pointer-events-none animate-float"
+      <div className="absolute bottom-[-20%] left-[-10%] w-[90vw] h-[90vw] max-w-[600px] max-h-[600px] rounded-full bg-[#c9956a]/[0.05] blur-[100px] pointer-events-none animate-float"
         style={{ animationDuration: '12s', animationDelay: '2s' }}
       />
 

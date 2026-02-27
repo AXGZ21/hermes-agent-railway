@@ -83,7 +83,7 @@ export const LogsViewer = () => {
     <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Toolbar */}
       <div className="glass border-b border-[#272733] p-3 md:p-4 flex-shrink-0 backdrop-blur-xl">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <select
             value={selectedLevel}
             onChange={(e) => { setSelectedLevel(e.target.value); setOffset(0); }}

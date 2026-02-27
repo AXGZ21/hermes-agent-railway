@@ -122,8 +122,8 @@ export const SessionHistory = () => {
                     </div>
                   </div>
 
-                  {/* Desktop actions */}
-                  <div className="hidden md:flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {/* Actions */}
+                  <div className="flex items-center gap-1.5 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={(e) => handleExport(session, e)}
                       className="p-2 glass text-zinc-400 rounded-lg hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] transition-all"
@@ -139,9 +139,6 @@ export const SessionHistory = () => {
                       <Trash2 size={14} />
                     </button>
                   </div>
-
-                  {/* Mobile chevron */}
-                  <ChevronRight size={18} className="md:hidden text-zinc-600 flex-shrink-0" />
                 </div>
               </div>
             ))}

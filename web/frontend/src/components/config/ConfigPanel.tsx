@@ -100,7 +100,7 @@ export const ConfigPanel = () => {
     <div className="h-full flex flex-col bg-[#0a0a0f]">
       {/* Tab bar - scrollable on mobile */}
       <div className="glass border-b border-[#272733] flex-shrink-0 backdrop-blur-xl">
-        <div className="flex gap-1 p-2 md:p-3 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-1.5 p-2.5 md:p-3 overflow-x-auto scrollbar-hide">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             return (

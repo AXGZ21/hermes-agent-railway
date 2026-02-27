@@ -340,6 +340,31 @@ code, pre, .font-mono {
   animation: swipe-hint 2s ease-in-out infinite;
 }
 
+/* Scroll fade edge indicator */
+.scroll-fade-right {
+  position: relative;
+}
+.scroll-fade-right::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  background: linear-gradient(to right, transparent, rgba(10, 10, 15, 0.95));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Mobile page header */
+@media (max-width: 767px) {
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
+
 /* Input reset */
 input, textarea, select {
   font-family: inherit;
