@@ -71,7 +71,7 @@ export const Layout = () => {
 
         {/* Logo */}
         <div className="flex items-center justify-center pt-6 pb-8">
-          <div className="w-10 h-10 rounded-xl gradient-border bg-gradient-brand flex items-center justify-center animate-glow-pulse group">
+          <div className="w-10 h-10 rounded-xl gradient-border bg-gradient-brand flex items-center justify-center group">
             <span className="text-[#0a0a0f] font-bold text-xl font-outfit tracking-tighter">H</span>
           </div>
         </div>
@@ -99,7 +99,7 @@ export const Layout = () => {
                 <item.icon
                   size={20}
                   strokeWidth={isActive ? 2 : 1.5}
-                  className={isActive ? '' : ''}
+                  className="transition-colors duration-200"
                 />
 
                 {/* Tooltip */}
@@ -181,7 +181,7 @@ export const Layout = () => {
                 <item.icon
                   size={20}
                   strokeWidth={isActive ? 2 : 1.5}
-                  className={isActive ? '' : ''}
+                  className="transition-colors duration-200"
                 />
                 <span>{item.label}</span>
               </NavLink>

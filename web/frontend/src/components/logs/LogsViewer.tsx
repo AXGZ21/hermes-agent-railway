@@ -87,7 +87,7 @@ export const LogsViewer = () => {
           <select
             value={selectedLevel}
             onChange={(e) => { setSelectedLevel(e.target.value); setOffset(0); }}
-            className="bg-[#16161f] text-zinc-200 rounded-xl px-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-outfit transition-all"
+            className="bg-[#16161f] text-zinc-200 rounded-xl px-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] font-outfit transition-all"
           >
             {LOG_LEVELS.map((level) => (
               <option key={level} value={level}>{level}</option>
@@ -101,7 +101,7 @@ export const LogsViewer = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search logs..."
-              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 placeholder:text-zinc-600 font-outfit transition-all"
+              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 placeholder:text-zinc-600 font-outfit transition-all"
             />
           </div>
 
@@ -111,7 +111,7 @@ export const LogsViewer = () => {
                 type="checkbox"
                 checked={autoRefresh}
                 onChange={(e) => setAutoRefresh(e.target.checked)}
-                className="rounded accent-brand focus:ring-2 focus:ring-brand/60"
+                className="rounded accent-brand focus:ring-2 focus:ring-[#c9956a]/25"
               />
               Auto
             </label>

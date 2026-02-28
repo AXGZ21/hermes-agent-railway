@@ -47,7 +47,7 @@ export const ConfirmDialog = () => {
       <div className="relative gradient-border ambient-glow-strong glass-strong rounded-2xl shadow-2xl shadow-black/50 w-full max-w-sm overflow-hidden animate-fade-in-scale">
         <div className="flex items-center justify-between p-4 border-b border-[#c9956a]/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-full gradient-border bg-[#16161f] flex items-center justify-center animate-glow-pulse">
+            <div className="w-10 h-10 rounded-full gradient-border bg-[#16161f] flex items-center justify-center">
               <AlertTriangle size={18} className="text-[#c9956a]" />
             </div>
             <h3 className="text-[15px] font-semibold font-outfit text-zinc-100">
@@ -75,7 +75,7 @@ export const ConfirmDialog = () => {
           </button>
           <button
             onClick={handleConfirm}
-            className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-xl text-[13px] font-semibold font-outfit hover:bg-red-600 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] active:bg-red-700 active:scale-95 transition-all"
+            className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-xl text-[13px] font-semibold font-outfit hover:bg-red-600 active:bg-red-700 active:scale-95 transition-all"
           >
             {confirmLabel}
           </button>

@@ -24,7 +24,7 @@ const ApiKeyField = ({ label, value, onChange, placeholder, description }: ApiKe
         value={value || ''}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-[#16161f] text-zinc-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-mono placeholder:text-zinc-600 transition-all"
+        className="w-full bg-[#16161f] text-zinc-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] font-mono placeholder:text-zinc-600 transition-all"
       />
     </div>
     <p className="text-[11px] text-zinc-500 mt-1.5 leading-relaxed font-outfit">{description}</p>
@@ -118,7 +118,7 @@ export const ConfigPanel = () => {
                 <span className="hidden md:inline">{tab.label}</span>
                 <span className="md:hidden">{tab.mobileLabel}</span>
                 {activeTab === tab.id && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-brand to-transparent shadow-[0_0_12px_rgba(201,149,106,0.6)]" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#c9956a] to-transparent" />
                 )}
               </button>
             );
@@ -148,7 +148,7 @@ export const ConfigPanel = () => {
                   <select
                     value={config.provider}
                     onChange={(e) => updateConfig({ provider: e.target.value })}
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] font-outfit transition-all"
                   >
                     <option value="openrouter">OpenRouter</option>
                     <option value="nous">Nous Portal</option>
@@ -163,7 +163,7 @@ export const ConfigPanel = () => {
                     value={config.model}
                     onChange={(e) => updateConfig({ model: e.target.value })}
                     placeholder="e.g., anthropic/claude-3.5-sonnet"
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                   />
                   <p className="text-[11px] text-zinc-500 mt-1.5 font-outfit">
                     {config.provider === 'openrouter'
@@ -182,7 +182,7 @@ export const ConfigPanel = () => {
                       value={config.base_url || ''}
                       onChange={(e) => updateConfig({ base_url: e.target.value })}
                       placeholder="https://api.example.com/v1"
-                      className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
+                      className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                     />
                   </div>
                 )}
@@ -305,7 +305,7 @@ export const ConfigPanel = () => {
                   <select
                     value={config.log_level}
                     onChange={(e) => updateConfig({ log_level: e.target.value })}
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] font-outfit transition-all"
                   >
                     <option value="DEBUG">DEBUG</option>
                     <option value="INFO">INFO</option>

@@ -81,7 +81,7 @@ export const SessionHistory = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
-              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] focus:ambient-glow placeholder:text-zinc-600 font-outfit transition-all"
+              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 placeholder:text-zinc-600 font-outfit transition-all"
             />
           </div>
         </div>
@@ -91,7 +91,7 @@ export const SessionHistory = () => {
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 size={24} className="text-brand animate-spin animate-glow-pulse" />
+            <Loader2 size={24} className="text-[#c9956a] animate-spin" />
           </div>
         ) : filteredSessions.length === 0 ? (
           <div className="text-center text-zinc-500 py-8 text-[13px] font-outfit">

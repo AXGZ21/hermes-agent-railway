@@ -100,7 +100,7 @@ export const ToolsBrowser = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search tools..."
-              className="w-full gradient-border bg-[#0f0f16] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] ambient-glow placeholder:text-zinc-600 transition-all"
+              className="w-full gradient-border bg-[#0f0f16] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 placeholder:text-zinc-600 transition-all"
             />
           </div>
         </div>
@@ -183,7 +183,7 @@ export const ToolsBrowser = () => {
                                 colors.bg,
                                 colors.text,
                                 colors.border,
-                                'shadow-[0_0_10px] shadow-current/30'
+                                ''
                               )}
                             >
                               {CATEGORY_LABELS[tool.category] || tool.category}

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../services/api';
 import { GatewayPlatform } from '../../types';
 import { useToastStore } from '../../store/toast';
-import { Loader2, CheckCircle2, AlertCircle, Circle } from 'lucide-react';
+import { Loader2, CheckCircle2, AlertCircle, Circle, X } from 'lucide-react';
 import clsx from 'clsx';
 
 const PLATFORM_ICONS: Record<string, string> = {
@@ -180,7 +180,7 @@ export const GatewayStatus = () => {
 
       {/* Setup instructions modal */}
       {selectedPlatform && (
-        <div className="fixed inset-0 glass-strong flex items-end md:items-center justify-center z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/90 flex items-end md:items-center justify-center z-50 animate-fade-in">
           <div className="gradient-border ambient-glow-strong bg-[#0f0f16] w-full md:max-w-lg md:rounded-2xl rounded-t-2xl max-h-[90dvh] flex flex-col">
             {/* Handle + header */}
             <div className="md:hidden flex items-center justify-center pt-2 pb-1">
@@ -206,7 +206,7 @@ export const GatewayStatus = () => {
                 onClick={() => setSelectedPlatform(null)}
                 className="p-2 -mr-2 text-zinc-400 hover:text-zinc-300 active:bg-[#16161f] rounded-xl transition-colors"
               >
-                ✕
+                <X size={20} />
               </button>
             </div>
 

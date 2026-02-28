@@ -117,7 +117,7 @@ export const SkillsManager = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search skills..."
-              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 font-outfit transition-all"
+              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 placeholder:text-zinc-600 font-outfit transition-all"
             />
           </div>
           <button
@@ -227,7 +227,7 @@ export const SkillsManager = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Web Search"
-                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                 />
               </div>
 
@@ -238,7 +238,7 @@ export const SkillsManager = () => {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Brief description"
                   rows={2}
-                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] resize-none placeholder:text-zinc-600 font-outfit transition-all"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] resize-none placeholder:text-zinc-600 font-outfit transition-all"
                 />
               </div>
 
@@ -249,7 +249,7 @@ export const SkillsManager = () => {
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   placeholder="Skill code or configuration"
                   rows={8}
-                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] resize-none font-mono placeholder:text-zinc-600 transition-all"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#c9956a]/25 border border-[#272733] resize-none font-mono placeholder:text-zinc-600 transition-all"
                 />
               </div>
 
@@ -259,7 +259,7 @@ export const SkillsManager = () => {
                   id="enabled"
                   checked={formData.enabled}
                   onChange={(e) => setFormData({ ...formData, enabled: e.target.checked })}
-                  className="rounded accent-brand focus:ring-2 focus:ring-brand/60"
+                  className="rounded accent-brand focus:ring-2 focus:ring-[#c9956a]/25"
                 />
                 <label htmlFor="enabled" className="text-[13px] text-zinc-300 font-outfit">
                   Enable this skill

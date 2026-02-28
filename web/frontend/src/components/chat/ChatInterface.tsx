@@ -245,7 +245,7 @@ export const ChatInterface = () => {
 
             {loadingSession ? (
               <div className="flex-1 flex items-center justify-center">
-                <Loader2 size={28} className="text-[#c9956a] animate-spin animate-glow-pulse" />
+                <Loader2 size={28} className="text-[#c9956a] animate-spin" />
               </div>
             ) : (
               <MessageList messages={messages} isStreaming={isStreaming} streamingContent={streamingContent} />
