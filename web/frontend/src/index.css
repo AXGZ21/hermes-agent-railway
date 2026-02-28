@@ -231,12 +231,12 @@ code, pre, .font-mono {
    Mobile: simple 1px solid border (no pseudo-element, no mask-composite)
    Desktop: fancy gradient border with pseudo-element */
 .gradient-border {
-  position: relative;
   border: 1px solid rgba(201, 149, 106, 0.12);
 }
 
 @media (min-width: 768px) {
   .gradient-border {
+    position: relative;
     border: none;
   }
   .gradient-border::before {
