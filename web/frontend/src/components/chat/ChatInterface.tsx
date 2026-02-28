@@ -253,15 +253,15 @@ export const ChatInterface = () => {
             <MessageInput onSend={sendMessage} disabled={isStreaming || wsStatus !== 'connected'} />
           </>
         ) : (
-          <div className="flex-1 flex items-end md:items-center justify-start px-6 pb-32 md:pb-6">
-            <div className="animate-fade-in max-w-[320px]">
+          <div className="flex-1 flex items-center justify-center px-7 pb-16 md:pb-0">
+            <div className="animate-fade-in -mt-[6vh]">
               <div className="w-12 h-12 rounded-xl bg-gradient-brand flex items-center justify-center mb-6">
                 <MessageSquare size={20} className="text-[#0a0a0f]" strokeWidth={2.5} />
               </div>
-              <h2 className="text-2xl md:text-3xl font-outfit font-light text-zinc-100 tracking-[-0.03em] leading-tight mb-3">
+              <h2 className="text-[26px] md:text-3xl font-outfit font-light text-zinc-100 tracking-[-0.03em] leading-tight mb-3">
                 Start a<br />conversation
               </h2>
-              <p className="text-[14px] text-zinc-500 mb-8 leading-relaxed font-outfit">
+              <p className="text-[14px] text-zinc-500 mb-8 leading-relaxed font-outfit max-w-[280px]">
                 Create a new session to talk with Hermes Agent.
               </p>
               <button
