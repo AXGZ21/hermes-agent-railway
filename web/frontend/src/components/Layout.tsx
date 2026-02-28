@@ -146,14 +146,14 @@ export const Layout = () => {
           drawerOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        <div className="flex items-center justify-between px-5 pt-6 pb-4 safe-top border-b border-white/5">
+        <div className="flex items-center justify-between px-5 pt-6 pb-4 safe-top border-b border-white/[0.06]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl gradient-border bg-gradient-brand flex items-center justify-center animate-glow-pulse">
+            <div className="w-10 h-10 rounded-xl bg-gradient-brand flex items-center justify-center">
               <span className="text-[#0a0a0f] font-bold text-lg font-outfit tracking-tighter">H</span>
             </div>
             <div>
-              <h1 className="text-sm font-semibold tracking-wider text-zinc-100 uppercase font-outfit">Hermes</h1>
-              <p className="text-[10px] text-zinc-500 tracking-widest uppercase font-outfit">Console</p>
+              <h1 className="text-[15px] font-semibold tracking-tight text-zinc-100 font-outfit">Hermes</h1>
+              <p className="text-[11px] text-zinc-500 tracking-wide font-outfit font-light">Command Center</p>
             </div>
           </div>
           <button
@@ -202,12 +202,12 @@ export const Layout = () => {
 
       {/* ── Main content ── */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        {/* Mobile top header */}
-        <div className="md:hidden flex items-center gap-2.5 px-4 py-2.5 border-b border-white/5 glass flex-shrink-0">
+        {/* Mobile top header — stronger visual weight */}
+        <div className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-white/[0.06] bg-[#0e0e17] flex-shrink-0">
           <button onClick={() => setDrawerOpen(true)} className="p-1.5 -ml-1.5 rounded-lg text-zinc-400 active:bg-white/5 transition-colors">
             <Menu size={20} />
           </button>
-          <span className="text-[14px] font-semibold text-zinc-100 font-outfit">{currentPage?.label || 'Hermes'}</span>
+          <span className="text-[15px] font-semibold text-zinc-100 font-outfit tracking-tight">{currentPage?.label || 'Hermes'}</span>
         </div>
 
         {/* Page content */}
@@ -215,9 +215,8 @@ export const Layout = () => {
           <Outlet />
         </main>
 
-        {/* ── Mobile bottom tab bar ── */}
-        <nav className="md:hidden relative flex items-stretch glass border-t border-white/5 pb-safe flex-shrink-0">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9956a]/20 to-transparent" />
+        {/* ── Mobile bottom tab bar — refined per taste-skill ── */}
+        <nav className="md:hidden relative flex items-stretch bg-[#0c0c14] border-t border-white/[0.06] pb-safe flex-shrink-0">
 
           {primaryMobileItems.map((item) => {
             const isActive = location.pathname.startsWith(item.to);
@@ -225,25 +224,26 @@ export const Layout = () => {
               <NavLink
                 key={item.to}
                 to={item.to}
-                className="flex-1 flex flex-col items-center justify-center gap-0.5 pt-2 pb-1.5 relative group"
+                className={clsx(
+                  'flex-1 flex flex-col items-center justify-center gap-1 pt-2.5 pb-2 relative',
+                  isActive && 'bg-[#c9956a]/[0.06]'
+                )}
               >
                 {isActive && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-gradient-to-r from-transparent via-[#c9956a] to-transparent rounded-full" />
+                  <div className="absolute top-0 inset-x-3 h-[2px] bg-[#c9956a] rounded-full" />
                 )}
 
                 <item.icon
                   size={20}
-                  strokeWidth={isActive ? 2.2 : 1.5}
+                  strokeWidth={isActive ? 2 : 1.5}
                   className={clsx(
                     'transition-all duration-200',
-                    isActive
-                      ? 'text-[#c9956a] '
-                      : 'text-zinc-500'
+                    isActive ? 'text-[#c9956a]' : 'text-zinc-600'
                   )}
                 />
                 <span className={clsx(
-                  'text-[10px] font-medium leading-none whitespace-nowrap transition-all font-outfit',
-                  isActive ? 'text-[#c9956a]' : 'text-zinc-500'
+                  'text-[10px] font-medium leading-none whitespace-nowrap font-outfit tracking-wide',
+                  isActive ? 'text-[#c9956a]' : 'text-zinc-600'
                 )}>
                   {item.label}
                 </span>
@@ -255,21 +255,24 @@ export const Layout = () => {
           <button
             onClick={() => setMoreMenuOpen(!moreMenuOpen)}
             className={clsx(
-              'flex-1 flex flex-col items-center justify-center gap-0.5 pt-2 pb-1.5 relative group',
-              moreMenuOpen && 'text-[#c9956a]'
+              'flex-1 flex flex-col items-center justify-center gap-1 pt-2.5 pb-2 relative',
+              moreMenuOpen && 'bg-[#c9956a]/[0.06]'
             )}
           >
+            {moreMenuOpen && (
+              <div className="absolute top-0 inset-x-3 h-[2px] bg-[#c9956a] rounded-full" />
+            )}
             <MoreHorizontal
               size={20}
-              strokeWidth={moreMenuOpen ? 2.2 : 1.5}
+              strokeWidth={moreMenuOpen ? 2 : 1.5}
               className={clsx(
                 'transition-all duration-200',
-                moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-500'
+                moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-600'
               )}
             />
             <span className={clsx(
-              'text-[10px] font-medium leading-none whitespace-nowrap font-outfit',
-              moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-500'
+              'text-[10px] font-medium leading-none whitespace-nowrap font-outfit tracking-wide',
+              moreMenuOpen ? 'text-[#c9956a]' : 'text-zinc-600'
             )}>
               More
             </span>

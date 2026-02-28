@@ -253,20 +253,23 @@ export const ChatInterface = () => {
             <MessageInput onSend={sendMessage} disabled={isStreaming || wsStatus !== 'connected'} />
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center px-6 pb-20 md:pb-6">
-            <div className="text-center animate-fade-in-scale">
-              <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-brand mb-5 animate-float shadow-lg shadow-black/20">
-                <MessageSquare size={24} className="text-[#0a0a0f]" strokeWidth={2.5} />
+          <div className="flex-1 flex items-end md:items-center justify-start px-6 pb-32 md:pb-6">
+            <div className="animate-fade-in max-w-[320px]">
+              <div className="w-12 h-12 rounded-xl bg-gradient-brand flex items-center justify-center mb-6">
+                <MessageSquare size={20} className="text-[#0a0a0f]" strokeWidth={2.5} />
               </div>
-              <h2 className="text-lg md:text-xl font-outfit font-semibold text-zinc-100 tracking-tight mb-2">Start a conversation</h2>
-              <p className="text-[13px] text-zinc-400 mb-6 max-w-[260px] mx-auto leading-relaxed">
-                Create a new session to talk with Hermes Agent
+              <h2 className="text-2xl md:text-3xl font-outfit font-light text-zinc-100 tracking-[-0.03em] leading-tight mb-3">
+                Start a<br />conversation
+              </h2>
+              <p className="text-[14px] text-zinc-500 mb-8 leading-relaxed font-outfit">
+                Create a new session to talk with Hermes Agent.
               </p>
               <button
                 onClick={handleCreateSession}
-                className="px-6 py-3 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[14px] font-semibold tracking-wide hover:shadow-lg hover:shadow-black/20 active:scale-95 transition-all duration-300"
+                className="flex items-center gap-2 px-5 py-3 bg-[#111119] border border-[#c9956a]/25 text-[#c9956a] rounded-xl text-[14px] font-semibold font-outfit tracking-wide active:scale-[0.98] transition-transform duration-150"
               >
-                New Chat
+                <Plus size={16} strokeWidth={2.5} />
+                <span>New Chat</span>
               </button>
             </div>
           </div>
