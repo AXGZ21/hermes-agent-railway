@@ -51,11 +51,11 @@ export const LoginPage = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-brand gradient-border mb-6 md:mb-8 animate-glow-pulse">
             <span className="text-2xl md:text-3xl font-bold text-[#0a0a0f] font-outfit tracking-tighter">H</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-light text-zinc-100 tracking-tight font-outfit mb-2">
+          <h1 className="text-3xl md:text-4xl font-light text-zinc-100 tracking-tighter font-outfit mb-2">
             <span className="text-gradient">Hermes</span>{' '}
-            <span className="font-serif italic text-[#e0796b]">Agent</span>
+            <span className="font-medium text-zinc-300">Agent</span>
           </h1>
-          <p className="text-xs text-zinc-500 tracking-[0.2em] uppercase font-outfit font-medium">
+          <p className="text-xs text-zinc-600 tracking-[0.25em] uppercase font-outfit font-medium">
             Command Center
           </p>
         </div>

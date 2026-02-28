@@ -122,7 +122,7 @@ export const SkillsManager = () => {
           </div>
           <button
             onClick={handleCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all flex-shrink-0 font-outfit"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold active:scale-95 transition-all flex-shrink-0 font-outfit"
           >
             <Plus size={15} strokeWidth={2} />
             <span className="hidden sm:inline">Create</span>
@@ -134,7 +134,7 @@ export const SkillsManager = () => {
       <div className="flex-1 overflow-y-auto px-3 py-3 md:px-5 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 size={24} className="text-brand animate-spin animate-glow-pulse" />
+            <Loader2 size={24} className="text-brand animate-spin" />
           </div>
         ) : filteredSkills.length === 0 ? (
           <div className="text-center text-zinc-500 py-8 text-[13px] font-outfit">
@@ -157,7 +157,7 @@ export const SkillsManager = () => {
                     className={clsx(
                       'p-2 rounded-lg transition-all flex-shrink-0',
                       skill.enabled
-                        ? 'text-brand hover:bg-brand/10 hover:shadow-[0_0_15px_rgba(201,149,106,0.3)]'
+                        ? 'text-brand hover:bg-brand/10'
                         : 'text-zinc-500 hover:bg-[#16161f]'
                     )}
                   >
@@ -173,7 +173,7 @@ export const SkillsManager = () => {
                   <span className={clsx(
                     'text-[10px] font-medium px-2 py-0.5 rounded-full uppercase tracking-widest font-outfit',
                     skill.enabled
-                      ? 'bg-gradient-brand text-[#0a0a0f] shadow-[0_0_12px_rgba(201,149,106,0.4)]'
+                      ? 'bg-gradient-brand text-[#0a0a0f]'
                       : 'bg-zinc-500/20 text-zinc-500'
                   )}>
                     {skill.enabled ? 'Active' : 'Inactive'}
@@ -181,13 +181,13 @@ export const SkillsManager = () => {
                   <div className="flex gap-1">
                     <button
                       onClick={() => handleEdit(skill)}
-                      className="p-1.5 glass text-zinc-400 rounded-lg hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] transition-all"
+                      className="p-1.5 glass text-zinc-400 rounded-lg hover:text-brand transition-all"
                     >
                       <Edit2 size={14} />
                     </button>
                     <button
                       onClick={() => handleDelete(skill.id)}
-                      className="p-1.5 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all"
+                      className="p-1.5 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-all"
                     >
                       <Trash2 size={14} />
                     </button>
@@ -208,7 +208,7 @@ export const SkillsManager = () => {
               <div className="w-8 h-1 rounded-full bg-zinc-600" />
             </div>
             <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-[#272733]">
-              <h2 className="text-[16px] font-semibold text-zinc-100 font-serif">
+              <h2 className="text-[16px] font-semibold text-zinc-100 font-outfit">
                 {editingSkill ? 'Edit Skill' : 'Create Skill'}
               </h2>
               <button
@@ -227,7 +227,7 @@ export const SkillsManager = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Web Search"
-                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                 />
               </div>
 
@@ -238,7 +238,7 @@ export const SkillsManager = () => {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Brief description"
                   rows={2}
-                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] resize-none placeholder:text-zinc-600 font-outfit transition-all"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] resize-none placeholder:text-zinc-600 font-outfit transition-all"
                 />
               </div>
 
@@ -249,7 +249,7 @@ export const SkillsManager = () => {
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   placeholder="Skill code or configuration"
                   rows={8}
-                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] resize-none font-mono placeholder:text-zinc-600 transition-all"
+                  className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] resize-none font-mono placeholder:text-zinc-600 transition-all"
                 />
               </div>
 
@@ -277,7 +277,7 @@ export const SkillsManager = () => {
               <button
                 onClick={handleSave}
                 disabled={!formData.name || !formData.content || saving}
-                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 font-outfit transition-all"
+                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 font-outfit transition-all"
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}
                 <span>{editingSkill ? 'Update' : 'Create'}</span>

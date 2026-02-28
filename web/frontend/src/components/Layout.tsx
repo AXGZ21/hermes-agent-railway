@@ -99,7 +99,7 @@ export const Layout = () => {
                 <item.icon
                   size={20}
                   strokeWidth={isActive ? 2 : 1.5}
-                  className={isActive ? 'drop-shadow-[0_0_8px_rgba(201,149,106,0.5)]' : ''}
+                  className={isActive ? '' : ''}
                 />
 
                 {/* Tooltip */}
@@ -153,7 +153,7 @@ export const Layout = () => {
             </div>
             <div>
               <h1 className="text-sm font-semibold tracking-wider text-zinc-100 uppercase font-outfit">Hermes</h1>
-              <p className="text-[10px] text-zinc-500 font-serif italic">Agent Console</p>
+              <p className="text-[10px] text-zinc-500 tracking-widest uppercase font-outfit">Console</p>
             </div>
           </div>
           <button
@@ -181,7 +181,7 @@ export const Layout = () => {
                 <item.icon
                   size={20}
                   strokeWidth={isActive ? 2 : 1.5}
-                  className={isActive ? 'drop-shadow-[0_0_8px_rgba(201,149,106,0.3)]' : ''}
+                  className={isActive ? '' : ''}
                 />
                 <span>{item.label}</span>
               </NavLink>
@@ -237,7 +237,7 @@ export const Layout = () => {
                   className={clsx(
                     'transition-all duration-200',
                     isActive
-                      ? 'text-[#c9956a] drop-shadow-[0_0_8px_rgba(201,149,106,0.5)]'
+                      ? 'text-[#c9956a] '
                       : 'text-zinc-500'
                   )}
                 />

@@ -131,7 +131,7 @@ export const ChatInterface = () => {
               className={clsx(
                 'w-full text-left p-3 rounded-lg mb-1.5 transition-all duration-300 group relative border-l-2',
                 currentSessionId === session.id
-                  ? 'bg-[#16161f] text-zinc-100 border-[#c9956a] shadow-lg shadow-[#c9956a]/5'
+                  ? 'bg-[#16161f] text-zinc-100 border-[#c9956a] shadow-lg shadow-black/20'
                   : 'text-zinc-400 hover:bg-[#16161f] border-transparent ambient-glow'
               )}
             >
@@ -255,16 +255,16 @@ export const ChatInterface = () => {
         ) : (
           <div className="flex-1 flex items-center justify-center px-6 pb-20 md:pb-6">
             <div className="text-center animate-fade-in-scale">
-              <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-brand mb-5 animate-float shadow-2xl shadow-[#c9956a]/20">
+              <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-brand mb-5 animate-float shadow-lg shadow-black/20">
                 <MessageSquare size={24} className="text-[#0a0a0f]" strokeWidth={2.5} />
               </div>
-              <h2 className="text-lg md:text-xl font-serif font-semibold text-gradient mb-2">Start a conversation</h2>
+              <h2 className="text-lg md:text-xl font-outfit font-semibold text-zinc-100 tracking-tight mb-2">Start a conversation</h2>
               <p className="text-[13px] text-zinc-400 mb-6 max-w-[260px] mx-auto leading-relaxed">
                 Create a new session to talk with Hermes Agent
               </p>
               <button
                 onClick={handleCreateSession}
-                className="px-6 py-3 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[14px] font-semibold tracking-wide hover:shadow-xl hover:shadow-[#c9956a]/20 active:scale-95 transition-all duration-300"
+                className="px-6 py-3 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[14px] font-semibold tracking-wide hover:shadow-lg hover:shadow-black/20 active:scale-95 transition-all duration-300"
               >
                 New Chat
               </button>

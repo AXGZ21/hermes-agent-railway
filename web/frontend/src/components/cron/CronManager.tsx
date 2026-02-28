@@ -109,12 +109,12 @@ export const CronManager = () => {
               Cron Jobs
             </h1>
             <p className="text-[12px] text-zinc-500 mt-0.5">
-              <span className="font-serif italic">Scheduled</span> task automation
+              <span className="font-outfit font-medium">Scheduled</span> task automation
             </p>
           </div>
           <button
             onClick={handleCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all md:ml-auto"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit active:scale-95 transition-all md:ml-auto"
           >
             <Plus size={15} strokeWidth={2} />
             <span>Create</span>
@@ -162,7 +162,7 @@ export const CronManager = () => {
                         className={clsx(
                           "text-[10px] font-medium font-outfit px-2 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0",
                           job.enabled
-                            ? 'bg-gradient-brand text-[#0a0a0f] shadow-[0_0_15px_rgba(201,149,106,0.5)]'
+                            ? 'bg-gradient-brand text-[#0a0a0f]'
                             : 'glass text-zinc-500 border border-[#c9956a]/20'
                         )}
                       >
@@ -172,7 +172,7 @@ export const CronManager = () => {
 
                     <div className="space-y-1.5 text-[12px] mb-3">
                       <div className="flex items-center gap-2 text-zinc-400 font-outfit">
-                        <Clock size={13} className="flex-shrink-0 text-[#c9956a] animate-glow-pulse" />
+                        <Clock size={13} className="flex-shrink-0 text-[#c9956a]" />
                         <span className="font-medium text-[#c9956a]">
                           {formatSchedule(job.schedule)}
                         </span>
@@ -252,7 +252,7 @@ export const CronManager = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Daily Backup"
-                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] font-outfit focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 transition-all"
+                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] font-outfit focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 placeholder:text-zinc-600 transition-all"
                 />
               </div>
 
@@ -265,7 +265,7 @@ export const CronManager = () => {
                   value={formData.schedule}
                   onChange={(e) => setFormData({ ...formData, schedule: e.target.value })}
                   placeholder="e.g., 0 9 * * * (daily at 9am)"
-                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] font-mono focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 transition-all"
+                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] font-mono focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 placeholder:text-zinc-600 transition-all"
                 />
                 <p className="text-[10px] text-zinc-600 mt-1.5 font-outfit">
                   Format: minute hour day month weekday
@@ -281,7 +281,7 @@ export const CronManager = () => {
                   onChange={(e) => setFormData({ ...formData, command: e.target.value })}
                   placeholder="Command to execute"
                   rows={4}
-                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] font-mono focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] resize-none placeholder:text-zinc-600 scrollbar-hide transition-all"
+                  className="w-full gradient-border bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[13px] font-mono focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 resize-none placeholder:text-zinc-600 scrollbar-hide transition-all"
                 />
               </div>
 
@@ -309,7 +309,7 @@ export const CronManager = () => {
               <button
                 onClick={handleSave}
                 disabled={!formData.name || !formData.schedule || !formData.command || saving}
-                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 transition-all"
+                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 transition-all"
               >
                 {saving && <Loader2 size={14} className="animate-spin" />}
                 <span>Create</span>

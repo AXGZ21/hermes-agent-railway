@@ -195,17 +195,22 @@ code, pre, .font-mono {
 }
 
 /* ═══════════════════════════════════════════
-   Glass and Depth Effects
-   Mobile: opaque solid backgrounds (no backdrop-filter — iOS Safari safe)
-   Desktop: backdrop-filter blur
+   Liquid Glass (taste-skill Section 4)
+   Inner refraction border + inner shadow simulate physical edge
+   Mobile: opaque, no backdrop-filter
+   Desktop: full blur
    ═══════════════════════════════════════════ */
 
 .glass {
   background: rgba(15, 15, 22, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .glass-strong {
   background: rgba(15, 15, 22, 0.99);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 @media (min-width: 768px) {
@@ -248,46 +253,31 @@ code, pre, .font-mono {
   }
 }
 
-/* Ambient glow */
+/* Depth shadows — tinted to surface hue, no neon glows (taste-skill Section 7) */
 .ambient-glow {
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 2px 8px -2px rgba(0, 0, 0, 0.4);
+    0 1px 2px rgba(0, 0, 0, 0.25),
+    0 4px 12px -4px rgba(10, 10, 15, 0.5);
 }
 .ambient-glow-strong {
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 4px 16px -4px rgba(0, 0, 0, 0.5);
-}
-@media (min-width: 768px) {
-  .ambient-glow {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.03),
-      0 2px 8px -2px rgba(0, 0, 0, 0.4),
-      0 0 40px -20px rgba(201, 149, 106, 0.15);
-  }
-  .ambient-glow-strong {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.04),
-      0 4px 16px -4px rgba(0, 0, 0, 0.5),
-      0 0 60px -20px rgba(201, 149, 106, 0.2);
-  }
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 8px 24px -6px rgba(10, 10, 15, 0.6);
 }
 
-/* Card hover lift — desktop only */
+/* Card hover — subtle lift, tinted shadow only (taste-skill Section 7: no outer glows) */
 .card-hover {
-  transition: box-shadow 0.25s ease;
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 @media (hover: hover) and (min-width: 768px) {
   .card-hover {
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .card-hover:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow:
-      0 0 0 1px rgba(201, 149, 106, 0.12),
-      0 8px 30px -8px rgba(0, 0, 0, 0.4),
-      0 0 50px -20px rgba(201, 149, 106, 0.12);
+      0 4px 20px -6px rgba(10, 10, 15, 0.6),
+      0 0 0 1px rgba(201, 149, 106, 0.08);
   }
 }
 

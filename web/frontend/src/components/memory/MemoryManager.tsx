@@ -54,12 +54,6 @@ export const MemoryManager = () => {
     setEditContent('');
   };
 
-  const getFileIcon = (filename: string) => {
-    if (filename === 'SOUL.md') return '🧠';
-    if (filename === 'MEMORY.md') return '📝';
-    if (filename === 'USER.md') return '👤';
-    return '📄';
-  };
 
   return (
     <div className="h-full flex flex-col bg-[#0a0a0f]">
@@ -89,11 +83,11 @@ export const MemoryManager = () => {
               >
                 <div className="flex items-start gap-3 mb-3">
                   <div className="w-12 h-12 rounded-full gradient-border bg-[#16161f] flex items-center justify-center flex-shrink-0">
-                    <div className="text-2xl">{getFileIcon(file.filename)}</div>
+                    <FileText size={20} className="text-[#c9956a]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-[15px] font-semibold font-outfit text-zinc-100 mb-1">
-                      <span className="font-serif italic">{file.name}</span>
+                    <h3 className="text-[15px] font-outfit font-medium text-zinc-100 mb-1">
+                      {file.name}
                     </h3>
                     <p className="text-[12px] text-zinc-400 leading-relaxed">
                       {file.description}
@@ -136,8 +130,8 @@ export const MemoryManager = () => {
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-[#c9956a]/10 flex-shrink-0">
               <div>
-                <h2 className="text-[16px] font-semibold font-outfit text-zinc-100">
-                  <span className="font-serif italic">{selectedFile.name}</span>
+                <h2 className="text-[16px] font-outfit font-medium text-zinc-100">
+                  {selectedFile.name}
                 </h2>
                 <p className="text-[12px] text-zinc-500 mt-0.5">
                   {selectedFile.description}
@@ -157,7 +151,7 @@ export const MemoryManager = () => {
                 value={editContent}
                 onChange={(e) => setEditContent(e.target.value)}
                 placeholder={`Write your ${selectedFile.name.toLowerCase()} here...`}
-                className="w-full h-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-3 text-[13px] leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#c9956a]/20 resize-none font-mono placeholder:text-zinc-600 scrollbar-hide transition-all"
+                className="w-full h-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-3 text-[13px] leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#c9956a]/40 border border-[#c9956a]/20 resize-none font-mono placeholder:text-zinc-600 scrollbar-hide transition-all"
               />
             </div>
 
@@ -172,7 +166,7 @@ export const MemoryManager = () => {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 transition-all"
+                className="flex-1 md:flex-none px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold font-outfit active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2 transition-all"
               >
                 {saving ? (
                   <Loader2 size={14} className="animate-spin" />

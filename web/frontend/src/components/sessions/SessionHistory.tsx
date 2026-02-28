@@ -106,7 +106,7 @@ export const SessionHistory = () => {
                 className="gradient-border ambient-glow bg-[#0f0f16] rounded-xl p-3.5 md:p-4 card-hover transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(201,149,106,0.3)]">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center flex-shrink-0 shadow-lg shadow-black/20">
                     <MessageSquare size={16} className="text-[#0a0a0f]" strokeWidth={2} />
                   </div>
 
@@ -126,14 +126,14 @@ export const SessionHistory = () => {
                   <div className="flex items-center gap-1.5 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={(e) => handleExport(session, e)}
-                      className="p-2 glass text-zinc-400 rounded-lg hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] transition-all"
+                      className="p-2 glass text-zinc-400 rounded-lg hover:text-brand transition-all"
                       title="Export"
                     >
                       <Download size={14} />
                     </button>
                     <button
                       onClick={(e) => handleDelete(session.id, e)}
-                      className="p-2 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all"
+                      className="p-2 glass bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-all"
                       title="Delete"
                     >
                       <Trash2 size={14} />

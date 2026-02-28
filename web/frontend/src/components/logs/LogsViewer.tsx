@@ -10,11 +10,11 @@ const LOG_LEVELS = ['ALL', 'DEBUG', 'INFO', 'WARNING', 'ERROR'];
 
 const getLevelColor = (level: string) => {
   switch (level.toLowerCase()) {
-    case 'debug': return 'bg-zinc-500/30 text-zinc-300 shadow-[0_0_10px_rgba(113,113,122,0.3)]';
-    case 'info': return 'bg-emerald-500/30 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.4)]';
-    case 'warning': return 'bg-amber-500/30 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.4)]';
-    case 'error': return 'bg-red-500/30 text-red-300 shadow-[0_0_10px_rgba(239,68,68,0.4)]';
-    default: return 'bg-zinc-500/30 text-zinc-300 shadow-[0_0_10px_rgba(113,113,122,0.3)]';
+    case 'debug': return 'bg-zinc-500/30 text-zinc-300';
+    case 'info': return 'bg-emerald-500/30 text-emerald-300';
+    case 'warning': return 'bg-amber-500/30 text-amber-300';
+    case 'error': return 'bg-red-500/30 text-red-300';
+    default: return 'bg-zinc-500/30 text-zinc-300';
   }
 };
 
@@ -87,7 +87,7 @@ export const LogsViewer = () => {
           <select
             value={selectedLevel}
             onChange={(e) => { setSelectedLevel(e.target.value); setOffset(0); }}
-            className="bg-[#16161f] text-zinc-200 rounded-xl px-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
+            className="bg-[#16161f] text-zinc-200 rounded-xl px-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-outfit transition-all"
           >
             {LOG_LEVELS.map((level) => (
               <option key={level} value={level}>{level}</option>
@@ -101,7 +101,7 @@ export const LogsViewer = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search logs..."
-              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] placeholder:text-zinc-600 font-outfit transition-all"
+              className="w-full gradient-border bg-[#16161f] text-zinc-200 rounded-xl pl-9 pr-3 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand/60 placeholder:text-zinc-600 font-outfit transition-all"
             />
           </div>
 
@@ -118,13 +118,13 @@ export const LogsViewer = () => {
             <button
               onClick={loadLogs}
               disabled={loading}
-              className="p-2 glass text-zinc-400 rounded-xl hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 border border-[#272733] transition-all"
+              className="p-2 glass text-zinc-400 rounded-xl hover:text-brand active:scale-95 border border-[#272733] transition-all"
             >
               <RefreshCw size={15} className={clsx(loading && 'animate-spin')} />
             </button>
             <button
               onClick={handleClearLogs}
-              className="p-2 glass bg-red-500/15 text-red-400 rounded-xl hover:bg-red-500/25 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] active:scale-95 border border-red-500/20 transition-all"
+              className="p-2 glass bg-red-500/15 text-red-400 rounded-xl hover:bg-red-500/25 active:scale-95 border border-red-500/20 transition-all"
             >
               <Trash2 size={15} />
             </button>
@@ -180,14 +180,14 @@ export const LogsViewer = () => {
             <button
               onClick={() => setOffset(Math.max(0, offset - limit))}
               disabled={offset === 0}
-              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
+              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Prev
             </button>
             <button
               onClick={() => setOffset(offset + limit)}
               disabled={offset + limit >= total}
-              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand hover:shadow-[0_0_15px_rgba(201,149,106,0.2)] active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
+              className="px-3 py-1.5 glass text-zinc-400 rounded-lg text-[12px] hover:text-brand active:scale-95 disabled:opacity-30 disabled:pointer-events-none border border-[#272733] font-outfit transition-all"
             >
               Next
             </button>

@@ -24,7 +24,7 @@ const ApiKeyField = ({ label, value, onChange, placeholder, description }: ApiKe
         value={value || ''}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-[#16161f] text-zinc-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-mono placeholder:text-zinc-600 transition-all"
+        className="w-full bg-[#16161f] text-zinc-100 rounded-xl pl-10 pr-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-mono placeholder:text-zinc-600 transition-all"
       />
     </div>
     <p className="text-[11px] text-zinc-500 mt-1.5 leading-relaxed font-outfit">{description}</p>
@@ -84,7 +84,7 @@ export const ConfigPanel = () => {
   if (loading || !config) {
     return (
       <div className="flex items-center justify-center h-full">
-        <Loader2 className="animate-spin text-brand animate-glow-pulse" size={28} />
+        <Loader2 className="animate-spin text-brand" size={28} />
       </div>
     );
   }
@@ -148,7 +148,7 @@ export const ConfigPanel = () => {
                   <select
                     value={config.provider}
                     onChange={(e) => updateConfig({ provider: e.target.value })}
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-outfit transition-all"
                   >
                     <option value="openrouter">OpenRouter</option>
                     <option value="nous">Nous Portal</option>
@@ -163,7 +163,7 @@ export const ConfigPanel = () => {
                     value={config.model}
                     onChange={(e) => updateConfig({ model: e.target.value })}
                     placeholder="e.g., anthropic/claude-3.5-sonnet"
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                   />
                   <p className="text-[11px] text-zinc-500 mt-1.5 font-outfit">
                     {config.provider === 'openrouter'
@@ -182,7 +182,7 @@ export const ConfigPanel = () => {
                       value={config.base_url || ''}
                       onChange={(e) => updateConfig({ base_url: e.target.value })}
                       placeholder="https://api.example.com/v1"
-                      className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
+                      className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] placeholder:text-zinc-600 font-outfit transition-all"
                     />
                   </div>
                 )}
@@ -245,7 +245,7 @@ export const ConfigPanel = () => {
                   </div>
                   <div className={clsx(
                     'w-2.5 h-2.5 rounded-full',
-                    config.telegram_enabled ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50 animate-glow-pulse' : 'bg-zinc-600'
+                    config.telegram_enabled ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50' : 'bg-zinc-600'
                   )} />
                 </div>
 
@@ -305,7 +305,7 @@ export const ConfigPanel = () => {
                   <select
                     value={config.log_level}
                     onChange={(e) => updateConfig({ log_level: e.target.value })}
-                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 focus:shadow-[0_0_20px_rgba(201,149,106,0.15)] border border-[#272733] font-outfit transition-all"
+                    className="w-full bg-[#16161f] text-zinc-100 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand/60 border border-[#272733] font-outfit transition-all"
                   >
                     <option value="DEBUG">DEBUG</option>
                     <option value="INFO">INFO</option>
@@ -327,12 +327,12 @@ export const ConfigPanel = () => {
               <div className="flex items-center gap-1.5 text-[12px] font-outfit">
                 {message.type === 'success' ? (
                   <>
-                    <CheckCircle size={14} className="text-emerald-500 flex-shrink-0 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                    <CheckCircle size={14} className="text-emerald-500 flex-shrink-0" />
                     <span className="text-emerald-500 truncate">{message.text}</span>
                   </>
                 ) : (
                   <>
-                    <XCircle size={14} className="text-red-500 flex-shrink-0 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
+                    <XCircle size={14} className="text-red-500 flex-shrink-0" />
                     <span className="text-red-500 truncate">{message.text}</span>
                   </>
                 )}
@@ -345,7 +345,7 @@ export const ConfigPanel = () => {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold hover:shadow-[0_0_30px_rgba(201,149,106,0.4)] active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none flex-shrink-0 font-outfit"
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-brand text-[#0a0a0f] rounded-xl text-[13px] font-semibold active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none flex-shrink-0 font-outfit"
           >
             {saving ? (
               <Loader2 size={15} className="animate-spin" />

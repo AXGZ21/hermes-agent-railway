@@ -20,12 +20,6 @@ const iconColorMap = {
   info: 'text-[#c9956a]',
 };
 
-const glowMap = {
-  success: 'shadow-[0_0_20px_rgba(16,185,129,0.15)]',
-  error: 'shadow-[0_0_20px_rgba(239,68,68,0.15)]',
-  info: 'shadow-[0_0_20px_rgba(201,149,106,0.15)]',
-};
-
 export const ToastContainer = () => {
   const { toasts, removeToast } = useToastStore();
 
@@ -38,10 +32,7 @@ export const ToastContainer = () => {
         return (
           <div
             key={toast.id}
-            className={clsx(
-              'pointer-events-auto glass gradient-border rounded-2xl overflow-hidden animate-slide-in',
-              glowMap[toast.type]
-            )}
+            className="pointer-events-auto glass gradient-border rounded-2xl overflow-hidden animate-slide-in"
           >
             <div className={clsx(
               'flex items-start gap-3 px-4 py-4 border-l-2',

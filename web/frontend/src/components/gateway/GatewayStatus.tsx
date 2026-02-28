@@ -6,10 +6,10 @@ import { Loader2, CheckCircle2, AlertCircle, Circle } from 'lucide-react';
 import clsx from 'clsx';
 
 const PLATFORM_ICONS: Record<string, string> = {
-  telegram: '✈️',
-  discord: '💬',
-  slack: '💼',
-  whatsapp: '📱',
+  telegram: 'TG',
+  discord: 'DC',
+  slack: 'SL',
+  whatsapp: 'WA',
 };
 
 const PLATFORM_ENV_VARS: Record<string, string> = {
@@ -71,9 +71,9 @@ export const GatewayStatus = () => {
 
   const getStatusIcon = (platform: GatewayPlatform) => {
     if (platform.connected) {
-      return <CheckCircle2 size={20} className="text-green-400 animate-glow-pulse" />;
+      return <CheckCircle2 size={20} className="text-green-400" />;
     } else if (platform.configured) {
-      return <AlertCircle size={20} className="text-[#c9956a] animate-glow-pulse" />;
+      return <AlertCircle size={20} className="text-[#c9956a]" />;
     } else {
       return <Circle size={20} className="text-zinc-600" />;
     }
@@ -97,7 +97,7 @@ export const GatewayStatus = () => {
           Gateway Status
         </h1>
         <p className="text-[12px] text-zinc-500 mt-0.5">
-          <span className="font-serif italic">Multi-platform</span> messaging connections
+          <span className="font-outfit font-medium">Multi-platform</span> messaging connections
         </p>
       </div>
 
@@ -119,8 +119,8 @@ export const GatewayStatus = () => {
                 >
                   <div className="flex items-start gap-3 mb-4">
                     <div className="w-12 h-12 rounded-full gradient-border bg-[#16161f] flex items-center justify-center flex-shrink-0">
-                      <div className="text-2xl">
-                        {PLATFORM_ICONS[platform.icon] || '🔌'}
+                      <div className="text-sm font-mono font-bold text-[#c9956a]">
+                        {PLATFORM_ICONS[platform.icon] || 'PL'}
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -189,8 +189,8 @@ export const GatewayStatus = () => {
             <div className="flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-[#c9956a]/10">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full gradient-border bg-[#16161f] flex items-center justify-center">
-                  <span className="text-xl">
-                    {PLATFORM_ICONS[selectedPlatform.icon] || '🔌'}
+                  <span className="text-sm font-mono font-bold text-[#c9956a]">
+                    {PLATFORM_ICONS[selectedPlatform.icon] || 'PL'}
                   </span>
                 </div>
                 <div>
